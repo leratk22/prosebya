@@ -10,6 +10,22 @@ const meta: Meta<typeof AudioCardWeb> = {
     viewport: {
       defaultViewport: 'mobile1',
     },
+    docs: {
+      description: {
+        component: `
+Адаптивная карточка для отображения аудио контента.
+
+**Адаптивность:**
+- **Mobile** (< 440px): badge сверху, затем заголовок, растягивается по ширине контейнера
+- **Desktop** (≥ 440px): заголовок и badge в одной строке, максимальная ширина **756px**
+
+**Особенности:**
+- Заголовок обрезается после 2 строк многоточием
+- Waveform всегда отображается, одного размера, обрезается по ширине контейнера
+- Весь блок кликабельный при наведении (если передан onClick)
+        `,
+      },
+    },
   },
   args: {
     title: "Заголовок может быть в две строки максимально, затем мы его обрезаем, если он не умещается, но таких медитаций у нас нет",
@@ -57,34 +73,3 @@ export const Clickable: Story = {
   },
 };
 
-export const Responsive: Story = {
-  parameters: {
-    docs: {
-      disable: true, // Скрываем из Docs, чтобы не вводить в заблуждение
-    },
-  },
-  render: () => (
-    <div className="flex flex-col gap-24">
-      <div className="flex flex-col gap-12">
-        <h3 className="text-title-m font-semibold">Desktop (широкий экран)</h3>
-        <div className="max-w-2xl">
-          <AudioCardWeb
-            title="Заголовок может быть в две строки максимально, затем мы его обрезаем, если он не умещается, но таких медитаций у нас нет"
-            topBadge="Тэг"
-            duration="05:23"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col gap-12">
-        <h3 className="text-title-m font-semibold">Mobile (узкий экран)</h3>
-        <div className="max-w-sm">
-          <AudioCardWeb
-            title="Заголовок может быть в две строки максимально, затем мы его обрезаем, если он не умещается, но таких медитаций у нас нет"
-            topBadge="Тэг"
-            duration="05:23"
-          />
-        </div>
-      </div>
-    </div>
-  ),
-};
