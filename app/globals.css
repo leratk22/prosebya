@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-light-bg-primary dark:bg-dark-bg-primary text-light-fg-primary dark:text-dark-fg-primary;
+    font-family: 'Euclid Circular A', sans-serif;
+  }
+}
