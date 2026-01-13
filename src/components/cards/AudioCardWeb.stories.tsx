@@ -58,6 +58,11 @@ export const Clickable: Story = {
 };
 
 export const Responsive: Story = {
+  parameters: {
+    docs: {
+      disable: true, // Скрываем из Docs, чтобы не вводить в заблуждение
+    },
+  },
   render: () => (
     <div className="flex flex-col gap-24">
       <div className="flex flex-col gap-12">

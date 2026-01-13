@@ -52,7 +52,7 @@ export const AudioCardWeb = React.forwardRef<
   ) => {
     // Стили для внешнего контейнера - адаптивный
     // Desktop: padding 20px, max-width 756px
-    // Mobile: padding 16px, width 343px
+    // Mobile: padding 16px, растягивается по ширине контейнера
     const containerClasses = [
       "w-full relative",
       "flex flex-col items-start",
@@ -61,7 +61,7 @@ export const AudioCardWeb = React.forwardRef<
       "bg-gray-core", // bg-aliceblue = #EAEFF8
       "rounded-m", // rounded-2xl = 16px
       "text-left font-euclid",
-      "max-w-[343px] md:max-w-[756px]", // ширина: 343px для mobile, 756px для desktop
+      "md:max-w-[756px]", // максимальная ширина только для desktop (756px)
       onClick && "cursor-pointer transition-opacity hover:opacity-90", // Кликабельный при наведении
       className,
     ]
