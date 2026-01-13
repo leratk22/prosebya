@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/nextjs'
-import '../app/globals.css'
+import '../app/globals.css' // Импортируем globals.css, который содержит @font-face для шрифтов
 
 const preview: Preview = {
   parameters: {

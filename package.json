@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_f1f820af99c54bd"
   },
   "dependencies": {
     "lucide-react": "^0.400.0",
@@ -30,6 +31,7 @@
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17",
     "autoprefixer": "^10.4.0",
+    "chromatic": "^13.3.5",
     "playwright": "^1.57.0",
     "postcss": "^8.4.0",
     "storybook": "^10.1.11",
