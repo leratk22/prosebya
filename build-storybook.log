@@ -1,37 +1,27 @@
 
 > design-system-demo@0.1.0 build-storybook
-> storybook build --output-dir=/var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF
+> storybook build --output-dir=/var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n
 
 
 ┌  Building storybook v10.1.11
 │
 ◇  Cleaning outputDir:
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n
 │
 ◇  Loading presets
 │
 ◇  Building manager..
 │
+▲  unable to find package.json for ast-types
+│
 ●  Building preview..
+│
+▲  No story files found for the specified pattern: src/**/*.mdx
 │  Vite vite v7.3.1 building client environment for production...
 │  Vite transforming...
 │
 ●  Copying static files: public at
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF
-│
-▲  Vite src/components/ui/badge.tsx (1:0): Error when using sourcemap for
-│  reporting an error: Can't resolve original location of error.
-│
-▲  Vite src/components/ui/badge.tsx (1:0): Module level directives cause
-│  errors when bundled, "use client" in "src/components/ui/badge.tsx" was
-│  ignored.
-│
-▲  Vite src/components/ui/button.tsx (1:0): Error when using sourcemap
-│  for reporting an error: Can't resolve original location of error.
-│
-▲  Vite src/components/ui/button.tsx (1:0): Module level directives cause
-│  errors when bundled, "use client" in "src/components/ui/button.tsx"
-│  was ignored.
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n
 │
 ▲  Vite src/components/cards/audio-card-web.tsx (1:0): Error when using
 │  sourcemap for reporting an error: Can't resolve original location of
@@ -41,150 +31,154 @@
 │  directives cause errors when bundled, "use client" in
 │  "src/components/cards/audio-card-web.tsx" was ignored.
 │
+▲  Vite src/components/cards/horizontal-card-web.tsx (1:0): Error when
+│  using sourcemap for reporting an error: Can't resolve original
+│  location of error.
+│
+▲  Vite src/components/cards/horizontal-card-web.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/cards/horizontal-card-web.tsx" was ignored.
+│
+▲  Vite src/components/illustrations/illustration.tsx (1:0): Error when
+│  using sourcemap for reporting an error: Can't resolve original
+│  location of error.
+│
+▲  Vite src/components/illustrations/illustration.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/illustrations/illustration.tsx" was ignored.
+│
+▲  Vite src/components/ui/badge.tsx (1:0): Error when using sourcemap for
+│  reporting an error: Can't resolve original location of error.
+│
+▲  Vite src/components/ui/badge.tsx (1:0): Module level directives cause
+│  errors when bundled, "use client" in "src/components/ui/badge.tsx" was
+│  ignored.
+│
+▲  Vite src/components/cards/practice-card.tsx (1:0): Error when using
+│  sourcemap for reporting an error: Can't resolve original location of
+│  error.
+│
+▲  Vite src/components/cards/practice-card.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/cards/practice-card.tsx" was ignored.
+│
+▲  Vite src/components/ui/palette-showcase.tsx (1:0): Error when using
+│  sourcemap for reporting an error: Can't resolve original location of
+│  error.
+│
+▲  Vite src/components/ui/palette-showcase.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/ui/palette-showcase.tsx" was ignored.
+│
+▲  Vite src/components/ui/button.tsx (1:0): Error when using sourcemap
+│  for reporting an error: Can't resolve original location of error.
+│
+▲  Vite src/components/ui/button.tsx (1:0): Module level directives cause
+│  errors when bundled, "use client" in "src/components/ui/button.tsx"
+│  was ignored.
+│
 ▲  Vite src/components/icons/icon.tsx (1:0): Error when using sourcemap
 │  for reporting an error: Can't resolve original location of error.
 │
 ▲  Vite src/components/icons/icon.tsx (1:0): Module level directives
 │  cause errors when bundled, "use client" in
 │  "src/components/icons/icon.tsx" was ignored.
-│  Vite ✓ 1942 modules transformed.
+│  Vite ✓ 2506 modules transformed.
 │  Vite rendering chunks...
 │  Vite computing gzip size...
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/context-C0qIqeS4.png
-│  6.12 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/styling-Bk6zjRzU.png
-│  7.24 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/iframe.html
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/iframe.html
 │  18.16 kB │ gzip:   5.10 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/docs---vsFbMi.png
-│  27.88 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/iframe-_xEC4eWo.css
+│  24.97 kB │ gzip:   5.24 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/share-DGA-UcQf.png
-│  40.77 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/accessibility-W_h2acOZ.png
-│  42.34 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/figma-plugin-CH2hELiO.png
-│  44.25 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/theming-D6WJLNoW.png
-│  44.37 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/testing-cbzR9l9r.png
-│  49.31 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/addon-library-BWUCAmyN.png
-│  467.37 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Header-Ck-SSN7O.css
-│  0.51 kB │ gzip:   0.30 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Button-B2efaGtC.css
-│  0.52 kB │ gzip:   0.29 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Page-CeeQJVdd.css
-│  0.91 kB │ gzip:   0.39 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/iframe-CmY-9nVC.css
-│  16.67 kB │ gzip:   3.84 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/jsx-runtime-D2R-KHky.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/jsx-runtime-0-Q3zfKW.js
 │  0.07 kB │ gzip:   0.08 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/formatter-QJ4M4OGQ-DLeE4kap.js
-│  0.25 kB │ gzip:   0.21 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/formatter-QJ4M4OGQ-kf3TThiV.js
+│  0.32 kB │ gzip:   0.25 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/index-Bk4n9Ltm.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/index-B9X4IkMD.js
 │  0.46 kB │ gzip:   0.30 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/createLucideIcon-4zqmHTjy.js
-│  0.87 kB │ gzip:   0.54 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/createLucideIcon-RaB7DwPJ.js
+│  0.87 kB │ gzip:   0.53 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/react-18-3Z2fzoDC.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/react-18-DaTG8bAd.js
 │  0.90 kB │ gzip:   0.51 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Header.stories-DX56caEe.js
-│  0.98 kB │ gzip:   0.52 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/index-BAX6bqEd.js
+│  0.95 kB │ gzip:   0.51 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/preload-helper-PPVm8Dsz.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/preload-helper-PPVm8Dsz.js
 │  1.23 kB │ gzip:   0.71 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/DocsRenderer-GHJI37HO-BbGI_iS9.js
-│  1.28 kB │ gzip:   0.70 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Button-9n4uoxaT.js
-│  1.52 kB │ gzip:   0.77 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Button.stories-Dsp8zpBN.js
-│  1.67 kB │ gzip:   0.65 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Header-CeU108jV.js
-│  1.79 kB │ gzip:   0.78 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/badge-GN1Jw_mT.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/badge-6_GNJ8zA.js
 │  1.83 kB │ gzip:   1.00 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/button-play-pause-D6EZWmq0.js
-│  2.98 kB │ gzip:   1.36 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/button-play-pause-BNf691se.js
+│  2.98 kB │ gzip:   1.35 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Page.stories-CmWY034d.js
-│  3.69 kB │ gzip:   1.62 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/button-CqnbAh-M.js
+│  5.30 kB │ gzip:   1.80 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/button-DzDIgfn0.js
-│  5.30 kB │ gzip:   1.81 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Badge.stories-D58uKH_c.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/Badge.stories-akMCAosG.js
 │  5.69 kB │ gzip:   1.38 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/ButtonExpand.stories-b41pfTyB.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/ButtonExpand.stories-CoF8PcOd.js
 │  6.11 kB │ gzip:   2.27 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Button.stories-Cj6zbNCu.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/Button.stories-C0g8cY1Z.js
 │  6.61 kB │ gzip:   1.68 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/ButtonPlayPause.stories-S2ojzpS3.js
-│  7.62 kB │ gzip:   1.69 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/ButtonPlayPause.stories-BUc__Cmr.js
+│  7.62 kB │ gzip:   1.68 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/AudioCardWeb.stories-BWNy86uD.js
-│  7.76 kB │ gzip:   2.60 kB
-│  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/icon-DY7vEhKh.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/icon-C4JkKbrT.js
 │  8.33 kB │ gzip:   2.21 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/ButtonGroup.stories-CBW5l_2T.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/ButtonGroup.stories-yejpIkTS.js
 │  11.55 kB │ gzip:   3.10 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/vite-inject-mocker-entry.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/Illustration.stories-30xsFnZ-.js
+│  12.97 kB │ gzip:   3.56 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/vite-inject-mocker-entry.js
 │  28.30 kB │ gzip:   9.84 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/matchers-DMFSMG2O-HJu_DfWo.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/matchers-DMFSMG2O-HJu_DfWo.js
 │  29.23 kB │ gzip:  10.06 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Color-ASIRERSW-DkX18dlt.js
-│  29.92 kB │ gzip:  11.36 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/Color-ASIRERSW-kdza48N6.js
+│  29.99 kB │ gzip:  11.39 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/WithTooltip-IO6J4KBT-DHIvwzPU.js
-│  33.06 kB │ gzip:  11.64 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/AudioCardWeb.stories-B196I26d.js
+│  32.76 kB │ gzip:   4.75 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/Configure-Dl2qEu_D.js
-│  42.37 kB │ gzip:  17.53 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/WithTooltip-IO6J4KBT-D1GQSdb5.js
+│  33.14 kB │ gzip:  11.68 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/syntaxhighlighter-IQDEPFLK-Dv3S03X5.js
-│  77.91 kB │ gzip:  27.32 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/PracticeCard.stories-MMvtAWBu.js
+│  37.42 kB │ gzip:   5.87 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/axe-DpZPuHS2.js
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/HorizontalCardWeb.stories-BY6E7d2e.js
+│  51.23 kB │ gzip:   6.24 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/syntaxhighlighter-IQDEPFLK-CSUjIHNC.js
+│  77.98 kB │ gzip:  27.36 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/PaletteShowcase.stories-C6pIKgxK.js
+│  327.42 kB │ gzip:  99.96 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/axe-Dat3213y.js
 │  579.41 kB │ gzip: 159.47 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/blocks-BvYIdrd1.js
-│  801.84 kB │ gzip: 256.53 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/DocsRenderer-GHJI37HO-CEDtu4Sg.js
+│  801.89 kB │ gzip: 256.60 kB
 │  Vite
-│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF/assets/iframe-CXCfY2G_.js
-│  1,393.95 kB │ gzip: 403.50 kB
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n/assets/iframe-BcbGo5uy.js
+│  1,393.90 kB │ gzip: 403.42 kB
 │
 ▲  Vite
 │  (!) Some chunks are larger than 500 kB after minification. Consider:
@@ -193,10 +187,10 @@
 │  ]8;;https://rollupjs.org/configuration-options/#output-manualchunkshttps://rollupjs.org/configuration-options/#output-manualchunks]8;;
 │  - Adjust chunk size limit for this warning via
 │  build.chunkSizeWarningLimit.
-│  Vite ✓ built in 5.08s
+│  Vite ✓ built in 5.82s
 │
 ◇  Output directory:
-│  /var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--33917-Fj5Yq2CH6zoF
+│  /var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--85316-CaCaqA5tcZ3n
 │
 └  Storybook build completed successfully
 

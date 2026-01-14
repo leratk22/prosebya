@@ -108,6 +108,7 @@ export const Illustration: React.FC<IllustrationProps> = ({
   const imageName = illustrationFilenames[type] || `${type}.png`;
   
   // Используем srcSet для автоматического выбора между 1x и 2x
+  // Браузер автоматически выберет подходящее разрешение в зависимости от device pixel ratio
   const src1x = `/illustrations/1x/${imageName}`;
   const src2x = `/illustrations/2x/${imageName}`;
 

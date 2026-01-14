@@ -165,7 +165,7 @@ export const AllIllustrations: Story = {
     ];
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 p-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 p-12">
         {allTypes.map((type) => (
           <div key={type} className="flex flex-col items-center gap-4">
             <Illustration
