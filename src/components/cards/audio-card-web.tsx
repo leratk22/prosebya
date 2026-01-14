@@ -122,6 +122,7 @@ export const AudioCardWeb = React.forwardRef<
             size={56}
             onToggle={undefined} // Не интерактивная, но не disabled
             onClick={(e) => e.preventDefault()} // Предотвращаем клик на кнопке
+            className="!bg-[rgba(52,64,121,0.1)] !shadow-none [&_svg]:!w-24 [&_svg]:!h-24"
           />
           <div className="flex-1 overflow-hidden flex flex-col justify-center self-stretch">
             <div className="w-full flex items-center gap-8">

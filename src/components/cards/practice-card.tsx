@@ -6,6 +6,7 @@ export interface PracticeCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Подзаголовок (например, "Практика")
+   * На desktop отображается как текст, на mobile как badge
    */
   subtitle: string;
   /**
@@ -17,9 +18,13 @@ export interface PracticeCardProps
    */
   label?: string;
   /**
-   * URL изображения для правой части
+   * URL изображения для правой части (1x)
    */
   imageUrl?: string;
+  /**
+   * URL изображения для правой части (2x, retina)
+   */
+  imageUrl2x?: string;
   /**
    * Alt текст для изображения
    */
@@ -38,10 +43,12 @@ export interface PracticeCardProps
  * Компонент PracticeCard
  *
  * Горизонтальная карточка для отображения практик/контента:
- * - Desktop only: текст слева, изображение справа
- * - Декоративный SVG элемент на фоне
+ * - Desktop: текст слева, изображение справа (gap 48px)
+ * - Mobile: текст слева, изображение справа (gap 0px, фиксированная ширина изображения 136px)
+ * - Декоративный SVG элемент на фоне (только desktop)
  * - Badge с длительностью на изображении
- * - Только светлая тема
+ * - Subtitle на desktop как текст, на mobile как badge
+ * - Поддержка светлой и темной темы
  */
 export const PracticeCard = React.forwardRef<
   HTMLDivElement,
@@ -53,6 +60,7 @@ export const PracticeCard = React.forwardRef<
       title,
       label,
       imageUrl,
+      imageUrl2x,
       imageAlt = "Practice image",
       duration,
       onClick,
@@ -65,38 +73,58 @@ export const PracticeCard = React.forwardRef<
     const containerClasses = [
       "relative",
       "flex flex-row items-stretch",
-      "p-20", // padding: 20px
-      "bg-light-bg-primary", // белый фон
+      "gap-16 md:gap-48", // gap: mobile 16px, desktop 48px
+      "p-16 md:p-20", // padding: mobile 16px, desktop 20px
+      "bg-light-bg-primary dark:bg-dark-bg-primary", // адаптивный фон
       "rounded-m", // borderRadius: 16px
-      "border border-light-border-secondary", // border: 1px rgba(34, 38, 59, 0.1)
+      "border border-light-border-secondary dark:border-dark-border-secondary", // адаптивная граница
       "shadow-[0px_12px_24px_-4px_rgba(34,38,59,0.05)]", // Elevation
-      "overflow-hidden",
+      "overflow-hidden", // скрываем содержимое за скругленными углами
       "box-border",
+      // Фиксированная высота: mobile 243px (211px изображение + 16px padding сверху + 16px padding снизу), desktop 251px
+      "h-[243px] md:h-[251px]",
+      // Максимальная ширина на desktop: 756px
+      "md:max-w-[756px]",
       onClick && "cursor-pointer transition-opacity hover:opacity-90",
       className,
     ]
       .filter(Boolean)
       .join(" ");
 
-    // Декоративный SVG элемент
+    // Декоративный SVG элемент - под всем контентом (только на desktop)
+    // Прикреплен к правому краю карточки без отступов
+    // Поддержка светлой и темной темы
     const renderDecorativeVector = () => {
       return (
         <div
-          className="absolute pointer-events-none"
+          className="hidden md:block absolute pointer-events-none overflow-hidden"
           style={{
-            left: "248px",
+            opacity: 0.7,
+            zIndex: 0,
+            right: 0,
             top: "-30px",
             width: "460px",
             height: "333px",
-            opacity: 0.7,
           }}
         >
-          <img
-            src="/decorative-vector.svg"
-            alt=""
-            className="w-full h-full object-contain"
+          <svg
+            viewBox="0 0 521 251"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full"
+            preserveAspectRatio="xMidYMid slice"
             aria-hidden="true"
-          />
+          >
+            <path
+              opacity="0.7"
+              d="M490.004 -0.962709C418.443 216.817 187.676 49.1193 224.29 -17.3762C260.904 -83.8717 448.887 131.647 294.385 180.048C165.493 220.425 145.695 72.7285 208.044 132.61C252.052 174.876 240.222 250.827 187.676 280.121C142.29 305.423 75.2997 313.962 30.0039 283.751"
+              stroke="#22263B"
+              strokeOpacity="0.1"
+              className="practice-card-decorative-path"
+              strokeWidth="40"
+              strokeLinecap="round"
+            />
+          </svg>
         </div>
       );
     };
@@ -104,39 +132,49 @@ export const PracticeCard = React.forwardRef<
     // Левая часть - текст
     const renderTextSection = () => {
       return (
-        <div className="flex flex-col justify-between flex-1 gap-8 py-8" style={{ marginRight: "48px" }}>
-          <div className="flex flex-col gap-8">
-            {/* Subtitle */}
-            <p 
-              className="font-medium font-euclid text-light-fg-secondary uppercase"
-              style={{
-                fontSize: "12px",
-                lineHeight: "1.3333333333333333em",
-                letterSpacing: "0.1em",
-              }}
-            >
-              {subtitle}
-            </p>
+        <div className="flex flex-col justify-between flex-1 relative z-10 gap-24 md:gap-8 md:py-8">
+          {/* Desktop: subtitle как текст, Mobile: subtitle как badge */}
+          <div className="flex flex-col gap-20 md:gap-8">
+            {/* Mobile: Subtitle как badge */}
+            <div className="md:hidden">
+              <div 
+                className="inline-flex items-center gap-4 px-8 py-4 rounded-full font-medium font-euclid bg-core-alpha-5 dark:bg-core-inverted-alpha-10 text-light-fg-primary dark:text-core-inverted"
+                style={{
+                  fontSize: "12px",
+                  lineHeight: "1.3333333333333333em",
+                }}
+              >
+                {subtitle.charAt(0).toUpperCase() + subtitle.slice(1).toLowerCase()}
+              </div>
+            </div>
+            
+            {/* Desktop: Subtitle как текст */}
+            <div className="hidden md:block">
+              <p 
+                className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary"
+                style={{
+                  fontSize: "12px", // MVP2.0/Caption/S
+                  lineHeight: "1.3333333333333333em",
+                  letterSpacing: "0.1em", // 10%
+                  textTransform: "uppercase",
+                }}
+              >
+                {subtitle}
+              </p>
+            </div>
+            
             {/* Title */}
             <h3 
-              className="font-semibold font-euclid text-light-fg-primary"
-              style={{
-                fontSize: "24px",
-                lineHeight: "1.3333333333333333em",
-                letterSpacing: "-0.015em",
-              }}
+              className="font-semibold font-euclid text-light-fg-primary dark:text-dark-fg-primary text-[20px] leading-[1.2em] tracking-[-0.01em] md:text-[24px] md:leading-[1.3333333333333333em] md:tracking-[-0.015em] line-clamp-3"
             >
               {title}
             </h3>
           </div>
+          
           {/* Label */}
           {label && (
             <p 
-              className="font-medium font-euclid text-light-fg-tertiary"
-              style={{
-                fontSize: "14px",
-                lineHeight: "1.4285714285714286em",
-              }}
+              className="font-medium font-euclid text-[12px] leading-[1.3333333333333333em] text-light-fg-tertiary dark:text-dark-fg-tertiary md:text-[14px] md:leading-[1.4285714285714286em] line-clamp-1"
             >
               {label}
             </p>
@@ -147,29 +185,57 @@ export const PracticeCard = React.forwardRef<
 
     // Правая часть - изображение с Badge
     const renderImageSection = () => {
+      const [imageError, setImageError] = React.useState(false);
+      
       return (
-        <div className="relative shrink-0" style={{ width: "120px", height: "211px" }}>
-          <div
-            className="w-full h-full rounded-[0px_16px_16px_0px] overflow-hidden relative"
-            style={{
-              backgroundColor: "#79818E", // fallback цвет
-            }}
+        <div 
+          className="practice-card-image relative shrink-0 z-10 w-[120px] md:w-[120px]"
+          style={{
+            height: "211px",
+          }}
+        >
+          <div 
+            className="w-full h-full relative"
           >
-            {imageUrl ? (
+            {imageUrl && !imageError ? (
               <img
                 src={imageUrl}
+                srcSet={imageUrl2x ? `${imageUrl} 1x, ${imageUrl2x} 2x` : undefined}
                 alt={imageAlt}
-                className="w-full h-full object-cover"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                  borderRadius: "0px 16px 16px 0px", // Скругление только справа
+                }}
+                onError={() => {
+                  // Если изображение не загрузилось, показываем SVG заглушку
+                  setImageError(true);
+                }}
               />
             ) : (
-              <div className="w-full h-full bg-gray-dark" />
+              <img
+                src="/practice-image-placeholder.svg"
+                alt={imageAlt || "Practice placeholder"}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                  borderRadius: "0px 16px 16px 0px", // Скругление только справа
+                }}
+              />
             )}
             {/* Badge с длительностью внизу */}
             {duration && (
               <div className="absolute bottom-16 left-0 right-0 flex justify-center">
                 <div 
-                  className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-core-alpha-60 text-core-inverted font-medium font-euclid"
+                  className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] text-[#FFFFFF]"
                   style={{
+                    padding: "4px 8px",
                     fontSize: "12px",
                     lineHeight: "1.3333333333333333em",
                   }}

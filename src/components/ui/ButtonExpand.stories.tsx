@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ButtonExpand, type ButtonExpandProps } from "./button-expand";
+import { ButtonExpand } from "./button-expand";
 
 const meta: Meta<typeof ButtonExpand> = {
   title: "UI/ButtonExpand",

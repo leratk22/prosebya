@@ -114,7 +114,8 @@ export default function Home() {
                 subtitle="Практика"
                 title="Как радоваться жизни каждый день"
                 label="Помочь себе за 2 минуты"
-                imageUrl="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=120&h=211&fit=crop&crop=face"
+                imageUrl="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=120&h=211&fit=crop&auto=format"
+                imageUrl2x="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=240&h=422&fit=crop&auto=format"
                 imageAlt="Woman practicing meditation"
                 duration="01:08"
                 onClick={() => alert("PracticeCard кликнута!")}

@@ -1,0 +1,23 @@
+[18:22:49.636] [INFO] storybook v10.1.11
+[18:22:50.707] [DEBUG] Getting package.json info for /Users/valeriatkaceva/Documents/ProSebya/CURSOR/package.json...
+[18:23:21.551] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+[18:23:52.146] [DEBUG] Serving static files from [36mnode_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
+[18:23:52.146] [DEBUG] Serving static files from [36mpublic[39m at [36m/[39m
+[18:23:52.146] [INFO] Starting...
+[18:23:52.152] [WARN] No story files found for the specified pattern: [34msrc/**/*.mdx[39m
+[18:23:52.162] [WARN] unable to find package.json for ast-types
+[18:23:57.899] [DEBUG] Starting preview..
+[18:24:11.182] [ERROR] Failed to build the preview
+[18:24:11.185] [ERROR] [38;2;241;97;97mError: Invalid package config ./node_modules/estree-walker/dist/esm/package.json.[39m
+    at getPackageScopeConfig (node:internal/modules/package_json_reader:208:33)
+    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:118:72)
+    at defaultGetFormatWithoutErrors (node:internal/modules/esm/get_format:198:36)
+    at defaultResolve (node:internal/modules/esm/resolve:1014:13)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[18:24:11.186] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[18:24:20.177] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":false}

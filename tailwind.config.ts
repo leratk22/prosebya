@@ -415,7 +415,39 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities, theme }: any) {
+      const colors = theme('colors') || {};
+      
+      // Функция для рекурсивного обхода вложенных цветов и создания плоских классов
+      const flattenColors = (obj: any, prefix = ''): Record<string, string> => {
+        const result: Record<string, string> = {};
+        for (const [key, value] of Object.entries(obj)) {
+          const newKey = prefix ? `${prefix}-${key}` : key;
+          if (typeof value === 'string') {
+            result[newKey] = value;
+          } else if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+            Object.assign(result, flattenColors(value, newKey));
+          }
+        }
+        return result;
+      };
+      
+      const flatColors = flattenColors(colors);
+      
+      // Добавляем утилиты для плоских цветов
+      const utilities: Record<string, Record<string, string>> = {};
+      for (const [key, value] of Object.entries(flatColors)) {
+        if (typeof value === 'string') {
+          utilities[`.bg-${key}`] = { 'background-color': value };
+          utilities[`.text-${key}`] = { color: value };
+          utilities[`.border-${key}`] = { 'border-color': value };
+        }
+      }
+      
+      addUtilities(utilities);
+    },
+  ],
 }
 
 export default config
