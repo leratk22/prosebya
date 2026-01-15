@@ -35,6 +35,9 @@ export interface ButtonExpandProps
  * - Левая часть: пустое место для выравнивания (24x24 или 20x20)
  * - Центр: Label + счетчик (счетчик с opacity 0.5)
  * - Правая часть: иконка chevron-down (24px для M, 20px для S)
+ * 
+ * @figma https://www.figma.com/file/{fileKey}/{fileName}?node-id={nodeId}
+ * Замените {fileKey}, {fileName} и {nodeId} на соответствующие значения из Figma
  */
 export const ButtonExpand = React.forwardRef<
   HTMLButtonElement,

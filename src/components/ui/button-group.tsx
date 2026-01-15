@@ -90,6 +90,9 @@ export interface ButtonGroupProps {
  * - 3-buttons-vertical-2: три кнопки вертикально (Primary + Secondary + Tertiary)
  * - navigation-2: две кнопки навигации (Secondary с иконкой + Primary с текстом)
  * - button-checkbox: кнопка с чекбоксом (пока без реализации чекбокса)
+ * 
+ * @figma https://www.figma.com/file/{fileKey}/{fileName}?node-id={nodeId}
+ * Замените {fileKey}, {fileName} и {nodeId} на соответствующие значения из Figma
  */
 export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
   (

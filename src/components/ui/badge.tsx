@@ -30,6 +30,9 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
  * - invert: фон core-inverted-alpha-10, текст core-inverted (для темного фона)
  * 
  * Иконка опциональна и может отключаться.
+ * 
+ * @figma https://www.figma.com/file/{fileKey}/{fileName}?node-id={nodeId}
+ * Замените {fileKey}, {fileName} и {nodeId} на соответствующие значения из Figma
  */
 export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   (

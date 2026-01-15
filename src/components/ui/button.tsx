@@ -52,6 +52,17 @@ export interface ButtonProps
   rightIcon?: React.ReactNode;
 }
 
+/**
+ * Компонент Button
+ * 
+ * Варианты: Primary, Secondary, Tertiary
+ * Размеры: S, M, L
+ * Поддерживает инвертированные варианты для темного фона
+ * 
+ * @figma https://www.figma.com/file/{fileKey}/{fileName}?node-id={nodeId}
+ * Замените {fileKey}, {fileName} и {nodeId} на соответствующие значения из Figma
+ */
+
 const SIZE_CLASSES: Record<ButtonSize, string> = {
   // все размеры во Figma имеют одинаковые паддинги 12x16, различаются типографикой
   l: "text-title-s md:text-label-l", // 16px label L — на мобиле можно оставить 14-16

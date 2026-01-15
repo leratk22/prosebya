@@ -31,6 +31,9 @@ export interface ButtonPlayPauseProps
  * - 32px: padding 8px, иконка 16px
  * - 56px: padding 16px, иконка 24px
  * - 72px: padding 16px, иконка 40px
+ * 
+ * @figma https://www.figma.com/file/{fileKey}/{fileName}?node-id={nodeId}
+ * Замените {fileKey}, {fileName} и {nodeId} на соответствующие значения из Figma
  */
 export const ButtonPlayPause = React.forwardRef<
   HTMLButtonElement,
