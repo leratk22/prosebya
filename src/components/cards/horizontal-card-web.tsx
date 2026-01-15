@@ -135,9 +135,9 @@ export const HorizontalCardWeb = React.forwardRef<
       
       return (
         <div 
-          className="flex flex-col justify-between flex-1 relative z-10 self-stretch py-16 pr-16 gap-12 md:py-32 md:pr-64 md:pl-0 md:gap-16"
+          className="flex flex-col justify-between flex-1 relative z-10 self-stretch py-16 pr-16 md:py-32 md:pr-64 md:pl-0"
         >
-          {/* Верхний блок: badges (mobile) + заголовок и описание */}
+          {/* Верхний блок: badges (mobile) + заголовок + описание (desktop) */}
           <div className="flex flex-col gap-8 md:gap-4 self-stretch">
             {/* Badges на mobile - перед заголовком */}
             <div className="flex flex-row gap-4 md:hidden self-stretch min-w-0 overflow-hidden">
@@ -157,10 +157,10 @@ export const HorizontalCardWeb = React.forwardRef<
             >
               {title}
             </h3>
-            {/* Description */}
+            {/* Description - только для desktop, в мобильной версии будет внизу */}
             {description && (
               <p
-                className="font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary line-clamp-1 self-stretch min-w-0"
+                className="hidden md:block font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary line-clamp-1 self-stretch min-w-0"
                 style={{
                   fontSize: "12px",
                   lineHeight: "16px", // 1.3333333333333333em
@@ -170,17 +170,32 @@ export const HorizontalCardWeb = React.forwardRef<
               </p>
             )}
           </div>
-          {/* Нижний блок: badges на desktop */}
-          <div className="hidden md:flex flex-row gap-8 self-stretch min-w-0 overflow-hidden">
-            {badges.map((badge, index) => (
-              <Badge 
-                key={index} 
-                variant="default"
-                className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
+          {/* Нижний блок: badges на desktop, описание на mobile */}
+          <div className="flex flex-col md:flex-row gap-8 self-stretch min-w-0 overflow-hidden">
+            {/* Badges на desktop */}
+            <div className="hidden md:flex flex-row gap-8 self-stretch min-w-0 overflow-hidden">
+              {badges.map((badge, index) => (
+                <Badge 
+                  key={index} 
+                  variant="default"
+                  className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
+                >
+                  {badge}
+                </Badge>
+              ))}
+            </div>
+            {/* Description на mobile - всегда внизу */}
+            {description && (
+              <p
+                className="md:hidden font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary line-clamp-1 self-stretch min-w-0"
+                style={{
+                  fontSize: "12px",
+                  lineHeight: "16px", // 1.3333333333333333em
+                }}
               >
-                {badge}
-              </Badge>
-            ))}
+                {description}
+              </p>
+            )}
           </div>
         </div>
       );

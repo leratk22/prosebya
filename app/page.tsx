@@ -1,150 +1,65 @@
 "use client";
 
 import { AudioCardWeb } from "@/components/cards/audio-card-web";
+import { BannerCardWeb } from "@/components/cards/banner-card-web";
+import { HorizontalCardWeb } from "@/components/cards/horizontal-card-web";
+import { LongreadCardWeb } from "@/components/cards/longread-card-web";
+import { LongreadCardOldWeb } from "@/components/cards/longread-card-old-web";
 import { PracticeCard } from "@/components/cards/practice-card";
-import { useState } from "react";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-
   return (
-    <div className={darkMode ? "dark" : ""}>
-      <div className="min-h-screen bg-light-bg-primary dark:bg-dark-bg-primary p-16 md:p-24">
-        <div className="max-w-4xl mx-auto space-y-32">
-          {/* Header */}
-          <header className="flex items-center justify-between">
-            <h1 className="text-title-xl md:text-title-xl font-bold text-light-fg-primary dark:text-dark-fg-primary">
-              AudioCardWeb Demo
-            </h1>
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="px-16 py-8 rounded-s bg-light-bg-secondary dark:bg-dark-bg-secondary text-light-fg-primary dark:text-dark-fg-primary border border-light-border-primary dark:border-dark-border-primary"
-            >
-              {darkMode ? "☀️" : "🌙"}
-            </button>
-          </header>
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto p-24">
+        <div className="flex flex-col gap-24">
+          {/* AudioCardWeb */}
+          <AudioCardWeb
+            title="Медитация для глубокого расслабления и снятия стресса"
+            topBadge="Медитация"
+            duration="12:45"
+          />
 
-          {/* Audio Cards */}
-          <section className="space-y-24">
-            <h2 className="text-title-l font-semibold text-light-fg-primary dark:text-dark-fg-primary">
-              AudioCardWeb - Различные варианты
-            </h2>
+          {/* BannerCardWeb */}
+          <BannerCardWeb
+            highlightText="Новое"
+            title="Как справиться с тревогой и паническими атаками"
+            description="Практические техники дыхания и когнитивно-поведенческие упражнения для управления тревожными состояниями в повседневной жизни"
+          />
 
-            {/* Card 1: С duration */}
-            <div className="space-y-12">
-              <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                С duration
-              </h3>
-                     <AudioCardWeb
-                       title="Заголовок может быть в две строки максимально, затем мы его обрезаем, если он не умещается, но таких медитаций у нас нет"
-                       topBadge="Тэг"
-                       duration="05:23"
-                     />
-            </div>
+          {/* HorizontalCardWeb */}
+          <HorizontalCardWeb
+            title="Техники работы с внутренним критиком"
+            description="Помочь себе за 5 минут"
+            badges={["Психология", "Саморазвитие"]}
+            imageUrl="/horizontal-card-1x.png"
+            imageUrl2x="/horizontal-card-2x.png"
+            imageAlt="Психологическая практика"
+          />
 
-            {/* Card 2: Короткий заголовок */}
-            <div className="space-y-12">
-              <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                Короткий заголовок
-              </h3>
-              <AudioCardWeb
-                title="Короткий заголовок"
-                topBadge="Новое"
-                duration="03:15"
-                playState="play"
-              />
-            </div>
+          {/* LongreadCardWeb */}
+          <LongreadCardWeb
+            title="Эмоциональный интеллект: как развить способность понимать и управлять своими эмоциями"
+            tag="Статья"
+            backgroundColor="yellow"
+          />
 
-                   {/* Card 3: Кликабельная карточка */}
-                   <div className="space-y-12">
-                     <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                       Кликабельная карточка
-                     </h3>
-                     <AudioCardWeb
-                       title="Заголовок может быть в две строки максимально, затем мы его обрезаем, если он не умещается, но таких медитаций у нас нет"
-                       topBadge="Популярное"
-                       duration="12:45"
-                       onClick={() => alert("Карточка кликнута!")}
-                     />
-                   </div>
+          {/* LongreadCardOldWeb */}
+          <LongreadCardOldWeb
+            title="Привязанность и отношения: как формируются паттерны поведения"
+            tag="Лонгрид"
+            time="18:20"
+          />
 
-            {/* Card 4: Длинный заголовок (для проверки обрезки) */}
-            <div className="space-y-12">
-              <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                Длинный заголовок (проверка обрезки после 2 строк)
-              </h3>
-              <AudioCardWeb
-                title="Это очень длинный заголовок который должен быть обрезан после двух строк и показать многоточие если текст не помещается в две строки максимально"
-                topBadge="Длинный"
-                duration="99:99"
-                playState="play"
-              />
-            </div>
-          </section>
-
-          {/* Responsive Demo */}
-          <section className="space-y-24">
-            <h2 className="text-title-l font-semibold text-light-fg-primary dark:text-dark-fg-primary">
-              Адаптивность (измените ширину окна)
-            </h2>
-            <div className="space-y-12">
-              <p className="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary">
-                На мобильных устройствах badge отображается сверху, на desktop - справа от заголовка
-              </p>
-              <AudioCardWeb
-                title="Заголовок может быть в две строки максимально, затем мы его обрезаем, если он не умещается, но таких медитаций у нас нет"
-                topBadge="Адаптивный"
-                duration="08:30"
-                playState="play"
-              />
-            </div>
-          </section>
-
-          {/* PracticeCard Demo */}
-          <section className="space-y-24">
-            <h2 className="text-title-l font-semibold text-light-fg-primary dark:text-dark-fg-primary">
-              PracticeCard - Горизонтальная карточка
-            </h2>
-            
-            <div className="space-y-12">
-              <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                Полный пример из Figma
-              </h3>
-              <PracticeCard
-                subtitle="Практика"
-                title="Как радоваться жизни каждый день"
-                label="Помочь себе за 2 минуты"
-                imageUrl="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=120&h=211&fit=crop&auto=format"
-                imageUrl2x="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=240&h=422&fit=crop&auto=format"
-                imageAlt="Woman practicing meditation"
-                duration="01:08"
-                onClick={() => alert("PracticeCard кликнута!")}
-              />
-            </div>
-
-            <div className="space-y-12">
-              <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                Без изображения (fallback)
-              </h3>
-              <PracticeCard
-                subtitle="Практика"
-                title="Как радоваться жизни каждый день"
-                label="Помочь себе за 2 минуты"
-                duration="01:08"
-              />
-            </div>
-
-            <div className="space-y-12">
-              <h3 className="text-title-m font-medium text-light-fg-secondary dark:text-dark-fg-secondary">
-                Без label и duration
-              </h3>
-              <PracticeCard
-                subtitle="Практика"
-                title="Как радоваться жизни каждый день"
-                imageUrl="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=120&h=211&fit=crop&crop=face"
-              />
-            </div>
-          </section>
+          {/* PracticeCard */}
+          <PracticeCard
+            subtitle="Практика"
+            title="Техника заземления при панических атаках"
+            label="Помочь себе за 2 минуты"
+            imageUrl="/practice-images/practice-image-1x.png"
+            imageUrl2x="/practice-images/practice-image-2x.png"
+            imageAlt="Практика медитации"
+            duration="03:15"
+          />
         </div>
       </div>
     </div>
