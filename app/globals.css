@@ -110,4 +110,114 @@
     stroke: #FFFFFF;
     stroke-opacity: 0.1;
   }
+
+  .banner-card-title {
+    font-size: 20px;
+    line-height: 1.2em;
+    letter-spacing: -0.01em; /* -1% */
+  }
+
+  @media (min-width: 440px) {
+    .banner-card-title {
+      font-size: 24px;
+      line-height: 1.3333333333333333em;
+      letter-spacing: -0.015em; /* -1.5% */
+    }
+  }
+
+  .banner-card-description {
+    font-size: 12px;
+    line-height: 1.3333333333333333em;
+  }
+
+  @media (min-width: 440px) {
+    .banner-card-description {
+      font-size: 14px;
+      line-height: 1.4285714285714286em;
+    }
+  }
+
+  .longread-card-title {
+    font-size: 20px;
+    line-height: 1.2em;
+    letter-spacing: -0.01em; /* -1% */
+  }
+
+  @media (min-width: 440px) {
+    .longread-card-title {
+      font-size: 24px;
+      line-height: 1.3333333333333333em; /* 32px */
+      letter-spacing: -0.015em; /* -1.5% */
+    }
+  }
+
+  .longread-card-image {
+    width: 182px;
+    height: 166px;
+  }
+
+  @media (min-width: 440px) {
+    .longread-card-image {
+      /* Контейнер должен вместить масштабированное изображение: 182*1.5 = 273px, 166*1.5 = 249px */
+      width: 273px;
+      height: 249px;
+      overflow: visible;
+    }
+  }
+
+  .longread-card-img {
+    width: 182px;
+    height: 166px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  @media (min-width: 440px) {
+    .longread-card-img {
+      width: 182px;
+      height: 166px;
+      transform: scale(1.5);
+      transform-origin: bottom right;
+    }
+  }
+
+  .longread-card-old-title {
+    font-size: 20px;
+    line-height: 1.2em;
+    letter-spacing: -0.01em; /* -1% */
+  }
+
+  @media (min-width: 440px) {
+    .longread-card-old-title {
+      font-size: 24px;
+      line-height: 1.3333333333333333em; /* 32px */
+      letter-spacing: -0.015em; /* -1.5% */
+    }
+  }
+
+  /* Фоновое изображение для карточки - автоматический выбор по теме */
+  .longread-card-old-bg {
+    background-image: url("/images/longread-card-old/light-1x.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Для темной темы */
+  .dark .longread-card-old-bg,
+  :is(.dark) .longread-card-old-bg {
+    background-image: url("/images/longread-card-old/dark-1x.png");
+  }
+
+  /* Для retina дисплеев (2x) */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .longread-card-old-bg {
+      background-image: url("/images/longread-card-old/light-2x.png");
+    }
+
+    .dark .longread-card-old-bg,
+    :is(.dark) .longread-card-old-bg {
+      background-image: url("/images/longread-card-old/dark-2x.png");
+    }
+  }
 }
