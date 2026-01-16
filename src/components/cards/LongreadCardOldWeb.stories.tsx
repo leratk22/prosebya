@@ -206,10 +206,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Заголовок</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  longread-card-old-title line-clamp-2
+                  longread-card-old-title font-medium line-clamp-2
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Mobile: 20px/1.2, Desktop: 24px/1.333, максимум 2 строки
+                  Mobile: MVP2.0/Title/M (20px/1.2), Desktop: MVP2.0/Title/L (24px/1.333), Medium, максимум 2 строки
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Точные значения:</strong> Mobile: font-size: 20px, line-height: 1.2em, font-weight: 500 (Medium), letter-spacing: -0.01em (-1%); Desktop: font-size: 24px, line-height: 1.333em, font-weight: 500 (Medium), letter-spacing: -0.015em (-1.5%)
                 </p>
               </div>
             </div>

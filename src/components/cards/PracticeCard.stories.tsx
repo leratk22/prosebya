@@ -323,20 +323,26 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Заголовок (Mobile)</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  text-[20px] leading-[1.2em] tracking-[-0.01em]
+                  text-[20px] leading-[1.2em] tracking-[-0.01em] font-medium
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  MVP2.0/Title/M, fontSize: 20px, lineHeight: 1.2em, letterSpacing: -1%
+                  MVP2.0/Title/M, fontSize: 20px, lineHeight: 1.2em, letterSpacing: -1%, font-weight: 500 (Medium)
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Точные значения:</strong> font-size: 20px, line-height: 1.2em, font-weight: 500 (Medium), letter-spacing: -0.01em (-1%)
                 </p>
               </div>
               
               <div>
                 <h4 className="text-label-m font-medium mb-4">Заголовок (Desktop)</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  md:text-[24px] md:leading-[1.333em] md:tracking-[-0.015em]
+                  md:text-[24px] md:leading-[1.333em] md:tracking-[-0.015em] font-medium
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  MVP2.0/Title/L, fontSize: 24px, lineHeight: 1.333em, letterSpacing: -1.5%
+                  MVP2.0/Title/L, fontSize: 24px, lineHeight: 1.333em, letterSpacing: -1.5%, font-weight: 500 (Medium)
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Точные значения:</strong> font-size: 24px, line-height: 1.333em, font-weight: 500 (Medium), letter-spacing: -0.015em (-1.5%)
                 </p>
               </div>
               
