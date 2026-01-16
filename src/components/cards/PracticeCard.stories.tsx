@@ -26,6 +26,8 @@ const meta: Meta<typeof PracticeCard> = {
 - Badge с длительностью на изображении (опционально)
 - Поддержка светлой и темной темы
 - Весь блок кликабельный при наведении (если передан onClick)
+
+**Figma:** [PracticeCard](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9892-27155&t=iWJmLoiT7vqKsn1t-1)
         `,
       },
     },

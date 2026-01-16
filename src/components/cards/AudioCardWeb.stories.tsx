@@ -23,6 +23,8 @@ const meta: Meta<typeof AudioCardWeb> = {
 - Заголовок обрезается после 2 строк многоточием
 - Waveform всегда отображается, одного размера, обрезается по ширине контейнера
 - Весь блок кликабельный при наведении (если передан onClick)
+
+**Figma:** [AudioCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9836-27778&t=iWJmLoiT7vqKsn1t-1)
         `,
       },
     },
@@ -35,13 +37,17 @@ const meta: Meta<typeof AudioCardWeb> = {
   argTypes: {
     title: {
       control: { type: "text" },
+      description: "Заголовок карточки. Перенос согласно описанию в Figma. Ожидаем, что заголовок приходит всегда.",
     },
     topBadge: {
+      name: "tag",
       control: { type: "text" },
+      description: "Тег. Ожидаем, что тег приходит всегда.",
     },
     duration: {
+      name: "contentDuration",
       control: { type: "text" },
-      description: "Длительность в формате MM:SS",
+      description: "Длительность аудио дорожки. Ожидаем, что длительность контента приходит всегда.",
     },
     onClick: {
       action: "clicked",

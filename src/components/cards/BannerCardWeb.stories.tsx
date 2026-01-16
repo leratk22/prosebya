@@ -26,6 +26,8 @@ const meta: Meta<typeof BannerCardWeb> = {
 - Заголовок максимум на 2 строки, далее обрезается в троеточие
 - Описание максимум 2 строки на десктопе и 3 в мобилке, далее обрезается в троеточие
 - Компонент Highlight опционален и отображается перед заголовком
+
+**Figma:** [BannerCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9924-76996&t=iWJmLoiT7vqKsn1t-1)
         `,
       },
     },
