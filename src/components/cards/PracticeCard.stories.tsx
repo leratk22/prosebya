@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PracticeCard, type PracticeCardProps } from "./practice-card";
+import { Spinner } from "@/components/ui/spinner";
 
 const meta: Meta<typeof PracticeCard> = {
   title: "Cards/PracticeCard",
@@ -227,6 +228,88 @@ export const PlaceholderThemesComparison: Story = {
     docs: {
       description: {
         story: "Сравнение карточек с заглушкой в светлой и темной теме. Заглушка отображается автоматически, когда imageUrl не передан.",
+      },
+    },
+  },
+};
+
+export const ImageLoading: Story = {
+  render: (args: PracticeCardProps) => {
+    // Создаем кастомную карточку с спиннером вместо изображения
+    const CustomCard = () => {
+      const containerClasses = [
+        "relative",
+        "flex flex-row items-stretch",
+        "gap-16 md:gap-48",
+        "p-16 md:p-20",
+        "bg-light-bg-primary dark:bg-dark-bg-primary",
+        "rounded-m",
+        "border border-light-border-secondary dark:border-dark-border-secondary",
+        "shadow-[0px_12px_24px_-4px_rgba(34,38,59,0.05)]",
+        "overflow-hidden",
+        "box-border",
+        "h-[243px] md:h-[251px]",
+        "md:max-w-[756px]",
+      ].join(" ");
+
+      return (
+        <div className={containerClasses}>
+          {/* Текстовая часть */}
+          <div className="flex flex-col justify-between flex-1 relative z-10 gap-24 md:gap-8 md:py-8">
+            <div className="flex flex-col gap-20 md:gap-8">
+              <div className="md:hidden">
+                <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full font-medium font-euclid bg-core-alpha-5 dark:bg-core-inverted-alpha-10 text-light-fg-primary dark:text-core-inverted text-label-s">
+                  {args.subtitle.charAt(0).toUpperCase() + args.subtitle.slice(1).toLowerCase()}
+                </div>
+              </div>
+              <div className="hidden md:block">
+                <p className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary text-caption-s uppercase">
+                  {args.subtitle}
+                </p>
+              </div>
+              <h3 className="font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary text-[20px] leading-[1.2em] tracking-[-0.01em] md:text-[24px] md:leading-[1.3333333333333333em] md:tracking-[-0.015em] line-clamp-3">
+                {args.title}
+              </h3>
+            </div>
+            {args.label && (
+              <p className="font-medium font-euclid text-[12px] leading-[1.3333333333333333em] text-light-fg-tertiary dark:text-dark-fg-tertiary md:text-[14px] md:leading-[1.4285714285714286em] line-clamp-1">
+                {args.label}
+              </p>
+            )}
+          </div>
+          {/* Область изображения со спиннером */}
+          <div 
+            className="practice-card-image relative shrink-0 z-10 w-[120px] md:w-[120px] flex items-center justify-center"
+            style={{
+              height: "211px",
+              borderRadius: "0px 16px 16px 0px",
+            }}
+          >
+            <Spinner size={32} aria-label="Загрузка изображения" role="status" />
+            {args.duration && (
+              <div className="absolute bottom-16 left-0 right-0 flex justify-center">
+                <div className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] text-[#FFFFFF] px-8 py-4 text-label-s">
+                  {args.duration}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    return <CustomCard />;
+  },
+  args: {
+    subtitle: "Практика",
+    title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Состояние загрузки изображения. На месте изображения отображается спиннер размером 32px.",
       },
     },
   },

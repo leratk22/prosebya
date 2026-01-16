@@ -46,6 +46,23 @@
   }
 }
 
+@layer utilities {
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+  }
+}
+
 @layer components {
   .practice-card-decorative {
     left: -16px;

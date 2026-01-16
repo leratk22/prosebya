@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { LongreadCardWeb, type LongreadCardWebProps } from "./longread-card-web";
+import { Spinner } from "@/components/ui/spinner";
+import { Badge } from "@/components/ui/badge";
 
 const meta: Meta<typeof LongreadCardWeb> = {
   title: "Cards/LongreadCardWeb",
@@ -161,6 +163,67 @@ export const Clickable: Story = {
     backgroundColor: "yellow",
     onClick: () => {
       alert("Карточка кликнута!");
+    },
+  },
+};
+
+export const ImageLoading: Story = {
+  render: (args: LongreadCardWebProps) => {
+    // Создаем кастомную карточку с спиннером вместо изображения
+    const CustomCard = () => {
+      const bgColor = args.backgroundColor === "yellow" ? "#FFE699" :
+                      args.backgroundColor === "orange" ? "#FFB899" :
+                      args.backgroundColor === "red" ? "#FF9999" :
+                      args.backgroundColor === "blue" ? "#A6C1F2" : "#FFFFFF";
+
+      const containerClasses = [
+        "relative",
+        "flex flex-row items-stretch",
+        "rounded-m",
+        "border border-[rgba(52,64,121,0.14)]",
+        "overflow-hidden",
+        "box-border",
+        "h-[235px]",
+        "w-full md:max-w-[756px]",
+      ].join(" ");
+
+      return (
+        <div className={containerClasses} style={{ backgroundColor: bgColor }}>
+          {/* Текстовая часть */}
+          <div className="flex flex-col justify-between flex-1 relative z-10 self-stretch gap-10 p-20 md:py-24 md:pr-64 md:pl-20">
+            <h3 className="w-full relative font-medium font-euclid text-[#22263B] line-clamp-3 self-stretch min-w-0 longread-card-title">
+              {args.title}
+            </h3>
+            <div className="self-start">
+              <Badge variant="default">{args.tag}</Badge>
+            </div>
+          </div>
+          {/* Область изображения со спиннером */}
+          <div 
+            className="absolute bottom-0 right-0 z-0 overflow-hidden longread-card-image md:static md:z-10 md:h-full md:shrink-0 md:overflow-visible flex items-center justify-center"
+            style={{
+              width: "182px",
+              height: "166px",
+            }}
+          >
+            <Spinner size={32} aria-label="Загрузка изображения" role="status" />
+          </div>
+        </div>
+      );
+    };
+
+    return <CustomCard />;
+  },
+  args: {
+    title: "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается на три строки",
+    tag: "Тэг",
+    backgroundColor: "yellow",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Состояние загрузки изображения. На месте изображения отображается спиннер размером 32px.",
+      },
     },
   },
 };
