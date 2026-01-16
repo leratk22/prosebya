@@ -15,6 +15,8 @@ const meta: Meta<typeof HorizontalCardWeb> = {
         component: `
 Горизонтальная карточка для отображения контента согласно дизайну из Figma.
 
+**Дизайн в Figma:** [Ссылка на карточку](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9785-27518&t=iWJmLoiT7vqKsn1t-1)
+
 **Адаптивность:**
 - **Mobile** (< 440px): высота **140px**, ширина **343px**, изображение слева (124px), текст справа
 - **Desktop** (≥ 440px): высота **210px**, максимальная ширина **756px**, изображение слева (186px), текст справа
@@ -35,25 +37,25 @@ const meta: Meta<typeof HorizontalCardWeb> = {
   },
   args: {
     title: "Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился",
-    description: "Описание в 1 строку в зависимости от типа контента (необязательно)",
-    badges: ["Тэг", "Тэг"],
+    description: "30 вопросов",
+    badges: ["первый тег", "второй тег"],
   },
   argTypes: {
     title: {
       control: { type: "text" },
-      description: "Заголовок карточки (максимум 2 строки)",
+      description: "Заголовок карточки. Перенос согласно описанию в Figma. Ожидается, что заголовок приходит всегда.",
     },
     description: {
       control: { type: "text" },
-      description: "Описание под заголовком (опционально)",
+      description: "Описание. Например, \"30 вопросов\". Если не получено (включая null или пустую строку \"\"), то не отображать. Размер карточки при этом не адаптируется.",
     },
     badges: {
       control: { type: "object" },
-      description: "Массив badges для отображения (обязательно минимум 1, максимум 2)",
+      description: "Массив badges для отображения. Первый элемент - первый тег (tag), второй элемент - второй тег (contentDuration). Ожидается, что теги приходят всегда.",
     },
     imageUrl: {
       control: { type: "text" },
-      description: "URL изображения для левой части (1x)",
+      description: "Ссылка на картинку (imageUri). Получить как файл согласно стандартной логике. Показать лоадер, пока идет запрос на получение картинки. Если ссылка не получена или не удалось получить картинку, показать стандартный плейсхолдер.",
     },
     imageUrl2x: {
       control: { type: "text" },
@@ -77,8 +79,8 @@ type Story = StoryObj<typeof HorizontalCardWeb>;
 export const Default: Story = {
   args: {
     title: "Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился",
-    description: "Описание в 1 строку в зависимости от типа контента (необязательно)",
-    badges: ["Тэг", "Тэг"],
+    description: "30 вопросов",
+    badges: ["первый тег", "второй тег"],
     imageUrl: "/horizontal-card-1x.png",
     imageUrl2x: "/horizontal-card-2x.png",
     imageAlt: "Карточка",
@@ -88,8 +90,8 @@ export const Default: Story = {
 export const WithImage: Story = {
   args: {
     title: "Медитация для сна",
-    description: "Помочь себе за 2 минуты",
-    badges: ["Практика", "Медитация"],
+    description: "30 вопросов",
+    badges: ["первый тег", "второй тег"],
     imageUrl: "/horizontal-card-1x.png",
     imageUrl2x: "/horizontal-card-2x.png",
     imageAlt: "Медитация",
@@ -99,8 +101,8 @@ export const WithImage: Story = {
 export const Clickable: Story = {
   args: {
     title: "Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился",
-    description: "Описание в 1 строку в зависимости от типа контента (необязательно)",
-    badges: ["Тэг", "Тэг"],
+    description: "30 вопросов",
+    badges: ["первый тег", "второй тег"],
     onClick: () => {
       alert("Карточка кликнута!");
     },
@@ -110,23 +112,23 @@ export const Clickable: Story = {
 export const WithoutDescription: Story = {
   args: {
     title: "Короткий заголовок",
-    badges: ["Тэг"],
+    badges: ["первый тег", "второй тег"],
   },
 };
 
 export const SingleBadge: Story = {
   args: {
     title: "Заголовок с одним badge",
-    description: "Описание",
-    badges: ["Тэг"],
+    description: "30 вопросов",
+    badges: ["первый тег"],
   },
 };
 
 export const LongTitle: Story = {
   args: {
     title: "Очень длинный заголовок который должен обрезаться после двух строк и показывать многоточие если текст не умещается в отведенное пространство карточки",
-    description: "Описание",
-    badges: ["Тэг", "Тэг"],
+    description: "30 вопросов",
+    badges: ["первый тег", "второй тег"],
   },
 };
 
@@ -134,7 +136,7 @@ export const LongDescription: Story = {
   args: {
     title: "Заголовок",
     description: "Очень длинное описание которое должно обрезаться после одной строки и показывать многоточие если текст не умещается в отведенное пространство карточки",
-    badges: ["Тэг"],
+    badges: ["первый тег", "второй тег"],
   },
 };
 
@@ -146,8 +148,8 @@ export const ThemesComparison: Story = {
         <div className="bg-light-bg-primary p-24 rounded-m">
           <HorizontalCardWeb
             title="Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился"
-            description="Описание в 1 строку в зависимости от типа контента (необязательно)"
-            badges={["Тэг", "Тэг"]}
+            description="30 вопросов"
+            badges={["первый тег", "второй тег"]}
             imageUrl="/horizontal-card-1x.png"
             imageUrl2x="/horizontal-card-2x.png"
             imageAlt="Карточка"
@@ -159,8 +161,8 @@ export const ThemesComparison: Story = {
         <div className="dark bg-light-bg-primary p-24 rounded-m">
           <HorizontalCardWeb
             title="Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился"
-            description="Описание в 1 строку в зависимости от типа контента (необязательно)"
-            badges={["Тэг", "Тэг"]}
+            description="30 вопросов"
+            badges={["первый тег", "второй тег"]}
             imageUrl="/horizontal-card-1x.png"
             imageUrl2x="/horizontal-card-2x.png"
             imageAlt="Карточка"
