@@ -135,10 +135,10 @@ export const HorizontalCardWeb = React.forwardRef<
       
       return (
         <div 
-          className="flex flex-col justify-between flex-1 relative z-10 self-stretch py-16 pr-16 md:py-32 md:pr-64 md:pl-0"
+          className="flex flex-col justify-between flex-1 min-w-0 relative z-10 self-stretch py-16 pr-16 md:py-32 md:pr-64 md:pl-0"
         >
           {/* Верхний блок: badges (mobile) + заголовок + описание (desktop) */}
-          <div className="flex flex-col gap-8 md:gap-4 self-stretch">
+          <div className="flex flex-col gap-8 md:gap-4 self-stretch min-w-0">
             {/* Badges на mobile - перед заголовком */}
             <div className="flex flex-row gap-4 md:hidden self-stretch min-w-0 overflow-hidden">
               {badges.map((badge, index) => (
@@ -153,14 +153,14 @@ export const HorizontalCardWeb = React.forwardRef<
             </div>
             {/* Title */}
             <h3 
-              className="practice-card-title font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary line-clamp-2 self-stretch min-w-0"
+              className="practice-card-title font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary line-clamp-2 self-stretch min-w-0 max-w-full"
             >
               {title}
             </h3>
             {/* Description - только для desktop, в мобильной версии будет внизу */}
             {description && (
               <p
-                className="hidden md:block font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary line-clamp-1 self-stretch min-w-0"
+                className="hidden md:block font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary truncate self-stretch min-w-0 max-w-full"
                 style={{
                   fontSize: "12px",
                   lineHeight: "16px", // 1.3333333333333333em
@@ -187,7 +187,7 @@ export const HorizontalCardWeb = React.forwardRef<
             {/* Description на mobile - всегда внизу */}
             {description && (
               <p
-                className="md:hidden font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary line-clamp-1 self-stretch min-w-0"
+                className="md:hidden font-medium font-euclid text-light-fg-tertiary dark:text-dark-fg-tertiary truncate self-stretch min-w-0 max-w-full"
                 style={{
                   fontSize: "12px",
                   lineHeight: "16px", // 1.3333333333333333em
