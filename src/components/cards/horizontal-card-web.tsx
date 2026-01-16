@@ -153,7 +153,7 @@ export const HorizontalCardWeb = React.forwardRef<
             </div>
             {/* Title */}
             <h3 
-              className="practice-card-title font-medium md:font-semibold font-euclid text-light-fg-primary dark:text-dark-fg-primary line-clamp-2 self-stretch min-w-0"
+              className="practice-card-title font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary line-clamp-2 self-stretch min-w-0"
             >
               {title}
             </h3>

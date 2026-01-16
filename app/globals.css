@@ -40,6 +40,10 @@
     @apply bg-light-bg-primary dark:bg-dark-bg-primary text-light-fg-primary dark:text-dark-fg-primary;
     font-family: 'Euclid Circular A', sans-serif;
   }
+
+  h3 {
+    @apply font-medium;
+  }
 }
 
 @layer components {

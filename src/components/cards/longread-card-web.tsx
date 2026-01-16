@@ -149,7 +149,7 @@ export const LongreadCardWeb = React.forwardRef<
         >
           {/* Заголовок */}
           <h3 
-            className="w-full relative font-semibold font-euclid text-[#22263B] line-clamp-3 self-stretch min-w-0 longread-card-title"
+            className="w-full relative font-medium font-euclid text-[#22263B] line-clamp-3 self-stretch min-w-0 longread-card-title"
           >
             {title}
           </h3>

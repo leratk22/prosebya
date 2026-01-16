@@ -161,7 +161,7 @@ export const LongreadCardOldWeb = React.forwardRef<
           {/* Светлая тема: #344079, Темная тема: #FFFFFF */}
           {/* textAlignVertical: BOTTOM из Figma - текст выровнен по нижнему краю */}
           {/* В Figma заголовок имеет horizontal: fill, vertical: hug, alignSelf: stretch */}
-          <h3 className="longread-card-old-title w-full font-semibold font-euclid text-[#344079] dark:text-[#FFFFFF] line-clamp-2 relative z-10">
+          <h3 className="longread-card-old-title w-full font-medium font-euclid text-[#344079] dark:text-[#FFFFFF] line-clamp-2 relative z-10">
             {title}
           </h3>
         </div>

@@ -165,7 +165,7 @@ export const PracticeCard = React.forwardRef<
             
             {/* Title */}
             <h3 
-              className="font-semibold font-euclid text-light-fg-primary dark:text-dark-fg-primary text-[20px] leading-[1.2em] tracking-[-0.01em] md:text-[24px] md:leading-[1.3333333333333333em] md:tracking-[-0.015em] line-clamp-3"
+              className="font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary text-[20px] leading-[1.2em] tracking-[-0.01em] md:text-[24px] md:leading-[1.3333333333333333em] md:tracking-[-0.015em] line-clamp-3"
             >
               {title}
             </h3>

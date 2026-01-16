@@ -166,7 +166,7 @@ export const BannerCardWeb = React.forwardRef<
           {/* Заголовок */}
           {/* Mobile: MVP2.0/Title/M (20px, lineHeight: 1.2em, letterSpacing: -1%) */}
           {/* Desktop: MVP2.0/Title/L (24px, lineHeight: 1.3333333333333333em, letterSpacing: -1.5%) */}
-          <h3 className="banner-card-title w-full text-center font-semibold font-euclid text-[#FFFFFF] line-clamp-2">
+          <h3 className="banner-card-title w-full text-center font-medium font-euclid text-[#FFFFFF] line-clamp-2">
             {title}
           </h3>
           {/* Описание */}

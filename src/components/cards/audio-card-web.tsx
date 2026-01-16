@@ -98,7 +98,7 @@ export const AudioCardWeb = React.forwardRef<
           </div>
           {/* Desktop: заголовок слева, badge справа */}
           <div className="hidden md:flex flex-1 flex-col items-start">
-            <h3 className="w-full relative text-title-l font-semibold font-euclid text-light-fg-primary tracking-title-l [line-height:32px] [display:-webkit-inline-box] overflow-hidden text-ellipsis [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
+            <h3 className="w-full relative text-title-l font-medium font-euclid text-light-fg-primary tracking-title-l [line-height:32px] [display:-webkit-inline-box] overflow-hidden text-ellipsis [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
               {title}
             </h3>
           </div>
