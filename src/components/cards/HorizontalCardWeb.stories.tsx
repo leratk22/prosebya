@@ -358,13 +358,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Заголовок (Desktop)</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  practice-card-title font-semibold font-euclid text-light-fg-primary dark:text-dark-fg-primary
+                  practice-card-title font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Title/L, SemiBold, Euclid Circular A, основной цвет текста
+                  Title/L, Medium, Euclid Circular A, основной цвет текста
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> font-size: 24px, line-height: 32px (1.3333333333333333em), font-weight: 600 (SemiBold), color: rgba(34, 38, 59, 1) / #FFFFFF, letter-spacing: -0.015em (-1.5%)
+                  <strong>Точные значения:</strong> font-size: 24px, line-height: 32px (1.3333333333333333em), font-weight: 500 (Medium), color: rgba(34, 38, 59, 1) / #FFFFFF, letter-spacing: -0.015em (-1.5%)
                 </p>
               </div>
               

@@ -337,26 +337,26 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Заголовок (Mobile)</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  longread-card-title font-semibold font-euclid text-[#22263B] line-clamp-3
+                  longread-card-title font-medium font-euclid text-[#22263B] line-clamp-3
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  MVP2.0/Title/M, SemiBold, Euclid Circular A
+                  MVP2.0/Title/M, Medium, Euclid Circular A
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> font-size: 20px, line-height: 1.2em, font-weight: 600 (SemiBold), color: #22263B, letter-spacing: -0.01em (-1%), максимум 3 строки
+                  <strong>Точные значения:</strong> font-size: 20px, line-height: 1.2em, font-weight: 500 (Medium), color: #22263B, letter-spacing: -0.01em (-1%), максимум 3 строки
                 </p>
               </div>
               
               <div>
                 <h4 className="text-label-m font-medium mb-4">Заголовок (Desktop)</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  longread-card-title font-semibold font-euclid text-[#22263B] line-clamp-3
+                  longread-card-title font-medium font-euclid text-[#22263B] line-clamp-3
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  MVP2.0/Title/L, SemiBold, Euclid Circular A
+                  MVP2.0/Title/L, Medium, Euclid Circular A
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> font-size: 24px, line-height: 1.3333333333333333em (32px), font-weight: 600 (SemiBold), color: #22263B, letter-spacing: -0.015em (-1.5%), максимум 3 строки
+                  <strong>Точные значения:</strong> font-size: 24px, line-height: 1.3333333333333333em (32px), font-weight: 500 (Medium), color: #22263B, letter-spacing: -0.015em (-1.5%), максимум 3 строки
                 </p>
               </div>
             </div>
