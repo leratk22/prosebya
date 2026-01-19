@@ -2,6 +2,7 @@
 
 import { AudioCardWeb } from "@/components/cards/audio-card-web";
 import { BannerCardWeb } from "@/components/cards/banner-card-web";
+import { BannerImageCardWeb } from "@/components/cards/banner-image-card-web";
 import { HorizontalCardWeb } from "@/components/cards/horizontal-card-web";
 import { LongreadCardWeb } from "@/components/cards/longread-card-web";
 import { WormCardWeb } from "@/components/cards/worm-card-web";
@@ -26,13 +27,18 @@ export default function Home() {
             description="Практические техники дыхания и когнитивно-поведенческие упражнения для управления тревожными состояниями в повседневной жизни"
           />
 
+          {/* BannerImageCardWeb */}
+          <BannerImageCardWeb
+            imageSrc="/ImageExample3x.png"
+            imageAlt="Пример баннерной карточки с изображением"
+          />
+
           {/* HorizontalCardWeb */}
           <HorizontalCardWeb
             title="Техники работы с внутренним критиком"
             description="Помочь себе за 5 минут"
             badges={["Психология", "Саморазвитие"]}
-            imageUrl="/horizontal-card-1x.png"
-            imageUrl2x="/horizontal-card-2x.png"
+            imageUrl="/horizontal-card-3x.png"
             imageAlt="Психологическая практика"
           />
 
@@ -55,8 +61,7 @@ export default function Home() {
             subtitle="Практика"
             title="Техника заземления при панических атаках"
             label="Помочь себе за 2 минуты"
-            imageUrl="/practice-images/practice-image-1x.png"
-            imageUrl2x="/practice-images/practice-image-2x.png"
+            imageUrl="/practice-images/practice-image-3x.png"
             imageAlt="Практика медитации"
             duration="03:15"
           />
