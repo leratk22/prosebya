@@ -29,8 +29,7 @@ export default function SandboxPage() {
               subtitle="Практика"
               title="Как радоваться жизни каждый день"
               label="Помочь себе за 2 минуты"
-              imageUrl="/horizontal-card-1x.png"
-              imageUrl2x="/horizontal-card-2x.png"
+              imageUrl="/practice-images/practice-image-3x.png"
               imageAlt="Практика"
               duration="01:08"
               onClick={() => console.log("PracticeCard кликнута")}
@@ -50,8 +49,7 @@ export default function SandboxPage() {
               title="Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился"
               description="Описание в 1 строку в зависимости от типа контента (необязательно)"
               badges={["Тэг", "Тэг"]}
-              imageUrl="/horizontal-card-1x.png"
-              imageUrl2x="/horizontal-card-2x.png"
+              imageUrl="/horizontal-card-3x.png"
               imageAlt="Карточка"
               onClick={() => console.log("HorizontalCardWeb кликнута")}
             />
