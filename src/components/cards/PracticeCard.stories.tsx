@@ -54,11 +54,7 @@ const meta: Meta<typeof PracticeCard> = {
     },
     imageUrl: {
       control: { type: "text" },
-      description: "URL изображения для правой части (1x)",
-    },
-    imageUrl2x: {
-      control: { type: "text" },
-      description: "URL изображения для правой части (2x, retina)",
+      description: "URL изображения для правой части (3x)",
     },
     imageAlt: {
       control: { type: "text" },
@@ -85,8 +81,7 @@ export const Default: Story = {
     title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
     label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
     duration: "05:23",
-    imageUrl: "/practice-images/practice-image-1x.png",
-    imageUrl2x: "/practice-images/practice-image-2x.png",
+    imageUrl: "/practice-images/practice-image-3x.png",
     imageAlt: "Практика медитации",
   },
 };
@@ -96,8 +91,7 @@ export const WithImage: Story = {
     subtitle: "Практика",
     title: "Медитация для сна",
     label: "Помочь себе за 2 минуты",
-    imageUrl: "/practice-images/practice-image-1x.png",
-    imageUrl2x: "/practice-images/practice-image-2x.png",
+    imageUrl: "/practice-images/practice-image-3x.png",
     imageAlt: "Медитация",
     duration: "10:45",
   },
@@ -109,8 +103,7 @@ export const Clickable: Story = {
     title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
     label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
     duration: "05:23",
-    imageUrl: "/practice-images/practice-image-1x.png",
-    imageUrl2x: "/practice-images/practice-image-2x.png",
+    imageUrl: "/practice-images/practice-image-3x.png",
     imageAlt: "Релаксация",
     onClick: () => {
       alert("Карточка кликнута!");
@@ -123,8 +116,7 @@ export const WithoutLabel: Story = {
     subtitle: "Практика",
     title: "Короткий заголовок",
     duration: "03:15",
-    imageUrl: "/practice-images/practice-image-1x.png",
-    imageUrl2x: "/practice-images/practice-image-2x.png",
+    imageUrl: "/practice-images/practice-image-3x.png",
     imageAlt: "Глубокий релакс",
   },
 };
@@ -135,8 +127,7 @@ export const LongTitle: Story = {
     title: "Очень длинный заголовок который должен обрезаться после трех строк и показывать многоточие если текст не умещается в отведенное пространство карточки",
     label: "Описание",
     duration: "12:34",
-    imageUrl: "/practice-images/practice-image-1x.png",
-    imageUrl2x: "/practice-images/practice-image-2x.png",
+    imageUrl: "/practice-images/practice-image-3x.png",
     imageAlt: "Самостоятельная забота",
   },
 };
@@ -169,8 +160,7 @@ export const ThemesComparison: Story = {
             title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
             label="Описание в 1 строку в зависимости от типа контента (необязательно)"
             duration="05:23"
-            imageUrl="/practice-images/practice-image-1x.png"
-            imageUrl2x="/practice-images/practice-image-2x.png"
+            imageUrl="/practice-images/practice-image-3x.png"
             imageAlt="Медитация"
           />
         </div>
@@ -183,8 +173,7 @@ export const ThemesComparison: Story = {
             title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
             label="Описание в 1 строку в зависимости от типа контента (необязательно)"
             duration="05:23"
-            imageUrl="/practice-images/practice-image-1x.png"
-            imageUrl2x="/practice-images/practice-image-2x.png"
+            imageUrl="/practice-images/practice-image-3x.png"
             imageAlt="Медитация"
           />
         </div>

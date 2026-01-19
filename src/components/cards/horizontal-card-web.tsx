@@ -18,13 +18,9 @@ export interface HorizontalCardWebProps
    */
   badges: string[];
   /**
-   * URL изображения для левой части (1x)
+   * URL изображения для левой части (3x)
    */
   imageUrl?: string;
-  /**
-   * URL изображения для левой части (2x, retina)
-   */
-  imageUrl2x?: string;
   /**
    * Alt текст для изображения
    */
@@ -57,7 +53,6 @@ export const HorizontalCardWeb = React.forwardRef<
       description,
       badges,
       imageUrl,
-      imageUrl2x,
       imageAlt = "Card image",
       onClick,
       className = "",
@@ -101,7 +96,6 @@ export const HorizontalCardWeb = React.forwardRef<
             {imageUrl && !imageError ? (
               <img
                 src={imageUrl}
-                srcSet={imageUrl2x ? `${imageUrl} 1x, ${imageUrl2x} 2x` : undefined}
                 alt={imageAlt}
                 className="w-full h-full object-cover"
                 onError={() => {

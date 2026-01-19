@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Badge } from "@/components/ui/badge";
 
 export interface PracticeCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,13 +19,9 @@ export interface PracticeCardProps
    */
   label?: string;
   /**
-   * URL изображения для правой части (1x)
+   * URL изображения для правой части (3x)
    */
   imageUrl?: string;
-  /**
-   * URL изображения для правой части (2x, retina)
-   */
-  imageUrl2x?: string;
   /**
    * Alt текст для изображения
    */
@@ -60,7 +57,6 @@ export const PracticeCard = React.forwardRef<
       title,
       label,
       imageUrl,
-      imageUrl2x,
       imageAlt = "Practice image",
       duration,
       onClick,
@@ -137,15 +133,12 @@ export const PracticeCard = React.forwardRef<
           <div className="flex flex-col gap-20 md:gap-8">
             {/* Mobile: Subtitle как badge */}
             <div className="md:hidden">
-              <div 
-                className="inline-flex items-center gap-4 px-8 py-4 rounded-full font-medium font-euclid bg-core-alpha-5 dark:bg-core-inverted-alpha-10 text-light-fg-primary dark:text-core-inverted"
-                style={{
-                  fontSize: "12px",
-                  lineHeight: "1.3333333333333333em",
-                }}
+              <Badge 
+                variant="default"
+                className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted"
               >
                 {subtitle.charAt(0).toUpperCase() + subtitle.slice(1).toLowerCase()}
-              </div>
+              </Badge>
             </div>
             
             {/* Desktop: Subtitle как текст */}
@@ -200,7 +193,6 @@ export const PracticeCard = React.forwardRef<
             {imageUrl && !imageError ? (
               <img
                 src={imageUrl}
-                srcSet={imageUrl2x ? `${imageUrl} 1x, ${imageUrl2x} 2x` : undefined}
                 alt={imageAlt}
                 style={{
                   width: "100%",
@@ -233,12 +225,7 @@ export const PracticeCard = React.forwardRef<
             {duration && (
               <div className="absolute bottom-16 left-0 right-0 flex justify-center">
                 <div 
-                  className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] text-[#FFFFFF]"
-                  style={{
-                    padding: "4px 8px",
-                    fontSize: "12px",
-                    lineHeight: "1.3333333333333333em",
-                  }}
+                  className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] dark:bg-[rgba(255,255,255,0.6)] text-[#FFFFFF] dark:text-[#22263B] px-8 py-4 text-label-s"
                 >
                   {duration}
                 </div>

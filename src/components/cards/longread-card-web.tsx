@@ -50,24 +50,12 @@ const BACKGROUND_COLORS: Record<LongreadCardBackgroundColor, string> = {
   white: "#FFFFFF",
 };
 
-// Пути к изображениям для каждого цвета фона
-const IMAGE_PATHS: Record<LongreadCardBackgroundColor, { "1x": string; "2x": string }> = {
-  yellow: {
-    "1x": "/images/longread/longread-yellow-1x.png",
-    "2x": "/images/longread/longread-yellow-2x.png",
-  },
-  orange: {
-    "1x": "/images/longread/longread-orange-1x.png",
-    "2x": "/images/longread/longread-orange-2x.png",
-  },
-  red: {
-    "1x": "/images/longread/longread-red-1x.png",
-    "2x": "/images/longread/longread-red-2x.png",
-  },
-  blue: {
-    "1x": "/images/longread/longread-blue-1x.png",
-    "2x": "/images/longread/longread-blue-2x.png",
-  },
+// Пути к изображениям для каждого цвета фона (только 3x)
+const IMAGE_PATHS: Record<LongreadCardBackgroundColor, string> = {
+  yellow: "/images/longread/longread-yellow-3x.png",
+  orange: "/images/longread/longread-orange-3x.png",
+  red: "/images/longread/longread-red-3x.png",
+  blue: "/images/longread/longread-blue-3x.png",
 };
 
 // Путь к SVG заглушке по умолчанию
@@ -82,7 +70,7 @@ const DEFAULT_PLACEHOLDER_SVG = "/icons/longread-placeholder.svg";
  * - Цвет фона: один из 5 (желтый, оранжевый, красный, голубой, белый)
  * - Для белого фона автоматически используется иллюстрация из желтой карточки
  * - Изображение автоматически выбирается по цвету фона (если imageUrl не указан)
- * - Поддержка разрешений 1x и 2x для retina дисплеев
+ * - Используется одно изображение 3x для всех дисплеев
  * - Изображение справа, текст слева
  * - В десктопе изображение масштабируется на 150%
  * - Один обязательный тег
@@ -112,11 +100,10 @@ export const LongreadCardWeb = React.forwardRef<
     // Определяем, какое изображение использовать
     // Если imageUrl не передан, используем изображение по цвету фона
     // Для белого фона используется изображение из желтой карточки
-    const defaultImagePaths = backgroundColor === "white" 
+    const defaultImagePath = backgroundColor === "white" 
       ? IMAGE_PATHS.yellow 
       : IMAGE_PATHS[backgroundColor as Exclude<LongreadCardBackgroundColor, "white">];
-    const finalImageUrl = imageUrl || defaultImagePaths?.["1x"];
-    const finalImageUrl2x = imageUrl ? undefined : defaultImagePaths?.["2x"];
+    const finalImageUrl = imageUrl || defaultImagePath;
     const finalPlaceholderSvgUrl = placeholderSvgUrl || DEFAULT_PLACEHOLDER_SVG;
 
     // Стили для основного контейнера
@@ -175,7 +162,6 @@ export const LongreadCardWeb = React.forwardRef<
             {finalImageUrl && !imageError ? (
               <img
                 src={finalImageUrl}
-                srcSet={finalImageUrl2x ? `${finalImageUrl} 1x, ${finalImageUrl2x} 2x` : undefined}
                 alt={imageAlt}
                 className="longread-card-img"
                 onError={() => {

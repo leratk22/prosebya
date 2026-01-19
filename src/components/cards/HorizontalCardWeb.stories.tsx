@@ -59,10 +59,6 @@ const meta: Meta<typeof HorizontalCardWeb> = {
       control: { type: "text" },
       description: "Ссылка на картинку (imageUri). Получить как файл согласно стандартной логике. Показать лоадер, пока идет запрос на получение картинки. Если ссылка не получена или не удалось получить картинку, показать стандартный плейсхолдер.",
     },
-    imageUrl2x: {
-      control: { type: "text" },
-      description: "URL изображения для левой части (2x, retina)",
-    },
     imageAlt: {
       control: { type: "text" },
       description: "Alt текст для изображения",
@@ -83,8 +79,7 @@ export const Default: Story = {
     title: "Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился",
     description: "30 вопросов",
     badges: ["первый тег", "второй тег"],
-    imageUrl: "/horizontal-card-1x.png",
-    imageUrl2x: "/horizontal-card-2x.png",
+    imageUrl: "/horizontal-card-3x.png",
     imageAlt: "Карточка",
   },
 };
@@ -94,8 +89,7 @@ export const WithImage: Story = {
     title: "Медитация для сна",
     description: "30 вопросов",
     badges: ["первый тег", "второй тег"],
-    imageUrl: "/horizontal-card-1x.png",
-    imageUrl2x: "/horizontal-card-2x.png",
+    imageUrl: "/horizontal-card-3x.png",
     imageAlt: "Медитация",
   },
 };
@@ -152,8 +146,7 @@ export const ThemesComparison: Story = {
             title="Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился"
             description="30 вопросов"
             badges={["первый тег", "второй тег"]}
-            imageUrl="/horizontal-card-1x.png"
-            imageUrl2x="/horizontal-card-2x.png"
+            imageUrl="/horizontal-card-3x.png"
             imageAlt="Карточка"
           />
         </div>
@@ -165,8 +158,7 @@ export const ThemesComparison: Story = {
             title="Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился"
             description="30 вопросов"
             badges={["первый тег", "второй тег"]}
-            imageUrl="/horizontal-card-1x.png"
-            imageUrl2x="/horizontal-card-2x.png"
+            imageUrl="/horizontal-card-3x.png"
             imageAlt="Карточка"
           />
         </div>
