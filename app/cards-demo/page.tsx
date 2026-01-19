@@ -11,8 +11,8 @@ import { PracticeCard } from "@/components/cards/practice-card";
 export default function CardsDemoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto p-24">
-        <div className="flex flex-col gap-24">
+      <div className="w-full max-w-4xl mx-auto p-16 md:p-24">
+        <div className="flex flex-col gap-16 md:gap-24">
           {/* AudioCardWeb */}
           <AudioCardWeb
             title="Медитация для глубокого расслабления и снятия стресса"
