@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { ViewportMeta } from '@/components/viewport-meta'
 
 export const metadata: Metadata = {
   title: 'Design System Demo',
@@ -18,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body>
+        <ViewportMeta />
+        {children}
+      </body>
     </html>
   )
 }
