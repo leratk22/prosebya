@@ -56,6 +56,7 @@ const IMAGE_PATHS: Record<LongreadCardBackgroundColor, string> = {
   orange: "/images/longread/longread-orange-3x.png",
   red: "/images/longread/longread-red-3x.png",
   blue: "/images/longread/longread-blue-3x.png",
+  gray: "/images/longread/longread-gray-3x.png",
 };
 
 // Путь к SVG заглушке по умолчанию
