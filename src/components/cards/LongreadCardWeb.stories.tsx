@@ -22,13 +22,13 @@ const meta: Meta<typeof LongreadCardWeb> = {
 
 **Особенности:**
 - Фиксированная высота 235px для всех размеров экрана
-- Цвет фона: один из 5 вариантов (желтый, оранжевый, красный, голубой, белый). Рекомендуем использовать все цвета, кроме белого, его только в крайних случаях
-- Для белого фона может использоваться иллюстрация любого цвета
+- Цвет фона: один из 5 вариантов (желтый, оранжевый, красный, голубой, серый #E0E5EF). Рекомендуем использовать все цвета, кроме серого, его только в крайних случаях
+- Для серого фона может использоваться иллюстрация любого цвета
 - Изображение выбирается по цвету фона
 - Используется одно изображение 3x для всех дисплеев
 - Изображение справа, текст слева
 - В десктопе изображение масштабируется на 150%
-- Один обязательный тег (Badge)
+- Один опциональный тег (Badge)
 - Заголовок максимум 3 строки с обрезкой в многоточие
 - SVG заглушка если изображение не загрузилось
 
@@ -49,12 +49,12 @@ const meta: Meta<typeof LongreadCardWeb> = {
     },
     tag: {
       control: { type: "text" },
-      description: "Текст для badge (обязательный)",
+      description: "Текст для badge (опционально)",
     },
     backgroundColor: {
       control: { type: "select" },
-      options: ["yellow", "orange", "red", "blue", "white"],
-      description: "Цвет фона карточки. Для белого фона автоматически используется иллюстрация из желтой карточки",
+      options: ["yellow", "orange", "red", "blue", "gray"],
+      description: "Цвет фона карточки. Для серого фона автоматически используется иллюстрация из желтой карточки",
     },
     imageUrl: {
       control: { type: "text" },
@@ -119,12 +119,20 @@ export const Blue: Story = {
   },
 };
 
-export const White: Story = {
+export const Gray: Story = {
   args: {
     title: "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается на три строки",
     tag: "Тэг",
-    backgroundColor: "white",
+    backgroundColor: "gray",
     imageAlt: "Longread image",
+  },
+};
+
+export const WithoutTag: Story = {
+  args: {
+    title: "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается на три строки",
+    tag: undefined,
+    backgroundColor: "yellow",
   },
 };
 
@@ -174,7 +182,8 @@ export const ImageLoading: Story = {
       const bgColor = args.backgroundColor === "yellow" ? "#FFE699" :
                       args.backgroundColor === "orange" ? "#FFB899" :
                       args.backgroundColor === "red" ? "#FF9999" :
-                      args.backgroundColor === "blue" ? "#A6C1F2" : "#FFFFFF";
+                      args.backgroundColor === "blue" ? "#A6C1F2" :
+                      args.backgroundColor === "gray" ? "#E0E5EF" : "#FFE699";
 
       const containerClasses = [
         "relative",
@@ -190,13 +199,15 @@ export const ImageLoading: Story = {
       return (
         <div className={containerClasses} style={{ backgroundColor: bgColor }}>
           {/* Текстовая часть */}
-          <div className="flex flex-col justify-between flex-1 relative z-10 self-stretch gap-10 p-20 md:py-24 md:pr-64 md:pl-20">
+          <div className="flex flex-col justify-between flex-1 min-w-0 relative z-10 self-stretch gap-10 p-20 md:py-24 md:pr-64 md:pl-20 overflow-hidden">
             <h3 className="w-full relative font-medium font-euclid text-[#22263B] line-clamp-3 self-stretch min-w-0 longread-card-title">
               {args.title}
             </h3>
-            <div className="self-start">
-              <Badge variant="default">{args.tag}</Badge>
-            </div>
+            {args.tag && (
+              <div className="self-start flex min-w-0 max-w-full">
+                <Badge variant="default" className="max-w-full min-w-0">{args.tag}</Badge>
+              </div>
+            )}
           </div>
           {/* Область изображения со спиннером */}
           <div 
@@ -241,16 +252,16 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Фон</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  backgroundColor (yellow/orange/red/blue/white)
+                  backgroundColor (yellow/orange/red/blue/gray)
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Желтый: #FFE699, Оранжевый: #FFB899, Красный: #FF9999, Голубой: #A6C1F2, Белый: #FFFFFF
+                  Желтый: #FFE699, Оранжевый: #FFB899, Красный: #FF9999, Голубой: #A6C1F2, Серый: #E0E5EF
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> background-color: #FFE699 (yellow), #FFB899 (orange), #FF9999 (red), #A6C1F2 (blue), #FFFFFF (white)
+                  <strong>Точные значения:</strong> background-color: #FFE699 (yellow), #FFB899 (orange), #FF9999 (red), #A6C1F2 (blue), #E0E5EF (gray)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Примечание:</strong> Для белого фона автоматически используется иллюстрация из желтой карточки.
+                  <strong>Примечание:</strong> Для серого фона автоматически используется иллюстрация из желтой карточки.
                 </p>
               </div>
               

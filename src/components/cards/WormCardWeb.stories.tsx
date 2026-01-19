@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { LongreadCardOldWeb, type LongreadCardOldWebProps } from "./longread-card-old-web";
+import { WormCardWeb, type WormCardWebProps } from "./worm-card-web";
 
-const meta: Meta<typeof LongreadCardOldWeb> = {
-  title: "Cards/LongreadCardOldWeb",
-  component: LongreadCardOldWeb,
+const meta: Meta<typeof WormCardWeb> = {
+  title: "Cards/WormCardWeb",
+  component: WormCardWeb,
   tags: ["autodocs"],
   parameters: {
     viewport: {
@@ -28,11 +28,11 @@ const meta: Meta<typeof LongreadCardOldWeb> = {
   - \`dark-2x.png\` - для темной темы, retina дисплеи
 - Можно указать свой URL через проп \`backgroundImageUrl\`
 - Заголовок максимум 2 строки с обрезкой в многоточие
-- Один обязательный тэг (Badge)
-- Время в формате MM:SS (обязательное, Badge)
+- Один опциональный тэг (Badge) с обрезкой текста в многоточие
+- Время в формате MM:SS (опционально, Badge) с обрезкой текста в многоточие
 - Поддержка светлой и темной темы
 
-**Figma:** [LongreadCardOldWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9933-30275&t=iWJmLoiT7vqKsn1t-1)
+**Figma:** [WormCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9933-30275&t=iWJmLoiT7vqKsn1t-1)
         `,
       },
     },
@@ -49,11 +49,11 @@ const meta: Meta<typeof LongreadCardOldWeb> = {
     },
     tag: {
       control: { type: "text" },
-      description: "Текст для badge тэга (обязательный)",
+      description: "Текст для badge тэга (опционально)",
     },
     time: {
       control: { type: "text" },
-      description: "Время в формате MM:SS (обязательное)",
+      description: "Время в формате MM:SS (опционально)",
     },
     backgroundImageUrl: {
       control: { type: "text" },
@@ -72,7 +72,7 @@ const meta: Meta<typeof LongreadCardOldWeb> = {
 
 export default meta;
 
-type Story = StoryObj<typeof LongreadCardOldWeb>;
+type Story = StoryObj<typeof WormCardWeb>;
 
 export const Default: Story = {
   args: {
@@ -82,11 +82,43 @@ export const Default: Story = {
   },
 };
 
+export const WithoutTag: Story = {
+  args: {
+    title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
+    tag: undefined,
+    time: "05:30",
+  },
+};
+
+export const WithoutTime: Story = {
+  args: {
+    title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
+    tag: "Тэг",
+    time: undefined,
+  },
+};
+
+export const WithoutTagAndTime: Story = {
+  args: {
+    title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
+    tag: undefined,
+    time: undefined,
+  },
+};
+
 export const LongTitle: Story = {
   args: {
     title: "Очень длинный заголовок который должен обрезаться после двух строк и показывать многоточие если текст не умещается в отведенное пространство карточки и продолжается дальше",
     tag: "Тэг",
     time: "03:20",
+  },
+};
+
+export const LongTag: Story = {
+  args: {
+    title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
+    tag: "Очень длинный тэг который должен обрезаться в многоточие если не умещается в контейнер",
+    time: "05:30",
   },
 };
 
@@ -112,7 +144,7 @@ export const Clickable: Story = {
 export const DarkTheme: Story = {
   render: (args) => (
     <div className="dark bg-light-bg-primary p-16 md:p-24">
-      <LongreadCardOldWeb {...args} />
+      <WormCardWeb {...args} />
     </div>
   ),
   args: {
@@ -233,6 +265,9 @@ export const DesignTokens: Story = {
                 </p>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-2">
                   Темная тема: core-inverted-alpha-10 / core-inverted
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Обрезка:</strong> Текст в бейджах обрезается в многоточие если не умещается в контейнер
                 </p>
               </div>
             </div>

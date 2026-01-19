@@ -8,7 +8,7 @@ export type LongreadCardBackgroundColor =
   | "orange"   // #FFB899
   | "red"      // #FF9999
   | "blue"     // #A6C1F2
-  | "white";   // #FFFFFF
+  | "gray";    // #E0E5EF
 
 export interface LongreadCardWebProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,9 +17,9 @@ export interface LongreadCardWebProps
    */
   title: string;
   /**
-   * Текст для badge (обязательный)
+   * Текст для badge (опционально)
    */
-  tag: string;
+  tag?: string;
   /**
    * Цвет фона карточки
    */
@@ -47,7 +47,7 @@ const BACKGROUND_COLORS: Record<LongreadCardBackgroundColor, string> = {
   orange: "#FFB899",
   red: "#FF9999",
   blue: "#A6C1F2",
-  white: "#FFFFFF",
+  gray: "#E0E5EF",
 };
 
 // Пути к изображениям для каждого цвета фона (только 3x)
@@ -67,13 +67,13 @@ const DEFAULT_PLACEHOLDER_SVG = "/icons/longread-placeholder.svg";
  * Карточка для отображения лонгрида:
  * - Desktop: ширина 756px, высота 235px (фиксированная)
  * - Mobile: ширина растягивается, высота 235px (фиксированная)
- * - Цвет фона: один из 5 (желтый, оранжевый, красный, голубой, белый)
- * - Для белого фона автоматически используется иллюстрация из желтой карточки
+ * - Цвет фона: один из 5 (желтый, оранжевый, красный, голубой, серый)
+ * - Для серого фона автоматически используется иллюстрация из желтой карточки
  * - Изображение автоматически выбирается по цвету фона (если imageUrl не указан)
  * - Используется одно изображение 3x для всех дисплеев
  * - Изображение справа, текст слева
  * - В десктопе изображение масштабируется на 150%
- * - Один обязательный тег
+ * - Один опциональный тег
  * - Заголовок максимум 3 строки с обрезкой
  * - SVG заглушка если изображение не загрузилось
  */
@@ -99,10 +99,10 @@ export const LongreadCardWeb = React.forwardRef<
 
     // Определяем, какое изображение использовать
     // Если imageUrl не передан, используем изображение по цвету фона
-    // Для белого фона используется изображение из желтой карточки
-    const defaultImagePath = backgroundColor === "white" 
+    // Для серого фона используется изображение из желтой карточки
+    const defaultImagePath = backgroundColor === "gray" 
       ? IMAGE_PATHS.yellow 
-      : IMAGE_PATHS[backgroundColor as Exclude<LongreadCardBackgroundColor, "white">];
+      : IMAGE_PATHS[backgroundColor as Exclude<LongreadCardBackgroundColor, "gray">];
     const finalImageUrl = imageUrl || defaultImagePath;
     const finalPlaceholderSvgUrl = placeholderSvgUrl || DEFAULT_PLACEHOLDER_SVG;
 
@@ -132,7 +132,7 @@ export const LongreadCardWeb = React.forwardRef<
     const renderTextSection = () => {
       return (
         <div 
-          className="flex flex-col justify-between flex-1 relative z-10 self-stretch gap-10 p-20 md:py-24 md:pr-64 md:pl-20"
+          className="flex flex-col justify-between flex-1 min-w-0 relative z-10 self-stretch gap-10 p-20 md:py-24 md:pr-64 md:pl-20 overflow-hidden"
         >
           {/* Заголовок */}
           <h3 
@@ -140,10 +140,12 @@ export const LongreadCardWeb = React.forwardRef<
           >
             {title}
           </h3>
-          {/* Badge */}
-          <div className="self-start">
-            <Badge variant="default">{tag}</Badge>
-          </div>
+          {/* Badge (опционально) */}
+          {tag && (
+            <div className="self-start flex min-w-0 max-w-full">
+              <Badge variant="default" className="max-w-full min-w-0">{tag}</Badge>
+            </div>
+          )}
         </div>
       );
     };

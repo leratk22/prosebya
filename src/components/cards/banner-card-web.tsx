@@ -6,9 +6,9 @@ import { Highlight } from "@/components/ui/highlight";
 export interface BannerCardWebProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Текст для компонента Highlight (опционально)
+   * Текст для компонента Highlight (обязательно)
    */
-  highlightText?: string;
+  highlightText: string;
   /**
    * Заголовок карточки (максимум 2 строки)
    */
@@ -33,6 +33,7 @@ export interface BannerCardWebProps
  * - В десктопной версии есть 2 фоновые SVG
  * - В мобильной версии фоновых SVG нет
  * - Переключения между светлой и темной темой нет (только темный фон)
+ * - Компонент Highlight обязателен и отображается перед заголовком
  * - Заголовок максимум на 2 строки, далее обрезается в троеточие
  * - Описание максимум 2 строки на десктопе и 3 в мобилке, далее обрезается в троеточие
  */
@@ -158,11 +159,9 @@ export const BannerCardWeb = React.forwardRef<
       return (
         <div className="flex flex-col items-center gap-16 relative z-10 w-full">
           {/* Highlight компонент */}
-          {highlightText && (
-            <div className="flex justify-center">
-              <Highlight variant="inverted">{highlightText}</Highlight>
-            </div>
-          )}
+          <div className="flex justify-center">
+            <Highlight variant="inverted">{highlightText}</Highlight>
+          </div>
           {/* Заголовок */}
           {/* Mobile: MVP2.0/Title/M (20px, lineHeight: 1.2em, letterSpacing: -1%) */}
           {/* Desktop: MVP2.0/Title/L (24px, lineHeight: 1.3333333333333333em, letterSpacing: -1.5%) */}

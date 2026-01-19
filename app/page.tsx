@@ -4,7 +4,7 @@ import { AudioCardWeb } from "@/components/cards/audio-card-web";
 import { BannerCardWeb } from "@/components/cards/banner-card-web";
 import { HorizontalCardWeb } from "@/components/cards/horizontal-card-web";
 import { LongreadCardWeb } from "@/components/cards/longread-card-web";
-import { LongreadCardOldWeb } from "@/components/cards/longread-card-old-web";
+import { WormCardWeb } from "@/components/cards/worm-card-web";
 import { PracticeCard } from "@/components/cards/practice-card";
 
 export default function Home() {
@@ -43,8 +43,8 @@ export default function Home() {
             backgroundColor="yellow"
           />
 
-          {/* LongreadCardOldWeb */}
-          <LongreadCardOldWeb
+          {/* WormCardWeb */}
+          <WormCardWeb
             title="Привязанность и отношения: как формируются паттерны поведения"
             tag="Лонгрид"
             time="18:20"

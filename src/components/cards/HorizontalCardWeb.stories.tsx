@@ -26,9 +26,10 @@ const meta: Meta<typeof HorizontalCardWeb> = {
 **Особенности:**
 - Заголовок обрезается после 2 строк многоточием (line-clamp-2)
 - Описание обрезается после 1 строки многоточием (line-clamp-1)
-- Badges обязательны (минимум 1, максимум 2)
+- Badges опциональны (максимум 2)
 - На mobile: badges перед заголовком (gap: 4px)
 - На desktop: badges внизу (gap: 8px)
+- Если группа тэгов не умещается в ширину контейнера, применяется градиент для плавного исчезновения справа (последние 30px)
 - Светлая тема: badges с вариантом "default" (brand-blue фон и текст)
 - Темная тема: badges с вариантом "invert" (белый текст на прозрачном фоне)
 - Размеры одинаковые в обеих темах
@@ -49,11 +50,11 @@ const meta: Meta<typeof HorizontalCardWeb> = {
     },
     description: {
       control: { type: "text" },
-      description: "Описание. Например, \"30 вопросов\". Если не получено (включая null или пустую строку \"\"), то не отображать. Размер карточки при этом не адаптируется.",
+      description: "Описание (опционально). Например, \"30 вопросов\". Если не получено (включая null или пустую строку \"\"), то не отображать. Размер карточки при этом не адаптируется.",
     },
     badges: {
       control: { type: "object" },
-      description: "Массив badges для отображения. Первый элемент - первый тег (tag), второй элемент - второй тег (contentDuration). Ожидается, что теги приходят всегда.",
+      description: "Массив badges для отображения (опционально). Первый элемент - первый тег (tag), второй элемент - второй тег (contentDuration).",
     },
     imageUrl: {
       control: { type: "text" },
@@ -108,7 +109,24 @@ export const Clickable: Story = {
 export const WithoutDescription: Story = {
   args: {
     title: "Короткий заголовок",
+    description: undefined,
     badges: ["первый тег", "второй тег"],
+  },
+};
+
+export const WithoutBadges: Story = {
+  args: {
+    title: "Короткий заголовок",
+    description: "30 вопросов",
+    badges: undefined,
+  },
+};
+
+export const WithoutDescriptionAndBadges: Story = {
+  args: {
+    title: "Короткий заголовок",
+    description: undefined,
+    badges: undefined,
   },
 };
 
@@ -133,6 +151,26 @@ export const LongDescription: Story = {
     title: "Заголовок",
     description: "Очень длинное описание которое должно обрезаться после одной строки и показывать многоточие если текст не умещается в отведенное пространство карточки",
     badges: ["первый тег", "второй тег"],
+  },
+};
+
+export const LongBadges: Story = {
+  args: {
+    title: "Заголовок максимум в 2 строки, далее обрезка в многоточие, если текст не уместился",
+    description: "30 вопросов",
+    badges: [
+      "Очень длинный тэг который не должен помещаться в контейнер и должен плавно исчезать",
+      "Еще один длинный тэг для демонстрации градиента"
+    ],
+    imageUrl: "/horizontal-card-3x.png",
+    imageAlt: "Карточка",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Демонстрация градиента для группы тэгов, которые не умещаются в контейнер. Тэги плавно исчезают справа с градиентом на последних 30px.",
+      },
+    },
   },
 };
 

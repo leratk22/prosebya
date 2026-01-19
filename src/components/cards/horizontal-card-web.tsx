@@ -14,9 +14,9 @@ export interface HorizontalCardWebProps
    */
   description?: string;
   /**
-   * Массив badges для отображения (обязательно минимум 1, максимум 2)
+   * Массив badges для отображения (опционально, максимум 2)
    */
-  badges: string[];
+  badges?: string[];
   /**
    * URL изображения для левой части (3x)
    */
@@ -123,6 +123,7 @@ export const HorizontalCardWeb = React.forwardRef<
     // Верхний блок: badges (mobile) + заголовок + описание (gap: 4 на desktop, gap: 8 на mobile)
     // Нижний блок: badges (desktop, gap: 8)
     const renderTextSection = () => {
+      const hasBadges = (badges?.length ?? 0) > 0;
       // Badges для светлой темы: variant="default" (brand-blue-alpha-10 фон, brand-blue текст)
       // Badges для темной темы: нужно использовать variant="invert" или переопределить через dark:
       // Используем variant="default" и переопределяем через dark: классы
@@ -134,17 +135,27 @@ export const HorizontalCardWeb = React.forwardRef<
           {/* Верхний блок: badges (mobile) + заголовок + описание (desktop) */}
           <div className="flex flex-col gap-8 md:gap-4 self-stretch min-w-0">
             {/* Badges на mobile - перед заголовком */}
-            <div className="flex flex-row gap-4 md:hidden self-stretch min-w-0 overflow-hidden">
-              {badges.map((badge, index) => (
-                <Badge 
-                  key={index} 
-                  variant="default"
-                  className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
-                >
-                  {badge}
-                </Badge>
-              ))}
-            </div>
+            {hasBadges && (
+              <div className="relative flex flex-row gap-4 md:hidden self-stretch min-w-0 w-full overflow-hidden">
+                {badges?.map((badge, index) => (
+                  <Badge 
+                    key={index} 
+                    variant="default"
+                    className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
+                  >
+                    {badge}
+                  </Badge>
+                ))}
+                {/* Градиент для плавного исчезновения справа - светлая тема */}
+                <div 
+                  className="absolute right-0 top-0 bottom-0 w-[30px] pointer-events-none bg-gradient-to-r from-transparent to-light-bg-primary dark:hidden"
+                />
+                {/* Градиент для плавного исчезновения справа - темная тема */}
+                <div 
+                  className="absolute right-0 top-0 bottom-0 w-[30px] pointer-events-none bg-gradient-to-r from-transparent to-dark-bg-primary hidden dark:block"
+                />
+              </div>
+            )}
             {/* Title */}
             <h3 
               className="practice-card-title font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary line-clamp-2 self-stretch min-w-0 max-w-full"
@@ -167,17 +178,27 @@ export const HorizontalCardWeb = React.forwardRef<
           {/* Нижний блок: badges на desktop, описание на mobile */}
           <div className="flex flex-col md:flex-row gap-8 self-stretch min-w-0 overflow-hidden">
             {/* Badges на desktop */}
-            <div className="hidden md:flex flex-row gap-8 self-stretch min-w-0 overflow-hidden">
-              {badges.map((badge, index) => (
-                <Badge 
-                  key={index} 
-                  variant="default"
-                  className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
-                >
-                  {badge}
-                </Badge>
-              ))}
-            </div>
+            {hasBadges && (
+              <div className="relative hidden md:flex flex-row gap-8 self-stretch min-w-0 w-full overflow-hidden">
+                {badges?.map((badge, index) => (
+                  <Badge 
+                    key={index} 
+                    variant="default"
+                    className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
+                  >
+                    {badge}
+                  </Badge>
+                ))}
+                {/* Градиент для плавного исчезновения справа - светлая тема */}
+                <div 
+                  className="absolute right-0 top-0 bottom-0 w-[30px] pointer-events-none bg-gradient-to-r from-transparent to-light-bg-primary dark:hidden"
+                />
+                {/* Градиент для плавного исчезновения справа - темная тема */}
+                <div 
+                  className="absolute right-0 top-0 bottom-0 w-[30px] pointer-events-none bg-gradient-to-r from-transparent to-dark-bg-primary hidden dark:block"
+                />
+              </div>
+            )}
             {/* Description на mobile - всегда внизу */}
             {description && (
               <p

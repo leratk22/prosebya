@@ -15,20 +15,20 @@ const BACKGROUND_IMAGE_PATHS = {
   },
 };
 
-export interface LongreadCardOldWebProps
+export interface WormCardWebProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Заголовок карточки (максимум 2 строки)
    */
   title: string;
   /**
-   * Текст для badge тэга (обязательный)
+   * Текст для badge тэга (опционально)
    */
-  tag: string;
+  tag?: string;
   /**
-   * Время в формате MM:SS (обязательное)
+   * Время в формате MM:SS (опционально)
    */
-  time: string;
+  time?: string;
   /**
    * URL фонового изображения (опционально, если не указано, используется автоматический выбор по теме)
    */
@@ -44,19 +44,19 @@ export interface LongreadCardOldWebProps
 }
 
 /**
- * Компонент LongreadCardOldWeb
+ * Компонент WormCardWeb
  *
  * Карточка для отображения контента:
  * - Desktop: ширина 756px, высота 200px (фиксированная)
  * - Mobile: ширина подстраивается под экран, высота 200px (фиксированная)
  * - Фоновое изображение (опционально)
  * - Заголовок максимум 2 строки с обрезкой
- * - Один обязательный тэг (Badge)
- * - Время в формате MM:SS (обязательное)
+ * - Один опциональный тэг (Badge)
+ * - Время в формате MM:SS (опционально)
  */
-export const LongreadCardOldWeb = React.forwardRef<
+export const WormCardWeb = React.forwardRef<
   HTMLDivElement,
-  LongreadCardOldWebProps
+  WormCardWebProps
 >(
   (
     {
@@ -104,6 +104,7 @@ export const LongreadCardOldWeb = React.forwardRef<
       "gap-16", // gap: 16px
       "p-16 md:p-20", // padding: mobile 16px, desktop 20px
       "h-full",
+      "min-w-0 overflow-hidden", // для корректной обрезки тэгов
       // Фоновое изображение через CSS класс для автоматического выбора по теме
       !backgroundImageUrl && "longread-card-old-bg",
     ]
@@ -120,15 +121,8 @@ export const LongreadCardOldWeb = React.forwardRef<
         }
       : undefined;
 
-    // Стили для badges контейнера
-    // В Figma: alignSelf: stretch, justifyContent: space-between
-    const badgesClasses = [
-      "flex flex-row justify-between", // row, justify-content: space-between
-      "w-full",
-      "self-stretch", // alignSelf: stretch из Figma
-    ]
-      .filter(Boolean)
-      .join(" ");
+    // Проверяем, есть ли хотя бы один бейдж для отображения
+    const hasBadges = tag || time;
 
     // Рендер контента
     const renderContent = () => {
@@ -137,31 +131,41 @@ export const LongreadCardOldWeb = React.forwardRef<
           className={contentClasses}
           style={contentStyle}
         >
-          {/* Badges: тэг и время */}
+          {/* Badges: тэг и время (опционально) */}
           {/* Используем стили Badge: default для светлой, invert для темной через dark: */} 
           {/* В Figma: badges frame имеет alignSelf: stretch, justifyContent: space-between */}
-          <div className={`${badgesClasses} relative z-10`}>
-            <Badge 
-              variant="default" 
-              className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
-            >
-              {tag}
-            </Badge>
-            <Badge 
-              variant="default" 
-              className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted shrink-0"
-            >
-              {time}
-            </Badge>
-          </div>
+          {hasBadges && (
+            <div className="flex flex-row justify-between w-full self-stretch relative z-10 min-w-0 overflow-hidden gap-4 flex-shrink-0">
+              {tag && (
+                <div className="flex min-w-0 max-w-[calc(50%-8px)]">
+                  <Badge 
+                    variant="default" 
+                    className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted max-w-full min-w-0"
+                  >
+                    {tag}
+                  </Badge>
+                </div>
+              )}
+              {time && (
+                <div className={`flex min-w-0 ${tag ? 'max-w-[calc(50%-8px)] ml-auto' : 'max-w-full'}`}>
+                  <Badge 
+                    variant="default" 
+                    className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted max-w-full min-w-0"
+                  >
+                    {time}
+                  </Badge>
+                </div>
+              )}
+            </div>
+          )}
           
-          {/* Заголовок */}
+          {/* Заголовок - всегда внизу */}
           {/* Mobile: MVP2.0/Title/M (20px, lineHeight: 1.2em, letterSpacing: -1%) */}
           {/* Desktop: MVP2.0/Title/L (24px, lineHeight: 1.3333333333333333em, letterSpacing: -1.5%) */}
           {/* Светлая тема: #344079, Темная тема: #FFFFFF */}
           {/* textAlignVertical: BOTTOM из Figma - текст выровнен по нижнему краю */}
           {/* В Figma заголовок имеет horizontal: fill, vertical: hug, alignSelf: stretch */}
-          <h3 className="longread-card-old-title w-full font-medium font-euclid text-[#344079] dark:text-[#FFFFFF] line-clamp-2 relative z-10">
+          <h3 className="longread-card-old-title w-full font-medium font-euclid text-[#344079] dark:text-[#FFFFFF] line-clamp-2 relative z-10 mt-auto">
             {title}
           </h3>
         </div>
@@ -194,4 +198,4 @@ export const LongreadCardOldWeb = React.forwardRef<
   },
 );
 
-LongreadCardOldWeb.displayName = "LongreadCardOldWeb";
+WormCardWeb.displayName = "WormCardWeb";

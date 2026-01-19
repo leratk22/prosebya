@@ -7,9 +7,9 @@ export interface PracticeCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Подзаголовок (например, "Практика")
-   * На desktop отображается как текст, на mobile как badge
+   * На desktop отображается как текст, на mobile как badge. Опционально.
    */
-  subtitle: string;
+  subtitle?: string;
   /**
    * Заголовок карточки
    */
@@ -128,33 +128,37 @@ export const PracticeCard = React.forwardRef<
     // Левая часть - текст
     const renderTextSection = () => {
       return (
-        <div className="flex flex-col justify-between flex-1 relative z-10 gap-24 md:gap-8 md:py-8">
+        <div className="flex flex-col justify-between flex-1 min-w-0 relative z-10 gap-24 md:gap-8 md:py-8 overflow-hidden">
           {/* Desktop: subtitle как текст, Mobile: subtitle как badge */}
-          <div className="flex flex-col gap-20 md:gap-8">
-            {/* Mobile: Subtitle как badge */}
-            <div className="md:hidden">
-              <Badge 
-                variant="default"
-                className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted"
-              >
-                {subtitle.charAt(0).toUpperCase() + subtitle.slice(1).toLowerCase()}
-              </Badge>
-            </div>
+          <div className="flex flex-col gap-20 md:gap-8 min-w-0 overflow-hidden">
+            {/* Mobile: Subtitle как badge (опционально) */}
+            {subtitle && (
+              <div className="md:hidden flex min-w-0 max-w-full">
+                <Badge 
+                  variant="default"
+                  className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted max-w-full min-w-0"
+                >
+                  {subtitle.charAt(0).toUpperCase() + subtitle.slice(1).toLowerCase()}
+                </Badge>
+              </div>
+            )}
             
-            {/* Desktop: Subtitle как текст */}
-            <div className="hidden md:block">
-              <p 
-                className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary"
-                style={{
-                  fontSize: "12px", // MVP2.0/Caption/S
-                  lineHeight: "1.3333333333333333em",
-                  letterSpacing: "0.1em", // 10%
-                  textTransform: "uppercase",
-                }}
-              >
-                {subtitle}
-              </p>
-            </div>
+            {/* Desktop: Subtitle как текст (опционально) */}
+            {subtitle && (
+              <div className="hidden md:block">
+                <p 
+                  className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary"
+                  style={{
+                    fontSize: "12px", // MVP2.0/Caption/S
+                    lineHeight: "1.3333333333333333em",
+                    letterSpacing: "0.1em", // 10%
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {subtitle}
+                </p>
+              </div>
+            )}
             
             {/* Title */}
             <h3 

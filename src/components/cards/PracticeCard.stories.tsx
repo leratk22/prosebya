@@ -24,7 +24,8 @@ const meta: Meta<typeof PracticeCard> = {
 - Заголовок обрезается после 3 строк многоточием (line-clamp-3)
 - Декоративный SVG элемент на фоне (только desktop, прикреплен к правому краю)
 - Subtitle на desktop как текст (Caption/S, uppercase), на mobile как badge
-- Badge с длительностью на изображении (опционально)
+- Label (текстовая метка под заголовком) опциональна
+- Badge с длительностью на изображении (duration) опционален
 - Поддержка светлой и темной темы
 - Весь блок кликабельный при наведении (если передан onClick)
 
@@ -42,7 +43,7 @@ const meta: Meta<typeof PracticeCard> = {
   argTypes: {
     subtitle: {
       control: { type: "text" },
-      description: "Подзаголовок карточки",
+      description: "Подзаголовок карточки (опционально). На desktop как текст, на mobile как badge.",
     },
     title: {
       control: { type: "text" },
@@ -115,9 +116,43 @@ export const WithoutLabel: Story = {
   args: {
     subtitle: "Практика",
     title: "Короткий заголовок",
+    label: undefined,
     duration: "03:15",
     imageUrl: "/practice-images/practice-image-3x.png",
     imageAlt: "Глубокий релакс",
+  },
+};
+
+export const WithoutDuration: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Короткий заголовок",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: undefined,
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Короткая практика",
+  },
+};
+
+export const WithoutLabelAndDuration: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Короткий заголовок",
+    label: undefined,
+    duration: undefined,
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Короткая практика без меток",
+  },
+};
+
+export const WithoutSubtitle: Story = {
+  args: {
+    subtitle: undefined,
+    title: "Короткий заголовок без подзаголовка",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Практика без подзаголовка",
   },
 };
 
@@ -246,16 +281,20 @@ export const ImageLoading: Story = {
           {/* Текстовая часть */}
           <div className="flex flex-col justify-between flex-1 relative z-10 gap-24 md:gap-8 md:py-8">
             <div className="flex flex-col gap-20 md:gap-8">
-              <div className="md:hidden">
-                <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full font-medium font-euclid bg-core-alpha-5 dark:bg-core-inverted-alpha-10 text-light-fg-primary dark:text-core-inverted text-label-s">
-                  {args.subtitle.charAt(0).toUpperCase() + args.subtitle.slice(1).toLowerCase()}
+              {args.subtitle && (
+                <div className="md:hidden">
+                  <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full font-medium font-euclid bg-core-alpha-5 dark:bg-core-inverted-alpha-10 text-light-fg-primary dark:text-core-inverted text-label-s">
+                    {args.subtitle.charAt(0).toUpperCase() + args.subtitle.slice(1).toLowerCase()}
+                  </div>
                 </div>
-              </div>
-              <div className="hidden md:block">
-                <p className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary text-caption-s uppercase">
-                  {args.subtitle}
-                </p>
-              </div>
+              )}
+              {args.subtitle && (
+                <div className="hidden md:block">
+                  <p className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary text-caption-s uppercase">
+                    {args.subtitle}
+                  </p>
+                </div>
+              )}
               <h3 className="font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary text-[20px] leading-[1.2em] tracking-[-0.01em] md:text-[24px] md:leading-[1.3333333333333333em] md:tracking-[-0.015em] line-clamp-3">
                 {args.title}
               </h3>
