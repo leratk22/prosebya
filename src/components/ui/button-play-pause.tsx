@@ -5,7 +5,7 @@ export type ButtonPlayPauseState = "play" | "pause";
 export type ButtonPlayPauseSize = 32 | 56 | 72;
 
 export interface ButtonPlayPauseProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type" | "onToggle"> {
   /**
    * Состояние кнопки: play (белая с тенью) или pause (полупрозрачная темная с размытием)
    */
