@@ -23,6 +23,13 @@ const meta: Meta<typeof Badge> = {
       description: "Иконка из библиотеки (опциональна, всегда 16px)",
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: "Компонент Badge отображает текст всегда в одну строку. Если текст и содержимое не помещаются в контейнер, текст обрезается многоточием (...).",
+      },
+    },
+  },
 };
 
 export default meta;
@@ -111,6 +118,48 @@ export const AllVariants: Story = {
           <Badge variant="invert" iconName="heart">
             Heart
           </Badge>
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+export const LongText: Story = {
+  render: () => (
+    <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-12">
+        <h3 className="text-title-m font-semibold">Длинный текст обрезается многоточием</h3>
+        <div className="flex flex-col gap-8">
+          <div className="w-200">
+            <Badge variant="default">
+              Очень длинный текст который не помещается в контейнер и должен быть обрезан
+            </Badge>
+          </div>
+          <div className="w-200">
+            <Badge variant="default" iconName="check">
+              Очень длинный текст с иконкой который не помещается в контейнер
+            </Badge>
+          </div>
+          <div className="w-150">
+            <Badge variant="default">
+              Еще более длинный текст для демонстрации обрезки
+            </Badge>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-12">
+        <h3 className="text-title-m font-semibold">Invert вариант с длинным текстом</h3>
+        <div className="p-24 bg-dark-bg-primary rounded-m flex flex-col gap-8">
+          <div className="w-200">
+            <Badge variant="invert">
+              Очень длинный текст который не помещается в контейнер и должен быть обрезан
+            </Badge>
+          </div>
+          <div className="w-200">
+            <Badge variant="invert" iconName="star">
+              Очень длинный текст с иконкой который не помещается в контейнер
+            </Badge>
+          </div>
         </div>
       </div>
     </div>

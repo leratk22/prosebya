@@ -62,30 +62,19 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 
     const baseClasses = [
       "relative", // как в Figma
-      "inline-flex items-start gap-4", // items-start, gap-4 (4px) - используем spacing из config
+      "inline-flex items-center gap-4", // items-center для вертикального выравнивания, gap-4 (4px) - используем spacing из config
       "px-8 py-4", // px-8 (8px боковые) py-4 (4px вертикальные) - используем spacing из config
       "box-border", // как в Figma
       "rounded-full", // rounded-[100px] в Figma
       "text-left", // как в Figma
       "text-body-s font-medium font-euclid leading-4", // text-body-s (12px), leading-4 (16px), letter-spacing: 0 (стандартный)
+      "max-w-full", // ограничение максимальной ширины
+      "overflow-hidden", // необходимо для работы text-ellipsis
       ...variantClasses,
       className,
     ]
       .filter(Boolean)
       .join(" ");
-
-    // Ограничение текста до 35 символов
-    const MAX_LENGTH = 35;
-    const truncateText = (text: React.ReactNode): React.ReactNode => {
-      if (typeof text === "string") {
-        return text.length > MAX_LENGTH ? `${text.slice(0, MAX_LENGTH)}...` : text;
-      }
-      // Если children не строка, конвертируем в строку для обрезки
-      const textString = String(text);
-      return textString.length > MAX_LENGTH ? `${textString.slice(0, MAX_LENGTH)}...` : text;
-    };
-
-    const truncatedChildren = truncateText(children);
 
     return (
       <div ref={ref} className={baseClasses} {...rest}>
@@ -96,9 +85,9 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
             className="shrink-0 flex-shrink-0"
           />
         )}
-        <div className="relative leading-4 font-medium whitespace-nowrap overflow-hidden text-ellipsis">
-          {truncatedChildren}
-        </div>
+        <span className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+          {children}
+        </span>
       </div>
     );
   },

@@ -11,13 +11,13 @@ export interface AudioCardWebProps
    */
   title: string;
   /**
-   * Текст для badge в верхней части (обязательный)
+   * Текст для badge в верхней части (опциональный)
    */
-  topBadge: string;
+  topBadge?: string;
   /**
-   * Длительность аудио в формате "MM:SS" (отображается справа от waveform, обязательный)
+   * Длительность аудио в формате "MM:SS" (отображается справа от waveform, опциональный)
    */
-  duration: string;
+  duration?: string;
   /**
    * Обработчик клика на всю карточку
    */
@@ -93,16 +93,24 @@ export const AudioCardWeb = React.forwardRef<
       return (
         <div className="w-full overflow-hidden flex flex-col md:flex-row items-start justify-center md:justify-start self-stretch gap-8 md:gap-20">
           {/* Mobile: badge сверху, gap: 4px между badges (но у нас только один) */}
-          <div className="flex md:hidden items-center gap-4 w-full">
-            <Badge variant="default">{topBadge}</Badge>
-          </div>
+          {topBadge && (
+            <div className="flex md:hidden items-center gap-4 w-full">
+              <Badge variant="default">{topBadge}</Badge>
+            </div>
+          )}
           {/* Desktop: заголовок слева, badge справа */}
-          <div className="hidden md:flex flex-1 flex-col items-start">
+          <div className="hidden md:flex flex-1 flex-col items-start min-w-0">
             <h3 className="w-full relative text-title-l font-medium font-euclid text-light-fg-primary tracking-title-l [line-height:32px] [display:-webkit-inline-box] overflow-hidden text-ellipsis [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
               {title}
             </h3>
           </div>
-          <Badge variant="default" className="hidden md:block">{topBadge}</Badge>
+          {topBadge && (
+            <div className="hidden md:block md:max-w-[35%] md:min-w-0 shrink">
+              <Badge variant="default" className="w-full min-w-0">
+                {topBadge}
+              </Badge>
+            </div>
+          )}
           {/* Mobile: заголовок снизу, gap: 8px от badge */}
           <div className="flex md:hidden flex-col gap-8 w-full">
             <h3 className="w-full relative text-body-xl font-medium font-euclid text-light-fg-primary [line-height:24px] [display:-webkit-inline-box] overflow-hidden text-ellipsis [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
@@ -134,11 +142,13 @@ export const AudioCardWeb = React.forwardRef<
                   style={{ minWidth: "569px", width: "100%" }} // Фиксированная минимальная ширина SVG, обрезается контейнером
                 />
               </div>
-              <div className="shrink-0 flex items-end py-4 px-8 box-border" style={{ width: "47px" }}>
-                <div className="relative leading-4 font-medium text-body-s text-light-fg-secondary">
-                  {duration}
+              {duration && (
+                <div className="shrink-0 flex items-end py-4 px-8 box-border" style={{ width: "47px" }}>
+                  <div className="relative leading-4 font-medium text-body-s text-light-fg-secondary">
+                    {duration}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
