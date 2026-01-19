@@ -474,7 +474,7 @@ const ComboChart: React.FC<ComboChartProps> = ({ colors }) => {
         fill="#666"
         fontSize={11}
         textAnchor="middle"
-        dominantBaseline="bottom"
+        dominantBaseline="text-after-edge"
       >
         {value.toFixed(1)}
       </text>
@@ -490,7 +490,7 @@ const ComboChart: React.FC<ComboChartProps> = ({ colors }) => {
         fill="#999"
         fontSize={10}
         textAnchor="middle"
-        dominantBaseline="bottom"
+        dominantBaseline="text-after-edge"
       >
         {value.toFixed(1)}
       </text>
