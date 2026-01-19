@@ -53,6 +53,9 @@ export const AudioCardWeb = React.forwardRef<
     },
     ref,
   ) => {
+    // Исключаем onClick из rest, так как он уже обработан отдельно
+    type RestProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'title' | 'topBadge' | 'duration' | 'className'>;
+    const restProps = rest as RestProps;
     // Стили для внешнего контейнера - адаптивный
     // Desktop: padding 20px, max-width 756px
     // Mobile: padding 16px, растягивается по ширине контейнера
@@ -159,14 +162,7 @@ export const AudioCardWeb = React.forwardRef<
       if (onClick) {
         onClick();
       }
-      // Пробрасываем onClick из rest, если он есть
-      if (rest.onClick) {
-        rest.onClick(e);
-      }
     };
-
-    // Убираем onClick из rest, чтобы избежать дублирования
-    const { onClick: _, ...restProps } = rest;
 
     return (
       <div 
