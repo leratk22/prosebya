@@ -95,6 +95,10 @@ export const LongreadCardWeb = React.forwardRef<
     },
     ref,
   ) => {
+    // Исключаем onClick из rest, так как он уже обработан отдельно
+    type RestProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'title' | 'tag' | 'backgroundColor' | 'imageUrl' | 'imageAlt' | 'placeholderSvgUrl' | 'className'>;
+    const restProps = rest as RestProps;
+    
     const [imageError, setImageError] = React.useState(false);
 
     // Определяем, какое изображение использовать
@@ -187,13 +191,7 @@ export const LongreadCardWeb = React.forwardRef<
       if (onClick) {
         onClick();
       }
-      if (rest.onClick) {
-        rest.onClick(e);
-      }
     };
-
-    // Убираем onClick из rest, чтобы избежать дублирования
-    const { onClick: _, ...restProps } = rest;
 
     return (
       <div

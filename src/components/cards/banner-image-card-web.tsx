@@ -42,6 +42,10 @@ export const BannerImageCardWeb = React.forwardRef<
     },
     ref,
   ) => {
+    // Исключаем onClick из rest, так как он уже обработан отдельно
+    type RestProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'imageSrc' | 'imageAlt' | 'className'>;
+    const restProps = rest as RestProps;
+    
     const [imageError, setImageError] = React.useState(false);
     const placeholderSrc = "/placeholder_banner_image.svg";
 
@@ -70,13 +74,7 @@ export const BannerImageCardWeb = React.forwardRef<
       if (onClick) {
         onClick();
       }
-      if (rest.onClick) {
-        rest.onClick(e);
-      }
     };
-
-    // Убираем onClick из rest, чтобы избежать дублирования
-    const { onClick: _, ...restProps } = rest;
 
     // Определяем, какое изображение использовать
     const finalImageSrc = imageError ? placeholderSrc : imageSrc;

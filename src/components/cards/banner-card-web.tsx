@@ -52,6 +52,9 @@ export const BannerCardWeb = React.forwardRef<
     },
     ref,
   ) => {
+    // Исключаем onClick из rest, так как он уже обработан отдельно
+    type RestProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'highlightText' | 'title' | 'description' | 'className'>;
+    const restProps = rest as RestProps;
     // Стили для обертки (для фоновых SVG)
     const wrapperClasses = [
       "relative",
@@ -182,13 +185,7 @@ export const BannerCardWeb = React.forwardRef<
       if (onClick) {
         onClick();
       }
-      if (rest.onClick) {
-        rest.onClick(e);
-      }
     };
-
-    // Убираем onClick из rest, чтобы избежать дублирования
-    const { onClick: _, ...restProps } = rest;
 
     return (
       <div
