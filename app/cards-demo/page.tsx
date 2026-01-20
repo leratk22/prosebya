@@ -4,9 +4,9 @@ import { AudioCardWeb } from "@/components/cards/audio-card-web";
 import { BannerCardWeb } from "@/components/cards/banner-card-web";
 import { BannerImageCardWeb } from "@/components/cards/banner-image-card-web";
 import { HorizontalCardWeb } from "@/components/cards/horizontal-card-web";
-import { LongreadCardWeb } from "@/components/cards/longread-card-web";
+import { ColoredCardSingle } from "@/components/cards/colored-card-single";
 import { WormCardWeb } from "@/components/cards/worm-card-web";
-import { PracticeCard } from "@/components/cards/practice-card";
+import { BigPhotoCard } from "@/components/cards/big-photo-card";
 
 export default function CardsDemoPage() {
   return (
@@ -42,8 +42,8 @@ export default function CardsDemoPage() {
             imageAlt="Психологическая практика"
           />
 
-          {/* LongreadCardWeb */}
-          <LongreadCardWeb
+          {/* ColoredCardSingle */}
+          <ColoredCardSingle
             title="Эмоциональный интеллект: как развить способность понимать и управлять своими эмоциями"
             tag="Статья"
             backgroundColor="yellow"
@@ -56,8 +56,8 @@ export default function CardsDemoPage() {
             time="18:20"
           />
 
-          {/* PracticeCard */}
-          <PracticeCard
+          {/* BigPhotoCard */}
+          <BigPhotoCard
             subtitle="Практика"
             title="Техника заземления при панических атаках"
             label="Помочь себе за 2 минуты"

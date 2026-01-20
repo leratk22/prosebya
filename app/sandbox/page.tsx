@@ -2,7 +2,7 @@
 
 import { AudioCardWeb } from "@/components/cards/audio-card-web";
 import { HorizontalCardWeb } from "@/components/cards/horizontal-card-web";
-import { PracticeCard } from "@/components/cards/practice-card";
+import { BigPhotoCard } from "@/components/cards/big-photo-card";
 import { useState } from "react";
 
 export default function SandboxPage() {
@@ -24,24 +24,24 @@ export default function SandboxPage() {
         {/* Карточки с условным классом dark */}
         <div className={isDarkMode ? "dark" : ""}>
           <div className="flex flex-col gap-16">
-            {/* PracticeCard с изображением */}
-            <PracticeCard
+            {/* BigPhotoCard с изображением */}
+            <BigPhotoCard
               subtitle="Практика"
               title="Как радоваться жизни каждый день"
               label="Помочь себе за 2 минуты"
               imageUrl="/practice-images/practice-image-3x.png"
               imageAlt="Практика"
               duration="01:08"
-              onClick={() => console.log("PracticeCard кликнута")}
+              onClick={() => console.log("BigPhotoCard кликнута")}
             />
 
-            {/* PracticeCard с заглушкой */}
-            <PracticeCard
+            {/* BigPhotoCard с заглушкой */}
+            <BigPhotoCard
               subtitle="Практика"
               title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
               label="Описание в 1 строку в зависимости от типа контента (необязательно)"
               duration="05:23"
-              onClick={() => console.log("PracticeCard с заглушкой кликнута")}
+              onClick={() => console.log("BigPhotoCard с заглушкой кликнута")}
             />
 
             {/* HorizontalCardWeb */}
