@@ -24,6 +24,10 @@ const meta: Meta<typeof Highlight> = {
 - Правый вектор зеркально отражен
 - Текст в стиле MVP2.0/Caption/S (12px, Medium, Uppercase, letter-spacing: 10%)
 - Layout: row, justifyContent: flex-end, alignItems: center, gap: 8px
+- Компонент ограничен родительским контейнером (max-width: 100%)
+- Когда достигает ограничения родителя, компонент перестает расширяться
+- Векторы остаются видимыми по краям (не сжимаются)
+- Текст обрезается без многоточия, если не помещается между векторами
         `,
       },
     },
@@ -31,7 +35,6 @@ const meta: Meta<typeof Highlight> = {
   args: {
     children: "слово или фраза",
     variant: "inverted",
-    maxLength: 24,
   },
   argTypes: {
     variant: {
@@ -41,11 +44,7 @@ const meta: Meta<typeof Highlight> = {
     },
     children: {
       control: { type: "text" },
-      description: "Текст для highlight компонента (максимум 24 символа по умолчанию)",
-    },
-    maxLength: {
-      control: { type: "number" },
-      description: "Максимальное количество символов (по умолчанию 24)",
+      description: "Текст для highlight компонента. Компонент ограничен родительским контейнером. Векторы остаются по краям, текст обрезается без многоточия при достижении ограничения",
     },
   },
 };
@@ -82,13 +81,14 @@ export const LongText: Story = {
   args: {
     variant: "inverted",
     children: "очень длинный текст который может быть в несколько слов",
-    maxLength: 24,
   },
   render: (args) => (
     <div className="bg-[#22263B] p-24 rounded-m">
-      <Highlight {...args} />
+      <div className="max-w-[200px] border border-[rgba(255,255,255,0.2)] p-8 rounded-s">
+        <Highlight {...args} />
+      </div>
       <p className="text-body-s text-[rgba(255,255,255,0.6)] mt-8">
-        Текст обрезан до 24 символов
+        Компонент ограничен родительским контейнером (200px). Векторы остаются по краям, текст обрезается без многоточия
       </p>
     </div>
   ),

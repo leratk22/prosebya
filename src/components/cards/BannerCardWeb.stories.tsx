@@ -24,6 +24,10 @@ const meta: Meta<typeof BannerCardWeb> = {
 - В мобильной версии фоновых SVG нет
 - Переключения между светлой и темной темой нет (только темный фон #22263B)
 - Компонент Highlight обязателен и отображается перед заголовком
+  - Компонент Highlight ограничивается родительским контейнером (max-width: 100%)
+  - Когда достигает ограничения родителя, компонент перестает расширяться
+  - Векторы (листья) остаются видимыми по краям (не сжимаются)
+  - Текст обрезается без многоточия, если не помещается между векторами
 - Заголовок максимум на 2 строки, далее обрезается в троеточие
 - Описание максимум 2 строки на десктопе и 3 в мобилке, далее обрезается в троеточие
 
@@ -292,6 +296,21 @@ export const DesignTokens: Story = {
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
                   Два декоративных вектора по бокам, текст в центре
                 </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Поведение при ограничении</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  max-w-full, min-w-0
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  Компонент ограничивается родительским контейнером. Когда достигает ограничения:
+                </p>
+                <ul className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-2 list-disc list-inside space-y-1">
+                  <li>Компонент перестает расширяться</li>
+                  <li>Векторы остаются видимыми по краям (не сжимаются благодаря shrink-0)</li>
+                  <li>Текст обрезается без многоточия (text-overflow: clip)</li>
+                </ul>
               </div>
               
               <div>

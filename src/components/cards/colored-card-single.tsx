@@ -10,7 +10,7 @@ export type LongreadCardBackgroundColor =
   | "blue"     // #A6C1F2
   | "gray";    // #E0E5EF
 
-export interface LongreadCardWebProps
+export interface ColoredCardSingleProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Заголовок карточки (максимум 3 строки)
@@ -22,6 +22,7 @@ export interface LongreadCardWebProps
   tag?: string;
   /**
    * Цвет фона карточки
+   * В разработке цвет не выбирается из значений, а задается любой HEX
    */
   backgroundColor?: LongreadCardBackgroundColor;
   /**
@@ -63,9 +64,9 @@ const IMAGE_PATHS: Record<LongreadCardBackgroundColor, string> = {
 const DEFAULT_PLACEHOLDER_SVG = "/icons/longread-placeholder.svg";
 
 /**
- * Компонент LongreadCardWeb
+ * Компонент ColoredCardSingle
  *
- * Карточка для отображения лонгрида:
+ * Карточка для отображения контента с цветным фоном:
  * - Desktop: ширина 756px, высота 235px (фиксированная)
  * - Mobile: ширина растягивается, высота 235px (фиксированная)
  * - Цвет фона: один из 5 (желтый, оранжевый, красный, голубой, серый)
@@ -78,9 +79,9 @@ const DEFAULT_PLACEHOLDER_SVG = "/icons/longread-placeholder.svg";
  * - Заголовок максимум 3 строки с обрезкой
  * - SVG заглушка если изображение не загрузилось
  */
-export const LongreadCardWeb = React.forwardRef<
+export const ColoredCardSingle = React.forwardRef<
   HTMLDivElement,
-  LongreadCardWebProps
+  ColoredCardSingleProps
 >(
   (
     {
@@ -88,7 +89,7 @@ export const LongreadCardWeb = React.forwardRef<
       tag,
       backgroundColor = "yellow",
       imageUrl,
-      imageAlt = "Longread card image",
+      imageAlt = "Colored card image",
       placeholderSvgUrl,
       onClick,
       className = "",
@@ -211,4 +212,4 @@ export const LongreadCardWeb = React.forwardRef<
   },
 );
 
-LongreadCardWeb.displayName = "LongreadCardWeb";
+ColoredCardSingle.displayName = "ColoredCardSingle";

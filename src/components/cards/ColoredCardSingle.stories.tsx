@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { LongreadCardWeb, type LongreadCardWebProps } from "./longread-card-web";
+import { ColoredCardSingle, type ColoredCardSingleProps } from "./colored-card-single";
 import { Spinner } from "@/components/ui/spinner";
 import { Badge } from "@/components/ui/badge";
 
-const meta: Meta<typeof LongreadCardWeb> = {
-  title: "Cards/LongreadCardWeb",
-  component: LongreadCardWeb,
+const meta: Meta<typeof ColoredCardSingle> = {
+  title: "Cards/ColoredCardSingle",
+  component: ColoredCardSingle,
   tags: ["autodocs"],
   parameters: {
     viewport: {
@@ -14,7 +14,7 @@ const meta: Meta<typeof LongreadCardWeb> = {
     docs: {
       description: {
         component: `
-Карточка для отображения лонгрида согласно дизайну из Figma.
+Карточка для отображения контента с цветным фоном согласно дизайну из Figma.
 
 **Адаптивность:**
 - **Mobile** (< 440px): ширина растягивается под экран, высота **235px** (фиксированная)
@@ -32,7 +32,7 @@ const meta: Meta<typeof LongreadCardWeb> = {
 - Заголовок максимум 3 строки с обрезкой в многоточие
 - SVG заглушка если изображение не загрузилось
 
-**Figma:** [LongreadCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9932-31044&t=iWJmLoiT7vqKsn1t-1)
+**Figma:** [ColoredCardSingle](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9932-31044&t=iWJmLoiT7vqKsn1t-1)
         `,
       },
     },
@@ -54,11 +54,11 @@ const meta: Meta<typeof LongreadCardWeb> = {
     backgroundColor: {
       control: { type: "select" },
       options: ["yellow", "orange", "red", "blue", "gray"],
-      description: "Цвет фона карточки. Для серого фона автоматически используется иллюстрация из желтой карточки",
+      description: "Цвет фона карточки. Для серого фона используется иллюстрация с любым цветом. В разработке цвет не выбирается из значений, а задается любой HEX",
     },
     imageUrl: {
       control: { type: "text" },
-      description: "URL изображения (опционально, если не указано, используется изображение по цвету фона)",
+      description: "URL изображения",
     },
     imageAlt: {
       control: { type: "text" },
@@ -77,7 +77,7 @@ const meta: Meta<typeof LongreadCardWeb> = {
 
 export default meta;
 
-type Story = StoryObj<typeof LongreadCardWeb>;
+type Story = StoryObj<typeof ColoredCardSingle>;
 
 export const Default: Story = {
   args: {
@@ -124,7 +124,7 @@ export const Gray: Story = {
     title: "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается на три строки",
     tag: "Тэг",
     backgroundColor: "gray",
-    imageAlt: "Longread image",
+    imageAlt: "Colored card image",
   },
 };
 
@@ -150,7 +150,7 @@ export const WithCustomImage: Story = {
     tag: "Тэг",
     backgroundColor: "yellow",
     imageUrl: "https://via.placeholder.com/182x166",
-    imageAlt: "Longread image",
+    imageAlt: "Colored card image",
   },
 };
 
@@ -176,7 +176,7 @@ export const Clickable: Story = {
 };
 
 export const ImageLoading: Story = {
-  render: (args: LongreadCardWebProps) => {
+  render: (args: ColoredCardSingleProps) => {
     // Создаем кастомную карточку с спиннером вместо изображения
     const CustomCard = () => {
       const bgColor = args.backgroundColor === "yellow" ? "#FFE699" :
@@ -262,6 +262,9 @@ export const DesignTokens: Story = {
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
                   <strong>Примечание:</strong> Для серого фона автоматически используется иллюстрация из желтой карточки.
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>В разработке:</strong> Цвет не выбирается из значений, а задается любой HEX.
                 </p>
               </div>
               
@@ -445,7 +448,7 @@ export const DesignTokens: Story = {
     layout: "fullscreen",
     docs: {
       description: {
-        story: "Подробное описание всех используемых дизайн-токенов в компоненте LongreadCardWeb",
+        story: "Подробное описание всех используемых дизайн-токенов в компоненте ColoredCardSingle",
       },
     },
   },

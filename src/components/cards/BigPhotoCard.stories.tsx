@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PracticeCard, type PracticeCardProps } from "./practice-card";
+import { BigPhotoCard, type BigPhotoCardProps } from "./big-photo-card";
 import { Spinner } from "@/components/ui/spinner";
 
-const meta: Meta<typeof PracticeCard> = {
-  title: "Cards/PracticeCard",
-  component: PracticeCard,
+const meta: Meta<typeof BigPhotoCard> = {
+  title: "Cards/BigPhotoCard",
+  component: BigPhotoCard,
   tags: ["autodocs"],
   parameters: {
     // По умолчанию показываем мобильную версию
@@ -14,7 +14,7 @@ const meta: Meta<typeof PracticeCard> = {
     docs: {
       description: {
         component: `
-Горизонтальная карточка для отображения практик/контента согласно дизайну из Figma.
+Горизонтальная карточка для отображения контента с большим фото согласно дизайну из Figma.
 
 **Адаптивность:**
 - **Mobile** (< 440px): высота **235px**, изображение справа (136px), текст слева
@@ -29,7 +29,7 @@ const meta: Meta<typeof PracticeCard> = {
 - Поддержка светлой и темной темы
 - Весь блок кликабельный при наведении (если передан onClick)
 
-**Figma:** [PracticeCard](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9892-27155&t=iWJmLoiT7vqKsn1t-1)
+**Figma:** [BigPhotoCard](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9892-27155&t=iWJmLoiT7vqKsn1t-1)
         `,
       },
     },
@@ -74,7 +74,7 @@ const meta: Meta<typeof PracticeCard> = {
 
 export default meta;
 
-type Story = StoryObj<typeof PracticeCard>;
+type Story = StoryObj<typeof BigPhotoCard>;
 
 export const Default: Story = {
   args: {
@@ -190,7 +190,7 @@ export const ThemesComparison: Story = {
       <div>
         <h3 className="text-title-m font-semibold mb-16">Светлая тема</h3>
         <div className="bg-light-bg-primary p-24 rounded-m">
-          <PracticeCard
+          <BigPhotoCard
             subtitle="Практика"
             title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
             label="Описание в 1 строку в зависимости от типа контента (необязательно)"
@@ -203,7 +203,7 @@ export const ThemesComparison: Story = {
       <div>
         <h3 className="text-title-m font-semibold mb-16">Темная тема</h3>
         <div className="dark bg-light-bg-primary p-24 rounded-m">
-          <PracticeCard
+          <BigPhotoCard
             subtitle="Практика"
             title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
             label="Описание в 1 строку в зависимости от типа контента (необязательно)"
@@ -226,7 +226,7 @@ export const PlaceholderThemesComparison: Story = {
       <div>
         <h3 className="text-title-m font-semibold mb-16">Светлая тема (с заглушкой)</h3>
         <div className="bg-light-bg-primary p-24 rounded-m">
-          <PracticeCard
+          <BigPhotoCard
             subtitle="Практика"
             title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
             label="Описание в 1 строку в зависимости от типа контента (необязательно)"
@@ -237,7 +237,7 @@ export const PlaceholderThemesComparison: Story = {
       <div>
         <h3 className="text-title-m font-semibold mb-16">Темная тема (с заглушкой)</h3>
         <div className="dark bg-light-bg-primary p-24 rounded-m">
-          <PracticeCard
+          <BigPhotoCard
             subtitle="Практика"
             title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
             label="Описание в 1 строку в зависимости от типа контента (необязательно)"
@@ -258,7 +258,7 @@ export const PlaceholderThemesComparison: Story = {
 };
 
 export const ImageLoading: Story = {
-  render: (args: PracticeCardProps) => {
+  render: (args: BigPhotoCardProps) => {
     // Создаем кастомную карточку с спиннером вместо изображения
     const CustomCard = () => {
       const containerClasses = [
@@ -307,7 +307,7 @@ export const ImageLoading: Story = {
           </div>
           {/* Область изображения со спиннером */}
           <div 
-            className="practice-card-image relative shrink-0 z-10 w-[120px] md:w-[120px] flex items-center justify-center"
+            className="big-photo-card-image relative shrink-0 z-10 w-[120px] md:w-[120px] flex items-center justify-center"
             style={{
               height: "211px",
               borderRadius: "0px 16px 16px 0px",
@@ -503,7 +503,7 @@ export const DesignTokens: Story = {
     layout: "fullscreen",
     docs: {
       description: {
-        story: "Подробное описание всех используемых дизайн-токенов в компоненте PracticeCard",
+        story: "Подробное описание всех используемых дизайн-токенов в компоненте BigPhotoCard",
       },
     },
   },

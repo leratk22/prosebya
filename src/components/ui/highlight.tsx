@@ -13,13 +13,9 @@ export interface HighlightProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: HighlightVariant;
   /**
    * Текст для highlight компонента
-   * Максимум 24 символа, если текст длиннее - будет обрезан
+   * Если компонент не умещается в контейнер, текст будет обрезан без многоточия
    */
   children: React.ReactNode;
-  /**
-   * Максимальное количество символов (по умолчанию 24)
-   */
-  maxLength?: number;
 }
 
 /**
@@ -39,7 +35,6 @@ export const Highlight = React.forwardRef<HTMLDivElement, HighlightProps>(
     {
       variant = "inverted",
       children,
-      maxLength = 24,
       className = "",
       ...rest
     },
@@ -56,19 +51,13 @@ export const Highlight = React.forwardRef<HTMLDivElement, HighlightProps>(
     const vectorColor = variant === "default" ? defaultVectorColor : invertedVectorColor;
     const textColor = variant === "default" ? defaultTextColor : invertedTextColor;
 
-    // Обрезаем текст до максимальной длины
-    const textContent = React.useMemo(() => {
-      const text = typeof children === "string" 
-        ? children 
-        : String(children || "");
-      return text.slice(0, maxLength);
-    }, [children, maxLength]);
-
     const baseClasses = [
       "relative",
       "inline-flex flex-row items-center justify-end", // row, justifyContent: flex-end, alignItems: center
       "gap-8", // gap: 8px
       "font-euclid",
+      "max-w-full", // ограничивается родительским контейнером
+      "min-w-0", // позволяет сжиматься меньше минимального размера контента
       className,
     ]
       .filter(Boolean)
@@ -117,15 +106,18 @@ export const Highlight = React.forwardRef<HTMLDivElement, HighlightProps>(
         </svg>
         {/* Текст */}
         <span
-          className="shrink-0 font-medium uppercase"
+          className="font-medium uppercase min-w-0 flex-shrink"
           style={{
             fontSize: "12px",
             lineHeight: "1.3333333333333333em",
             letterSpacing: "0.1em", // 10%
             color: textColor,
+            textOverflow: "clip", // обрезка без многоточия
+            overflow: "hidden",
+            whiteSpace: "nowrap",
           }}
         >
-          {textContent}
+          {children}
         </span>
         {/* Правый вектор (зеркально развернут) */}
         <svg

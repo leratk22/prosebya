@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 
-export interface PracticeCardProps
+export interface BigPhotoCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Подзаголовок (например, "Практика")
@@ -37,9 +37,9 @@ export interface PracticeCardProps
 }
 
 /**
- * Компонент PracticeCard
+ * Компонент BigPhotoCard
  *
- * Горизонтальная карточка для отображения практик/контента:
+ * Горизонтальная карточка для отображения контента с большим фото:
  * - Desktop: текст слева, изображение справа (gap 48px)
  * - Mobile: текст слева, изображение справа (gap 0px, фиксированная ширина изображения 136px)
  * - Декоративный SVG элемент на фоне (только desktop)
@@ -47,9 +47,9 @@ export interface PracticeCardProps
  * - Subtitle на desktop как текст, на mobile как badge
  * - Поддержка светлой и темной темы
  */
-export const PracticeCard = React.forwardRef<
+export const BigPhotoCard = React.forwardRef<
   HTMLDivElement,
-  PracticeCardProps
+  BigPhotoCardProps
 >(
   (
     {
@@ -57,7 +57,7 @@ export const PracticeCard = React.forwardRef<
       title,
       label,
       imageUrl,
-      imageAlt = "Practice image",
+      imageAlt = "Big photo card image",
       duration,
       onClick,
       className = "",
@@ -119,7 +119,7 @@ export const PracticeCard = React.forwardRef<
               d="M490.004 -0.962709C418.443 216.817 187.676 49.1193 224.29 -17.3762C260.904 -83.8717 448.887 131.647 294.385 180.048C165.493 220.425 145.695 72.7285 208.044 132.61C252.052 174.876 240.222 250.827 187.676 280.121C142.29 305.423 75.2997 313.962 30.0039 283.751"
               stroke="#22263B"
               strokeOpacity="0.1"
-              className="practice-card-decorative-path"
+              className="big-photo-card-decorative-path"
               strokeWidth="40"
               strokeLinecap="round"
             />
@@ -189,7 +189,7 @@ export const PracticeCard = React.forwardRef<
       
       return (
         <div 
-          className="practice-card-image relative shrink-0 z-10 w-[120px] md:w-[120px]"
+          className="big-photo-card-image relative shrink-0 z-10 w-[120px] md:w-[120px]"
           style={{
             height: "211px",
           }}
@@ -217,7 +217,7 @@ export const PracticeCard = React.forwardRef<
             ) : (
               <img
                 src="/practice-image-placeholder.svg"
-                alt={imageAlt || "Practice placeholder"}
+                alt={imageAlt || "Big photo card placeholder"}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -264,4 +264,4 @@ export const PracticeCard = React.forwardRef<
   },
 );
 
-PracticeCard.displayName = "PracticeCard";
+BigPhotoCard.displayName = "BigPhotoCard";

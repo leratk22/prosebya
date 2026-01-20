@@ -162,8 +162,10 @@ export const BannerCardWeb = React.forwardRef<
       return (
         <div className="flex flex-col items-center gap-16 relative z-10 w-full">
           {/* Highlight компонент */}
-          <div className="flex justify-center">
-            <Highlight variant="inverted">{highlightText}</Highlight>
+          <div className="w-full max-w-full min-w-0 flex justify-center">
+            <div className="max-w-full min-w-0">
+              <Highlight variant="inverted">{highlightText}</Highlight>
+            </div>
           </div>
           {/* Заголовок */}
           {/* Mobile: MVP2.0/Title/M (20px, lineHeight: 1.2em, letterSpacing: -1%) */}
