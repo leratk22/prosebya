@@ -276,8 +276,43 @@ export const ImageLoading: Story = {
         "md:max-w-[756px]",
       ].join(" ");
 
+      // Декоративный SVG элемент - под всем контентом (только на desktop)
+      const renderDecorativeVector = () => {
+        return (
+          <div
+            className="hidden md:block absolute pointer-events-none overflow-hidden"
+            style={{
+              opacity: 0.7,
+              zIndex: 0,
+              right: 0,
+              top: "-30px",
+              width: "460px",
+              height: "333px",
+            }}
+          >
+            <svg
+              viewBox="0 0 521 251"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+              preserveAspectRatio="xMidYMid slice"
+              aria-hidden="true"
+            >
+              <path
+                opacity="0.7"
+                d="M490.004 -0.962709C418.443 216.817 187.676 49.1193 224.29 -17.3762C260.904 -83.8717 448.887 131.647 294.385 180.048C165.493 220.425 145.695 72.7285 208.044 132.61C252.052 174.876 240.222 250.827 187.676 280.121C142.29 305.423 75.2997 313.962 30.0039 283.751"
+                className="big-photo-card-decorative-path"
+                strokeWidth="40"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        );
+      };
+
       return (
         <div className={containerClasses}>
+          {renderDecorativeVector()}
           {/* Текстовая часть */}
           <div className="flex flex-col justify-between flex-1 relative z-10 gap-24 md:gap-8 md:py-8">
             <div className="flex flex-col gap-20 md:gap-8">
@@ -316,7 +351,7 @@ export const ImageLoading: Story = {
             <Spinner size={32} aria-label="Загрузка изображения" role="status" />
             {args.duration && (
               <div className="absolute bottom-16 left-0 right-0 flex justify-center">
-                <div className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] text-[#FFFFFF] px-8 py-4 text-label-s">
+                <div className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] dark:bg-[rgba(255,255,255,0.6)] text-[#FFFFFF] dark:text-[#22263B] px-8 py-4 text-label-s">
                   {args.duration}
                 </div>
               </div>

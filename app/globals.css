@@ -121,13 +121,16 @@
     border-color: rgba(255, 255, 255, 0.14) !important;
   }
 
-  .practice-card-decorative-path {
+  .practice-card-decorative-path,
+  .big-photo-card-decorative-path {
     stroke: #22263B;
     stroke-opacity: 0.1;
   }
 
   .dark .practice-card-decorative-path,
-  :is(.dark) .practice-card-decorative-path {
+  :is(.dark) .practice-card-decorative-path,
+  .dark .big-photo-card-decorative-path,
+  :is(.dark) .big-photo-card-decorative-path {
     stroke: #FFFFFF;
     stroke-opacity: 0.1;
   }
