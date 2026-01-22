@@ -123,18 +123,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         onClick={handleClick}
       >
         <input
-<<<<<<< HEAD
-          ref={(node) => {
-            inputRef.current = node;
-            if (typeof ref === "function") {
-              ref(node);
-            } else if (ref) {
-              ref.current = node;
-            }
-          }}
-=======
           ref={setInputRef}
->>>>>>> 4e5b4e4 (fix: исправлена ошибка компиляции в компоненте Checkbox)
           type="checkbox"
           checked={checked}
           onChange={onChange}
