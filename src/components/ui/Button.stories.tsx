@@ -27,6 +27,10 @@ const meta: Meta<typeof Button> = {
     fullWidth: {
       control: { type: "boolean" },
     },
+    loading: {
+      control: { type: "boolean" },
+      description: "Состояние загрузки. При loading=true кнопка становится disabled, вместо текста отображается спиннер 16px (желтый)",
+    },
     leftIconName: {
       control: { type: "select" },
       options: ["", ...availableIcons],
@@ -63,6 +67,89 @@ export const Disabled: Story = {
     size: "m",
     children: "Disabled button",
     disabled: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    variant: "primary",
+    size: "m",
+    children: "Loading button",
+    loading: true,
+  },
+};
+
+export const LoadingVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-16 max-w-xs">
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Primary Loading</h3>
+        <Button variant="primary" size="m" loading>
+          Loading
+        </Button>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Secondary Loading</h3>
+        <Button variant="secondary" size="m" loading>
+          Loading
+        </Button>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Tertiary Loading</h3>
+        <Button variant="tertiary" size="m" loading>
+          Loading
+        </Button>
+      </div>
+    </div>
+  ),
+};
+
+export const LoadingSizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-16 max-w-xs">
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Large (L)</h3>
+        <Button variant="primary" size="l" loading>
+          Loading
+        </Button>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Medium (M)</h3>
+        <Button variant="primary" size="m" loading>
+          Loading
+        </Button>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Small (S)</h3>
+        <Button variant="primary" size="s" loading>
+          Loading
+        </Button>
+      </div>
+    </div>
+  ),
+};
+
+export const LoadingInverted: Story = {
+  render: () => (
+    <div className="flex flex-col gap-16 max-w-xs">
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Secondary Inverted Loading</h3>
+        <Button variant="secondary" inverted size="m" loading>
+          Loading
+        </Button>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-8">Tertiary Inverted Loading</h3>
+        <Button variant="tertiary" inverted size="m" loading>
+          Loading
+        </Button>
+      </div>
+    </div>
+  ),
+  parameters: {
+    backgrounds: {
+      default: "dark",
+    },
   },
 };
 

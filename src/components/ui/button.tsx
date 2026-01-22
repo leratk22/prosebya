@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Icon } from "@/components/icons";
+import { Spinner } from "@/components/ui/spinner";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonSize = "s" | "m" | "l";
@@ -25,6 +26,11 @@ export interface ButtonProps
    * Делать кнопку на всю доступную ширину контейнера.
    */
   fullWidth?: boolean;
+  /**
+   * Состояние загрузки. При loading=true кнопка становится disabled,
+   * вместо текста отображается спиннер 16px белого цвета
+   */
+  loading?: boolean;
   /**
    * Название иконки из библиотеки слева (например, "play", "chevron-left")
    * Автоматически определяется размер иконки по размеру кнопки (L→24px, M→20px, S→16px)
@@ -145,6 +151,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size = "m",
       inverted,
       fullWidth = true,
+      loading = false,
       leftIconName,
       rightIconName,
       iconSize,
@@ -158,6 +165,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    // При loading кнопка должна быть disabled
+    const isDisabled = disabled || loading;
     // Определяем размер иконки на основе размера кнопки
     const getIconSize = (): 16 | 20 | 24 => {
       if (iconSize) return iconSize;
@@ -195,7 +204,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const sizeCls = SIZE_CLASSES[size];
-    const variantCls = variantClasses(variant, inverted, disabled);
+    const variantCls = variantClasses(variant, inverted, isDisabled);
 
     const classes = [
       ...base,
@@ -205,6 +214,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ]
       .filter(Boolean)
       .join(" ");
+
+    // В состоянии загрузки показываем только спиннер (16px, желтый по умолчанию)
+    if (loading) {
+      return (
+        <button
+          ref={ref}
+          type={type}
+          disabled={isDisabled}
+          className={classes}
+          {...rest}
+        >
+          <Spinner size={16} aria-label="Загрузка" />
+        </button>
+      );
+    }
 
     // Определяем, какую иконку показывать слева
     const leftIconElement = leftIconName ? (
@@ -228,7 +252,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         type={type}
-        disabled={disabled}
+        disabled={isDisabled}
         className={classes}
         {...rest}
       >
