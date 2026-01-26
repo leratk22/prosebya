@@ -24,11 +24,11 @@ export interface WormCardWebProps
   /**
    * Текст для badge тэга (опционально)
    */
-  tag?: string;
+  tagLeft?: string;
   /**
-   * Время в формате MM:SS (опционально)
+   * Текст для badge тэга (опционально), обычно это время в формате MM:SS (опционально)
    */
-  time?: string;
+  tagRight?: string;
   /**
    * URL фонового изображения (опционально, если не указано, используется автоматический выбор по теме)
    */
@@ -51,8 +51,8 @@ export interface WormCardWebProps
  * - Mobile: ширина подстраивается под экран, высота 200px (фиксированная)
  * - Фоновое изображение (опционально)
  * - Заголовок максимум 2 строки с обрезкой
- * - Один опциональный тэг (Badge)
- * - Время в формате MM:SS (опционально)
+ * - Два тэга (Badges, оба опциональные). Каждый тэг может занимать 50% ширины контейнера с учетом обязательного отступа между ними. Если текст не помещается в тэг, то текст обрезается в многоточие
+ * - Поддержка светлой и темной темы
  */
 export const WormCardWeb = React.forwardRef<
   HTMLDivElement,
@@ -61,8 +61,8 @@ export const WormCardWeb = React.forwardRef<
   (
     {
       title,
-      tag,
-      time,
+      tagLeft,
+      tagRight,
       backgroundImageUrl,
       backgroundImageAlt,
       onClick,
@@ -72,7 +72,7 @@ export const WormCardWeb = React.forwardRef<
     ref,
   ) => {
     // Исключаем onClick из rest, так как он уже обработан отдельно
-    type RestProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'title' | 'tag' | 'time' | 'backgroundImageUrl' | 'backgroundImageAlt' | 'className'>;
+    type RestProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'title' | 'tagLeft' | 'tagRight' | 'backgroundImageUrl' | 'backgroundImageAlt' | 'className'>;
     const restProps = rest as RestProps;
     // Стили для основного контейнера
     const containerClasses = [
@@ -125,7 +125,7 @@ export const WormCardWeb = React.forwardRef<
       : undefined;
 
     // Проверяем, есть ли хотя бы один бейдж для отображения
-    const hasBadges = tag || time;
+    const hasBadges = tagLeft || tagRight;
 
     // Рендер контента
     const renderContent = () => {
@@ -139,23 +139,23 @@ export const WormCardWeb = React.forwardRef<
           {/* В Figma: badges frame имеет alignSelf: stretch, justifyContent: space-between */}
           {hasBadges && (
             <div className="flex flex-row justify-between w-full self-stretch relative z-10 min-w-0 overflow-hidden gap-4 flex-shrink-0">
-              {tag && (
+              {tagLeft && (
                 <div className="flex min-w-0 max-w-[calc(50%-8px)]">
                   <Badge 
                     variant="default" 
                     className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted max-w-full min-w-0"
                   >
-                    {tag}
+                    {tagLeft}
                   </Badge>
                 </div>
               )}
-              {time && (
-                <div className={`flex min-w-0 ${tag ? 'max-w-[calc(50%-8px)] ml-auto' : 'max-w-full'}`}>
+              {tagRight && (
+                <div className={`flex min-w-0 ${tagLeft ? 'max-w-[calc(50%-8px)] ml-auto' : 'max-w-full'}`}>
                   <Badge 
                     variant="default" 
                     className="dark:bg-core-inverted-alpha-10 dark:text-core-inverted max-w-full min-w-0"
                   >
-                    {time}
+                    {tagRight}
                   </Badge>
                 </div>
               )}
