@@ -28,8 +28,7 @@ const meta: Meta<typeof WormCardWeb> = {
   - \`dark-2x.png\` - для темной темы, retina дисплеи
 - Можно указать свой URL через проп \`backgroundImageUrl\`
 - Заголовок максимум 2 строки с обрезкой в многоточие
-- Один опциональный тэг (Badge) с обрезкой текста в многоточие
-- Время в формате MM:SS (опционально, Badge) с обрезкой текста в многоточие
+- Два тэга (Badges, оба опциональные). Каждый тэг может занимать 50% ширины контейнера с учетом обязательного отступа между ними. Если текст не помещается в тэг, то текст обрезается в многоточие
 - Поддержка светлой и темной темы
 
 **Figma:** [WormCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9933-30275&t=iWJmLoiT7vqKsn1t-1)
@@ -47,13 +46,13 @@ const meta: Meta<typeof WormCardWeb> = {
       control: { type: "text" },
       description: "Заголовок карточки (максимум 2 строки)",
     },
-    tag: {
+    tagLeft: {
       control: { type: "text" },
-      description: "Текст для badge тэга (опционально)",
+      description: "Текст для левого badge тэга (опционально)",
     },
-    time: {
+    tagRight: {
       control: { type: "text" },
-      description: "Время в формате MM:SS (опционально)",
+      description: "Текст для правого badge тэга, обычно это время в формате MM:SS (опционально)",
     },
     backgroundImageUrl: {
       control: { type: "text" },
