@@ -38,8 +38,8 @@ const meta: Meta<typeof WormCardWeb> = {
   },
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: "Тэг",
-    time: "05:30",
+    tagLeft: "Тэг",
+    tagRight: "05:30",
   },
   argTypes: {
     title: {
@@ -76,64 +76,64 @@ type Story = StoryObj<typeof WormCardWeb>;
 export const Default: Story = {
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: "Тэг",
-    time: "05:30",
+    tagLeft: "Тэг",
+    tagRight: "05:30",
   },
 };
 
 export const WithoutTag: Story = {
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: undefined,
-    time: "05:30",
+    tagLeft: undefined,
+    tagRight: "05:30",
   },
 };
 
 export const WithoutTime: Story = {
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: "Тэг",
-    time: undefined,
+    tagLeft: "Тэг",
+    tagRight: undefined,
   },
 };
 
 export const WithoutTagAndTime: Story = {
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: undefined,
-    time: undefined,
+    tagLeft: undefined,
+    tagRight: undefined,
   },
 };
 
 export const LongTitle: Story = {
   args: {
     title: "Очень длинный заголовок который должен обрезаться после двух строк и показывать многоточие если текст не умещается в отведенное пространство карточки и продолжается дальше",
-    tag: "Тэг",
-    time: "03:20",
+    tagLeft: "Тэг",
+    tagRight: "03:20",
   },
 };
 
 export const LongTag: Story = {
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: "Очень длинный тэг который должен обрезаться в многоточие если не умещается в контейнер",
-    time: "05:30",
+    tagLeft: "Очень длинный тэг который должен обрезаться в многоточие если не умещается в контейнер",
+    tagRight: "05:30",
   },
 };
 
 export const ShortTitle: Story = {
   args: {
     title: "Короткий заголовок",
-    tag: "Тэг",
-    time: "01:15",
+    tagLeft: "Тэг",
+    tagRight: "01:15",
   },
 };
 
 export const Clickable: Story = {
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: "Тэг",
-    time: "08:00",
+    tagLeft: "Тэг",
+    tagRight: "08:00",
     onClick: () => {
       alert("Карточка кликнута!");
     },
@@ -148,8 +148,8 @@ export const DarkTheme: Story = {
   ),
   args: {
     title: "Заголовок на две строки, а затем обрезаем его в многоточие, если не умещается",
-    tag: "Тэг",
-    time: "15:30",
+    tagLeft: "Тэг",
+    tagRight: "15:30",
   },
   parameters: {
     backgrounds: {
