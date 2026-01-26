@@ -52,8 +52,8 @@ export default function CardsDemoPage() {
           {/* WormCardWeb */}
           <WormCardWeb
             title="Привязанность и отношения: как формируются паттерны поведения"
-            tag="Лонгрид"
-            time="18:20"
+            tagLeft="Лонгрид"
+            tagRight="18:20"
           />
 
           {/* BigPhotoCard */}
