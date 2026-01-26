@@ -22,6 +22,8 @@ export interface BottomSheetProps {
   helperText?: string;
   showSkipButton?: boolean;
   onSkip?: () => void;
+  customContent?: React.ReactNode;
+  customFooter?: React.ReactNode;
 }
 
 export const BottomSheet: React.FC<BottomSheetProps> = ({
@@ -36,6 +38,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
   helperText,
   showSkipButton = false,
   onSkip,
+  customContent,
+  customFooter,
 }) => {
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -86,8 +90,11 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                   </p>
                 )}
 
-                <div className="flex flex-col gap-8">
-                  {options.map((option) => {
+                {customContent ? (
+                  customContent
+                ) : (
+                  <div className="flex flex-col gap-8">
+                    {options.map((option) => {
                     const isSelected = selectedIds.includes(option.id);
                     return (
                       <motion.button
@@ -132,32 +139,37 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                       </motion.button>
                     );
                   })}
-                </div>
+                  </div>
+                )}
               </div>
 
               {/* Footer with Button */}
-              <div className="border-t border-core-alpha-10 px-32 pt-12 pb-20">
-                <div className="flex flex-col gap-8">
-                  <Button
-                    variant="primary"
-                    size="l"
-                    onClick={onSubmit}
-                    fullWidth
-                  >
-                    {submitLabel}
-                  </Button>
-                  {showSkipButton && onSkip && (
+              {customFooter ? (
+                customFooter
+              ) : (
+                <div className="border-t border-core-alpha-10 px-16 pt-12 pb-20">
+                  <div className="flex flex-col gap-8">
                     <Button
-                      variant="secondary"
+                      variant="primary"
                       size="l"
-                      onClick={onSkip}
+                      onClick={onSubmit}
                       fullWidth
                     >
-                      Пропустить
+                      {submitLabel}
                     </Button>
-                  )}
+                    {showSkipButton && onSkip && (
+                      <Button
+                        variant="secondary"
+                        size="l"
+                        onClick={onSkip}
+                        fullWidth
+                      >
+                        Пропустить
+                      </Button>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </motion.div>
         </>
