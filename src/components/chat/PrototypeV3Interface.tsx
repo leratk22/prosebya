@@ -546,7 +546,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full max-w-[440px] mx-auto bg-light-bg-secondary">
+    <div className="flex flex-col h-full min-h-0 max-w-[440px] mx-auto bg-light-bg-secondary w-full">
       <header className="flex items-center justify-between px-16 py-20 bg-light-bg-secondary shrink-0 min-h-64">
         <div className="flex items-center gap-12 flex-1 min-w-0">
           <h1 className="text-14 font-semibold text-core-alpha-80 truncate leading-[20px]">
@@ -605,7 +605,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
       </div>
 
       {showInput ? (
-        <div className="bg-light-bg-secondary px-16 pt-8 pb-20 shrink-0">
+        <div className="bg-light-bg-secondary px-16 pt-8 shrink-0 pb-[max(20px,env(safe-area-inset-bottom))]">
           <div className="relative -mx-16">
             <div className="flex gap-4 mb-16 overflow-x-auto whitespace-nowrap scrollbar-hide px-16">
               {categoryOptions.map((category) => {
@@ -672,7 +672,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
           </Button>
         </div>
       ) : (
-        <div className="bg-light-bg-secondary px-16 py-16">
+        <div className="bg-light-bg-secondary px-16 pt-16 pb-[max(16px,env(safe-area-inset-bottom))] shrink-0">
           {chatSubStep === "gender" && showGenderNextButton && (
             <Button
               variant="secondary"
@@ -762,7 +762,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
       )}
 
       {showInput ? null : (
-        <div className="bg-light-bg-secondary px-16 py-16">
+        <div className="bg-light-bg-secondary px-16 pt-16 pb-[max(16px,env(safe-area-inset-bottom))] shrink-0">
           <p className="text-12 leading-[1.3333333333333333em] text-center text-core-alpha-60">
             Бот может допускать ошибки. Информация не является медицинским заключением
           </p>

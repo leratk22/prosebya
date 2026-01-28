@@ -47,6 +47,22 @@
 }
 
 @layer utilities {
+  /* Скрыть скроллбар, сохранив прокрутку (в т.ч. Safari/iOS на проде) */
+  .scrollbar-hide {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+    overflow-y: hidden;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .scrollbar-hide::-webkit-scrollbar-track,
+  .scrollbar-hide::-webkit-scrollbar-thumb {
+    display: none !important;
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);

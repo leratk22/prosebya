@@ -14,7 +14,7 @@ export function ViewportMeta() {
         document.head.insertBefore(viewport, document.head.firstChild);
       }
       
-      viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+      viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
       
       // Принудительно перезагружаем стили для применения медиа-запросов
       if (window.innerWidth < 440) {

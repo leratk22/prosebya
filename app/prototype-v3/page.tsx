@@ -26,8 +26,8 @@ export default function PrototypeV3Page() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEFF8] flex items-center justify-center">
-      <div className="w-full max-w-[440px] h-screen relative">
+    <div className="min-h-[100dvh] h-[100dvh] bg-[#EAEFF8] flex items-center justify-center overflow-hidden">
+      <div className="w-full max-w-[440px] h-full max-h-[100dvh] relative flex flex-col overflow-hidden">
         <AnimatePresence mode="wait">
           {view === "interface" && (
             <motion.div
@@ -35,7 +35,7 @@ export default function PrototypeV3Page() {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="absolute inset-0"
+              className="absolute inset-0 flex flex-col min-h-0"
             >
               <PrototypeV3Interface onShowResults={handleShowResults} />
             </motion.div>
