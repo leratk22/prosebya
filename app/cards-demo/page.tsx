@@ -29,6 +29,7 @@ export default function CardsDemoPage() {
           {/* BannerImageCardWeb */}
           <BannerImageCardWeb
             imageSrc="/ImageExample3x.png"
+            imageSrcMobile="/ImageExample3x.png"
             imageAlt="Пример баннерной карточки с изображением"
           />
 
