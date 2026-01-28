@@ -12,8 +12,8 @@ export interface MessageBubbleProps {
   content?: string | React.ReactNode;
   variant?: MessageVariant;
   chips?: Array<{ label: string; value: string; active?: boolean }>;
-  onChipClick?: (value: string, step?: string) => void;
-  chipStep?: string;
+  onChipClick?: (value: string, step?: string | null) => void;
+  chipStep?: string | null;
   showTyping?: boolean;
   multiSelect?: boolean;
 }

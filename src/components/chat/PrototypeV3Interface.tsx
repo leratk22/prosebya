@@ -467,8 +467,8 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
     }
   };
 
-  const handleChipClick = (value: string, step?: ChatSubStep | null) => {
-    const targetStep = step ?? chatSubStep;
+  const handleChipClick = (value: string, step?: string | null) => {
+    const targetStep = (step ?? chatSubStep) as ChatSubStep | null;
     if (!targetStep) return;
 
     // Клик по чипу из предыдущего вопроса — откатываемся на тот шаг и перезаписываем ответ
