@@ -7,6 +7,7 @@ import { HorizontalCardWeb } from "@/components/cards/horizontal-card-web";
 import { ColoredCardSingle } from "@/components/cards/colored-card-single";
 import { WormCardWeb } from "@/components/cards/worm-card-web";
 import { BigPhotoCard } from "@/components/cards/big-photo-card";
+import { SkillCourseCardWeb } from "@/components/cards/skill-course-card-web";
 
 export default function CardsDemoPage() {
   return (
@@ -64,6 +65,33 @@ export default function CardsDemoPage() {
             imageUrl="/practice-images/practice-image-3x.png"
             imageAlt="Практика медитации"
             duration="03:15"
+          />
+
+          {/* SkillCourseCardWeb - Default */}
+          <SkillCourseCardWeb
+            subtitle="тэг"
+            title="Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается"
+            state="default"
+            videoImageUrl="/ImageExample3x.png"
+            videoImageAlt="Video preview"
+            buttonText="Название кнопки"
+            videoTag="Тэг"
+            onClick={() => console.log("SkillCourseCardWeb Default кликнута")}
+            buttonOnClick={() => console.log("Кнопка кликнута")}
+          />
+
+          {/* SkillCourseCardWeb - In progress */}
+          <SkillCourseCardWeb
+            subtitle="Тэг"
+            title="Название всего курса максимум в две строки, потом многоточие"
+            state="in-progress"
+            nextExerciseSubtitle="Следующее упражнение"
+            nextExerciseTitle="Название упражнения, максимум три строки на десктопе, если длиннее, то обрезаем в многоточие, но таких названий вроде и нет"
+            nextExerciseImageUrl="/ImageExample3x.png"
+            nextExerciseImageAlt="Exercise cover"
+            nextExerciseButtonText="Название кнопки"
+            onClick={() => console.log("SkillCourseCardWeb In progress кликнута")}
+            nextExerciseButtonOnClick={() => console.log("Кнопка упражнения кликнута")}
           />
         </div>
       </div>

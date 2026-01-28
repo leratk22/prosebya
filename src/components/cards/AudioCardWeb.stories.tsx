@@ -16,8 +16,8 @@ const meta: Meta<typeof AudioCardWeb> = {
 Адаптивная карточка для отображения аудио контента.
 
 **Адаптивность:**
-- **Mobile** (< 440px): badge сверху (если есть), затем заголовок, растягивается по ширине контейнера
-- **Desktop** (≥ 440px): заголовок и badge в одной строке, максимальная ширина **756px**
+- **Mobile**: badge сверху (если есть), затем заголовок, растягивается по ширине контейнера
+- **Desktop**: заголовок и badge в одной строке, максимальная ширина **756px**
 
 **Особенности:**
 - Заголовок обрезается после 2 строк многоточием
@@ -135,7 +135,7 @@ export const DesignTokens: Story = {
                   Mobile: 16px, Desktop: 20px (токены Numbers)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> padding: 16px (mobile), padding: 20px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> padding: 16px (mobile), padding: 20px (desktop)
                 </p>
               </div>
               
@@ -171,10 +171,10 @@ export const DesignTokens: Story = {
                   md:max-w-[756px]
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  756px только для desktop (≥ 440px)
+                  756px только для desktop
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> max-width: 756px (при ширине экрана ≥ 440px)
+                  <strong>Точное значение:</strong> max-width: 756px
                 </p>
               </div>
             </div>
@@ -231,7 +231,7 @@ export const DesignTokens: Story = {
                   Mobile: 12px, Desktop: 16px (токены Numbers)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> padding: 12px (mobile), padding: 16px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> padding: 12px (mobile), padding: 16px (desktop)
                 </p>
               </div>
             </div>
@@ -287,13 +287,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Брейкпоинт</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  md: (440px)
+                  md:
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Переход между mobile и desktop версиями происходит на 440px
+                  Переход между mobile и desktop версиями происходит на брейкпоинте md
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> @media (min-width: 440px)
+                  <strong>Точное значение:</strong> @media (min-width: md)
                 </p>
               </div>
               
@@ -306,7 +306,7 @@ export const DesignTokens: Story = {
                   Mobile: 8px, Desktop: 20px (токены Numbers)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> gap: 8px (mobile), gap: 20px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> gap: 8px (mobile), gap: 20px (desktop)
                 </p>
               </div>
             </div>

@@ -17,8 +17,8 @@ const meta: Meta<typeof ColoredCardSingle> = {
 Карточка для отображения контента с цветным фоном согласно дизайну из Figma.
 
 **Адаптивность:**
-- **Mobile** (< 440px): ширина растягивается под экран, высота **235px** (фиксированная)
-- **Desktop** (≥ 440px): максимальная ширина **756px**, высота **235px** (фиксированная)
+- **Mobile**: ширина растягивается под экран, высота **235px** (фиксированная)
+- **Desktop**: максимальная ширина **756px**, высота **235px** (фиксированная)
 
 **Особенности:**
 - Фиксированная высота 235px для всех размеров экрана
@@ -313,10 +313,10 @@ export const DesignTokens: Story = {
                   md:max-w-[756px]
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  756px только для desktop (≥ 440px)
+                  756px только для desktop
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> max-width: 756px (при ширине экрана ≥ 440px)
+                  <strong>Точное значение:</strong> max-width: 756px
                 </p>
               </div>
             </div>
@@ -391,7 +391,7 @@ export const DesignTokens: Story = {
                   273px × 249px (для масштабированного изображения)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> width: 273px, height: 249px (≥ 440px)
+                  <strong>Точные значения:</strong> width: 273px, height: 249px (desktop)
                 </p>
               </div>
               

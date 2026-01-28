@@ -16,8 +16,8 @@ const meta: Meta<typeof BannerCardWeb> = {
 Баннерная карточка для отображения контента согласно дизайну из Figma.
 
 **Адаптивность:**
-- **Mobile** (< 440px): ширина растягивается под экран, padding **24px 32px**, gap **12px**
-- **Desktop** (≥ 440px): максимальная ширина **756px**, padding **32px 64px**, gap **12px**, высота адаптируется под текст
+- **Mobile**: ширина растягивается под экран, padding **24px 32px**, gap **12px**
+- **Desktop**: максимальная ширина **756px**, padding **32px 64px**, gap **12px**, высота адаптируется под текст
 
 **Особенности:**
 - В десктопной версии есть 2 фоновые SVG (Vector 810 и Vector 811)
@@ -181,10 +181,10 @@ export const DesignTokens: Story = {
                   md:max-w-[756px]
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  756px только для desktop (≥ 440px)
+                  756px только для desktop
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> max-width: 756px (при ширине экрана ≥ 440px)
+                  <strong>Точное значение:</strong> max-width: 756px
                 </p>
               </div>
               
@@ -347,13 +347,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Брейкпоинт</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  md: (440px)
+                  md:
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Переход между mobile и desktop версиями происходит на 440px
+                  Переход между mobile и desktop версиями происходит на брейкпоинте md
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> @media (min-width: 440px)
+                  <strong>Точное значение:</strong> @media (min-width: md)
                 </p>
               </div>
               
@@ -363,10 +363,10 @@ export const DesignTokens: Story = {
                   hidden md:block
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Фоновые SVG отображаются только на desktop (≥ 440px)
+                  Фоновые SVG отображаются только на desktop
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> display: none (mobile), display: block (desktop ≥ 440px)
+                  <strong>Точное значение:</strong> display: none (mobile), display: block (desktop)
                 </p>
               </div>
             </div>

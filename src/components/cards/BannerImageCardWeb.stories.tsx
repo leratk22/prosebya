@@ -16,28 +16,38 @@ const meta: Meta<typeof BannerImageCardWeb> = {
 Баннерная карточка с изображением согласно дизайну из Figma.
 
 **Адаптивность:**
-- **Mobile** (< 440px): ширина растягивается под экран, высота фиксированная **176px**
-- **Desktop** (≥ 440px): максимальная ширина **756px**, высота фиксированная **176px**
+- **Mobile**: ширина растягивается под экран, высота подстраивается пропорционально соотношению сторон изображения (~1.95:1)
+- **Desktop**: максимальная ширина **756px**, высота фиксированная **176px**
 
 **Особенности:**
+- Поддержка двух разных изображений для desktop и mobile версий
+- Desktop: изображение 756px × 176px (рекомендуется **2x разрешение** для retina дисплеев), фиксировано слева, при уменьшении ширины обрезается справа
+- Mobile: изображение подстраивается по ширине экрана, высота вычисляется пропорционально (соотношение сторон ~1.95:1, рекомендуется **3x разрешение** для retina дисплеев)
 - Внутри карточки только изображение
-- Изображение центрируется
-- По умолчанию изображение равно ширине десктопа (756px), при уменьшении ширины боковые части скрываются за границами блока
-- Фиксированная высота 176px на всех разрешениях
+- Фиксированная высота 176px только для desktop версии
 
-**Figma:** [BannerImageCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=10039-108244&m=dev)
+**Изображения:**
+- Desktop: рекомендуется использовать изображение в разрешении **2x** (1512px × 352px) для поддержки retina дисплеев
+- Mobile: рекомендуется использовать изображение в разрешении **3x** для поддержки retina дисплеев на мобильных устройствах
+
+**Figma:** [BannerImageCardWeb](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=10039-107968&t=4UI1WKLLMK9UJTeE-1)
         `,
       },
     },
   },
   args: {
-    imageSrc: "/ImageExample3x.png",
+    imageSrc: "/images/banner/banner-desktop.png",
+    imageSrcMobile: "/images/banner/banner-mobile.png",
     imageAlt: "Пример баннера",
   },
   argTypes: {
     imageSrc: {
       control: { type: "text" },
-      description: "Путь к изображению баннера",
+      description: "Путь к изображению баннера для desktop версии (рекомендуется 2x разрешение для retina дисплеев)",
+    },
+    imageSrcMobile: {
+      control: { type: "text" },
+      description: "Путь к изображению баннера для mobile версии (рекомендуется 3x разрешение для retina дисплеев)",
     },
     imageAlt: {
       control: { type: "text" },
@@ -56,21 +66,40 @@ type Story = StoryObj<typeof BannerImageCardWeb>;
 
 export const Default: Story = {
   args: {
-    imageSrc: "/ImageExample3x.png",
+    imageSrc: "/images/banner/banner-desktop.png",
+    imageSrcMobile: "/images/banner/banner-mobile.png",
     imageAlt: "Пример баннера",
   },
 };
 
+export const WithDifferentImages: Story = {
+  args: {
+    imageSrc: "/images/banner/banner-desktop.png",
+    imageSrcMobile: "/images/banner/banner-mobile.png",
+    imageAlt: "Пример баннера с разными изображениями",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Пример использования разных изображений для desktop и mobile версий",
+      },
+    },
+  },
+};
+
+
 export const WithPlaceholder: Story = {
   args: {
     imageSrc: "/placeholder_banner_image.svg",
+    imageSrcMobile: "/placeholder_banner_image.svg",
     imageAlt: "Заглушка баннера",
   },
 };
 
 export const Clickable: Story = {
   args: {
-    imageSrc: "/ImageExample3x.png",
+    imageSrc: "/images/banner/banner-desktop.png",
+    imageSrcMobile: "/images/banner/banner-mobile.png",
     imageAlt: "Пример баннера",
     onClick: () => {
       alert("Баннер кликнут!");
@@ -91,13 +120,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Высота</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  h-[176px]
+                  h-auto md:h-[176px]
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Фиксированная высота 176px на всех разрешениях
+                  Desktop: фиксированная высота 176px. Mobile: высота подстраивается пропорционально соотношению сторон изображения (~1.95:1)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> height: 176px
+                  <strong>Точные значения:</strong> height: auto (mobile), height: 176px (desktop), aspect-ratio: ~1.95 (mobile)
                 </p>
               </div>
               
@@ -120,10 +149,10 @@ export const DesignTokens: Story = {
                   md:max-w-[756px]
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  756px только для desktop (≥ 440px)
+                  756px только для desktop
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> max-width: 756px (при ширине экрана ≥ 440px)
+                  <strong>Точное значение:</strong> max-width: 756px
                 </p>
               </div>
               
@@ -172,28 +201,43 @@ export const DesignTokens: Story = {
               </div>
               
               <div>
-                <h4 className="text-label-m font-medium mb-4">Ширина и высота</h4>
+                <h4 className="text-label-m font-medium mb-4">Размеры изображений</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  width: 756px, height: 176px
+                  Desktop: 756px × 176px<br />
+                  Mobile: 100% width × пропорциональная высота
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  По умолчанию изображение равно ширине десктопа (756px) и высоте баннера (176px)
+                  Desktop: изображение имеет фиксированные размеры 756px × 176px, центрируется. Mobile: изображение подстраивается по ширине экрана, высота вычисляется пропорционально (соотношение сторон ~1.95:1 из Figma)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> width: 756px, min-width: 756px, height: 176px
+                  <strong>Точные значения:</strong> Desktop: width: 756px, min-width: 756px, height: 176px. Mobile: width: 100%, height: auto, aspect-ratio: ~1.95
                 </p>
               </div>
               
               <div>
-                <h4 className="text-label-m font-medium mb-4">Центрирование</h4>
+                <h4 className="text-label-m font-medium mb-4">Два изображения</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  position: absolute, left: 50%, transform: translateX(-50%)
+                  imageSrc (desktop) + imageSrcMobile (mobile)
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Изображение центрируется по горизонтали внутри контейнера
+                  Компонент поддерживает два разных изображения: одно для desktop версии (рекомендуется 2x разрешение), другое для mobile версии (рекомендуется 3x разрешение). Оба изображения обязательны.
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> position: absolute, left: 50%, top: 0, transform: translateX(-50%)
+                  <strong>Логика:</strong> Desktop использует imageSrc (рекомендуется 2x разрешение), Mobile использует imageSrcMobile (рекомендуется 3x разрешение). Оба изображения обязательны.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Позиционирование</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  Desktop: absolute, left: 50%, transform: translateX(-50%)<br />
+                  Mobile: block, width: 100%, height: 100%
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  Desktop: изображение центрируется по горизонтали через absolute positioning. Mobile: изображение заполняет весь контейнер с сохранением пропорций
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Точные значения:</strong> Desktop: position: absolute, left: 50%, top: 0, transform: translateX(-50%). Mobile: display: block, width: 100%, height: 100%, object-fit: cover
                 </p>
               </div>
             </div>
@@ -205,13 +249,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Брейкпоинт</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  md: (440px)
+                  md:
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Переход между mobile и desktop версиями происходит на 440px
+                  Переход между mobile и desktop версиями происходит на брейкпоинте md
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> @media (min-width: 440px)
+                  <strong>Точное значение:</strong> @media (min-width: md)
                 </p>
               </div>
               

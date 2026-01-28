@@ -1,23 +1,35 @@
-[18:22:49.636] [INFO] storybook v10.1.11
-[18:22:50.707] [DEBUG] Getting package.json info for /Users/valeriatkaceva/Documents/ProSebya/CURSOR/package.json...
-[18:23:21.551] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
-[18:23:52.146] [DEBUG] Serving static files from [36mnode_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
-[18:23:52.146] [DEBUG] Serving static files from [36mpublic[39m at [36m/[39m
-[18:23:52.146] [INFO] Starting...
-[18:23:52.152] [WARN] No story files found for the specified pattern: [34msrc/**/*.mdx[39m
-[18:23:52.162] [WARN] unable to find package.json for ast-types
-[18:23:57.899] [DEBUG] Starting preview..
-[18:24:11.182] [ERROR] Failed to build the preview
-[18:24:11.185] [ERROR] [38;2;241;97;97mError: Invalid package config ./node_modules/estree-walker/dist/esm/package.json.[39m
-    at getPackageScopeConfig (node:internal/modules/package_json_reader:208:33)
-    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:118:72)
-    at defaultGetFormatWithoutErrors (node:internal/modules/esm/get_format:198:36)
-    at defaultResolve (node:internal/modules/esm/resolve:1014:13)
-    at nextResolve (node:internal/modules/esm/hooks:785:28)
-    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
-    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
-    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
-[18:24:11.186] [WARN] Broken build, fix the error above.
+[08:37:35.577] [INFO] storybook v10.1.11
+[08:38:18.663] [DEBUG] Getting package.json info for /Users/valeriatkaceva/Documents/ProSebya/CURSOR/package.json...
+[08:50:10.778] [ERROR] [38;2;241;97;97mSB_CORE-SERVER_0002 (CriticalPresetLoadError): Storybook failed to load the following preset: @storybook/nextjs-vite/preset.
+
+Please check whether your setup is correct, the Storybook dependencies (and their peer dependencies) are installed correctly and there are no package version clashes.
+
+If you believe this is a bug, please open an issue on Github.
+
+Error: Cannot find module 'next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js'
+Require stack:
+- ./node_modules/vite-plugin-storybook-nextjs/dist/index.cjs
+- ./node_modules/@storybook/nextjs-vite/dist/preset.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.require (node:internal/modules/cjs/loader:1504:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (./node_modules/vite-plugin-storybook-nextjs/dist/index.cjs:11:34)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14)
+
+More info: 
+[39m
+    at loadPreset (file://./node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:10101:13)
+    at async Promise.all (index 0)
+    at async loadPresets (file://./node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:10110:73)
+    at async getPresets (file://./node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:10141:23)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7163:17)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-2372JZ52.js:209:12)
+    at async dev (file://./node_modules/storybook/dist/bin/core.js:2734:3)
+    at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2801:92)
+[08:50:10.782] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.
-[18:24:20.177] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":false}

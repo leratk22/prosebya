@@ -20,8 +20,8 @@ const meta: Meta<typeof HorizontalCardWeb> = {
 **Дизайн в Figma:** [Ссылка на карточку](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9785-27518&t=iWJmLoiT7vqKsn1t-1)
 
 **Адаптивность:**
-- **Mobile** (< 440px): высота **140px**, ширина **343px**, изображение слева (124px), текст справа
-- **Desktop** (≥ 440px): высота **210px**, максимальная ширина **756px**, изображение слева (186px), текст справа
+- **Mobile**: высота **140px**, ширина **343px**, изображение слева (124px), текст справа
+- **Desktop**: высота **210px**, максимальная ширина **756px**, изображение слева (186px), текст справа
 
 **Особенности:**
 - Заголовок обрезается после 2 строк многоточием (line-clamp-2)
@@ -366,7 +366,7 @@ export const DesignTokens: Story = {
                   Mobile: 140px, Desktop: 210px
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> height: 140px (mobile), height: 210px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> height: 140px (mobile), height: 210px (desktop)
                 </p>
               </div>
               
@@ -376,10 +376,10 @@ export const DesignTokens: Story = {
                   md:max-w-[756px]
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  756px только для desktop (≥ 440px)
+                  756px только для desktop
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> max-width: 756px (при ширине экрана ≥ 440px)
+                  <strong>Точное значение:</strong> max-width: 756px
                 </p>
               </div>
             </div>
@@ -397,7 +397,7 @@ export const DesignTokens: Story = {
                   Mobile: 124px, Desktop: 186px
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> width: 124px (mobile), width: 186px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> width: 124px (mobile), width: 186px (desktop)
                 </p>
               </div>
               
@@ -454,7 +454,7 @@ export const DesignTokens: Story = {
                   Mobile: 12px, Desktop: 16px (токены Numbers)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> gap: 12px (mobile), gap: 16px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> gap: 12px (mobile), gap: 16px (desktop)
                 </p>
               </div>
             </div>
@@ -542,7 +542,7 @@ export const DesignTokens: Story = {
                   Mobile: 4px, Desktop: 8px (токены Numbers)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> gap: 4px (mobile), gap: 8px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> gap: 4px (mobile), gap: 8px (desktop)
                 </p>
               </div>
             </div>
@@ -554,13 +554,13 @@ export const DesignTokens: Story = {
               <div>
                 <h4 className="text-label-m font-medium mb-4">Брейкпоинт</h4>
                 <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
-                  md: (440px)
+                  md:
                 </code>
                 <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
-                  Переход между mobile и desktop версиями происходит на 440px
+                  Переход между mobile и desktop версиями происходит на брейкпоинте md
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точное значение:</strong> @media (min-width: 440px)
+                  <strong>Точное значение:</strong> @media (min-width: md)
                 </p>
               </div>
               
@@ -586,7 +586,7 @@ export const DesignTokens: Story = {
                   Mobile: 8px, Desktop: 4px (токены Numbers)
                 </p>
                 <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
-                  <strong>Точные значения:</strong> gap: 8px (mobile), gap: 4px (desktop ≥ 440px)
+                  <strong>Точные значения:</strong> gap: 8px (mobile), gap: 4px (desktop)
                 </p>
               </div>
             </div>
