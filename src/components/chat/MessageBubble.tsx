@@ -12,7 +12,8 @@ export interface MessageBubbleProps {
   content?: string | React.ReactNode;
   variant?: MessageVariant;
   chips?: Array<{ label: string; value: string; active?: boolean }>;
-  onChipClick?: (value: string) => void;
+  onChipClick?: (value: string, step?: string) => void;
+  chipStep?: string;
   showTyping?: boolean;
   multiSelect?: boolean;
 }
@@ -23,6 +24,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   variant = "default",
   chips,
   onChipClick,
+  chipStep,
   showTyping = false,
   multiSelect = false,
 }) => {
@@ -35,42 +37,28 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         animate={{ opacity: 1, y: 0 }}
         className="flex justify-start"
       >
-        <div className="flex gap-1 px-16 py-12 bg-white rounded-16 max-w-[80%]">
-          <div className="flex gap-1">
-            <motion.div
-              className="w-2 h-2 bg-core-alpha-40 rounded-full"
-              animate={{
-                y: [0, -4, 0],
-              }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                delay: 0,
-              }}
-            />
-            <motion.div
-              className="w-2 h-2 bg-core-alpha-40 rounded-full"
-              animate={{
-                y: [0, -4, 0],
-              }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                delay: 0.2,
-              }}
-            />
-            <motion.div
-              className="w-2 h-2 bg-core-alpha-40 rounded-full"
-              animate={{
-                y: [0, -4, 0],
-              }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                delay: 0.4,
-              }}
-            />
-          </div>
+        <div
+          className="
+            flex gap-1 items-center px-16 py-12 max-w-[80%] min-h-[48px]
+            bg-[rgba(255,184,0,0.3)] text-core
+            rounded-[16px_16px_16px_0px]
+          "
+        >
+          <motion.div
+            className="w-2 h-2 bg-core-alpha-40 rounded-full"
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+          />
+          <motion.div
+            className="w-2 h-2 bg-core-alpha-40 rounded-full"
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+          />
+          <motion.div
+            className="w-2 h-2 bg-core-alpha-40 rounded-full"
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+          />
         </div>
       </motion.div>
     );
@@ -90,7 +78,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
               key={chip.value}
               label={chip.label}
               active={chip.active}
-              onClick={() => onChipClick?.(chip.value)}
+              onClick={() => onChipClick?.(chip.value, chipStep)}
               multiSelect={multiSelect}
             />
           ))}
