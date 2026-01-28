@@ -23,13 +23,13 @@ export const Chip: React.FC<ChipProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={`
-        inline-flex items-center justify-center gap-2
-        px-16 py-8
+        inline-flex items-center justify-center shrink-0
+        min-h-36 px-16 py-8
         rounded-full
-        font-semibold text-14 leading-[1.4285714285714286em]
+        font-semibold text-14 leading-[20px]
         transition-colors
         ${active
-          ? "bg-brand-blue text-white"
+          ? "bg-brand-blue text-system-white"
           : "bg-core-alpha-5 text-core-alpha-40"
         }
         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}

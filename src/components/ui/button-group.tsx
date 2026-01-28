@@ -138,6 +138,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
       }
 
       if (buttons && buttons.length > 0) {
+        const equalWidth = type === "2-buttons" && finalOrientation === "horizontal";
         return buttons.map((buttonConfig, index) => (
           <Button
             key={index}
@@ -148,7 +149,8 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
             leftIcon={buttonConfig.leftIcon}
             rightIcon={buttonConfig.rightIcon}
             onClick={buttonConfig.onClick}
-            fullWidth={finalOrientation === "vertical"}
+            fullWidth={finalOrientation === "vertical" || equalWidth}
+            className={equalWidth ? "flex-1 min-w-0" : undefined}
           >
             {buttonConfig.label}
           </Button>

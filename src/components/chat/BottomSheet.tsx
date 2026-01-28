@@ -61,31 +61,31 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             onClick={handleBackdropClick}
           />
 
-          {/* Bottom Sheet */}
+          {/* Bottom Sheet — стили по Figma: белый фон, контент 375×692, quiz-buttons 343×56, radius 16, border 10% */}
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-16 max-w-[440px] mx-auto"
+            className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-m max-w-[440px] mx-auto"
             style={{ maxHeight: "90vh" }}
           >
             <div className="flex flex-col h-full max-h-[90vh]">
               {/* Handle */}
-              <div className="flex justify-center pt-12 pb-8">
+              <div className="flex justify-center pt-12 pb-8 shrink-0">
                 <div className="w-40 h-4 bg-core-alpha-20 rounded-full" />
               </div>
 
               {/* Content */}
-              <div className="flex-1 overflow-y-auto px-16 pt-0">
+              <div className="flex-1 overflow-y-auto px-16 pt-0 pb-16">
                 {title && (
-                  <h3 className="text-16 font-semibold text-core-alpha-80 mb-16">
+                  <h3 className="text-title-l font-semibold text-core-alpha-80 text-center mb-16">
                     {title}
                   </h3>
                 )}
 
                 {helperText && (
-                  <p className="text-12 leading-[1.3333333333333333em] text-center text-core-alpha-40 mb-16">
+                  <p className="text-12 text-center text-core-alpha-40 leading-[16px] mb-16">
                     {helperText}
                   </p>
                 )}
@@ -95,59 +95,48 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                 ) : (
                   <div className="flex flex-col gap-8">
                     {options.map((option) => {
-                    const isSelected = selectedIds.includes(option.id);
-                    return (
-                      <motion.button
-                        key={option.id}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => onToggle(option.id)}
-                        className={`
-                          flex items-center gap-8
-                          px-16 py-16
-                          border border-core-alpha-10
-                          rounded-16
-                          text-left
-                          transition-colors
-                          ${isSelected
-                            ? "bg-core-alpha-5"
-                            : "bg-white"
-                          }
-                        `}
-                      >
-                        {/* Checkbox */}
-                        <Checkbox
-                          type="box"
-                          checked={isSelected}
-                          onChange={() => {
-                            onToggle(option.id);
-                          }}
-                          disabled={false}
-                        />
-
-                        {/* Label */}
-                        <span
+                      const isSelected = selectedIds.includes(option.id);
+                      return (
+                        <motion.button
+                          key={option.id}
+                          type="button"
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => onToggle(option.id)}
                           className={`
-                            text-16 leading-[1.5em]
+                            flex items-center gap-8 min-h-56 h-56
+                            px-16
+                            border border-core-alpha-10 rounded-m
+                            text-left
+                            transition-colors
                             ${isSelected
-                              ? "text-core-alpha-80 font-medium"
-                              : "text-core-alpha-80 font-regular"
+                              ? "bg-core-alpha-5"
+                              : "bg-white"
                             }
                           `}
                         >
-                          {option.label}
-                        </span>
-                      </motion.button>
-                    );
-                  })}
+                          <Checkbox
+                            type="box"
+                            size={24}
+                            checked={isSelected}
+                            onChange={() => onToggle(option.id)}
+                            disabled={false}
+                            className="shrink-0"
+                          />
+                          <span className="text-16 font-regular text-core-alpha-80 leading-[24px]">
+                            {option.label}
+                          </span>
+                        </motion.button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
 
-              {/* Footer with Button */}
+              {/* Footer — по Figma: border-t 10%, padding, кнопка 311×48, radius full */}
               {customFooter ? (
                 customFooter
               ) : (
-                <div className="border-t border-core-alpha-10 px-16 pt-12 pb-20">
+                <div className="border-t border-core-alpha-10 bg-white px-32 pt-12 pb-20 shrink-0">
                   <div className="flex flex-col gap-8">
                     <Button
                       variant="primary"
