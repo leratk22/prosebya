@@ -1,16 +1,20 @@
 "use client";
 
 import * as React from "react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { BottomSheet } from "./BottomSheet";
 import { MessageBubble } from "./MessageBubble";
 import { Chip } from "./Chip";
 import { psychologists, Psychologist } from "@/data/psychologists";
+import { symptomToSpecializations } from "./symptomMapping";
+
+export type PsychologistWithDisplayTags = Psychologist & { displayTags?: string[] };
 
 export interface PrototypeV3InterfaceProps {
   onClose?: () => void;
-  onShowResults?: (psychologists: Psychologist[]) => void;
+  onShowResults?: (psychologists: PsychologistWithDisplayTags[]) => void;
 }
 
 export interface Message {
@@ -23,54 +27,69 @@ export interface Message {
 }
 
 const categoryOptions = [
-  { label: "Мое состояние", value: "Мое состояние" },
-  { label: "Отношения", value: "Отношения" },
-  { label: "Работа и учеба", value: "Работа и учеба" },
-  { label: "События в жизни", value: "События в жизни" },
+  { label: "Здоровье и тело", value: "Здоровье и тело" },
+  { label: "Кризисные ситуации", value: "Кризисные ситуации" },
+  { label: "Работа и эффективность", value: "Работа и эффективность" },
+  { label: "Эмоциональные трудности", value: "Эмоциональные трудности" },
+  { label: "Проблемы в отношениях", value: "Проблемы в отношениях" },
+  { label: "Личностный рост", value: "Личностный рост" },
 ];
 
 const PROBLEM_OPTIONS = {
-  "Мое состояние": [
-    "Снижение настроения",
-    "Отсутствие радости и удовольствия",
-    "Чувство одиночества, непонимания",
-    "Мысли об уходе из жизни",
-    "Чувство безнадежности и упадка энергии",
-    "Проблемы со сном",
-    "Недовольство собой",
-    "Поиск себя, смысла жизни",
-    "Навязчивые мысли",
+  "Здоровье и тело": [
+    "Проблема с питанием и весом",
+    "Сексуальное здоровье",
+    "Хроническая болезнь",
+    "Химическая зависимость",
+    "Принятие своего тела",
     "Панические атаки",
-    "Приступы страха",
-    "Проблемы с питанием, проблемы с весом",
-    "Частые перепады настроения",
-    "Рискованные поступки",
-    "Чрезмерная энергичность",
-    "Трудности с выполнением повседневных задач",
+    "Проблемы со сном",
+    "Нехимическая зависимость",
   ],
-  "Отношения": [
-    "Трудности в общении",
-    "Созависимость",
-    "Импульсивность",
-    "Конфликты",
-    "Сложности в семье",
-    "Отсутствие интереса к сексуальной активности",
-    "Проблемы с эрекцией",
-    "Аноргазмия",
-    "Проблемы с сексуальным возбуждением",
-  ],
-  "Работа и учеба": [
-    "Конфликтные ситуации на работе",
-    "Трудности с мотивацией и управлением временем",
-    "Трудно сосредоточить внимание на задачах",
-    "Рассеянность/забывчивость",
-    "Споры между деловыми партнерами",
-  ],
-  "События в жизни": [
+  "Кризисные ситуации": [
     "Развод",
     "Потеря работы",
-    "Смерть или болезнь близких",
-    "Физическое насилие, сексуальное насилие",
+    "Горе и утрата",
+    "Насилие",
+    "Страх смерти",
+  ],
+  "Работа и эффективность": [
+    "Продуктивность в работе",
+    "Прокрастинация",
+    "Финансовая эффективность",
+    "Стресс и выгорание",
+    "Баланс работы и жизни",
+    "Лидерство и управление",
+    "Профессиональный рост",
+    "Самоопределение",
+    "Конфликты на работе",
+    "Отношения в коллективе",
+  ],
+  "Эмоциональные трудности": [
+    "Плохое настроение",
+    "Мысли о суициде",
+    "Рассеянность",
+    "Эмоциональное напряжение",
+    "Страх и тревога",
+    "Перепады настроения",
+    "Раздражительность",
+    "Апатия",
+  ],
+  "Проблемы в отношениях": [
+    "Чувство одиночества",
+    "Трудности в общении",
+    "Отношения с детьми",
+    "Отношения в паре",
+    "Конфликты с близкими",
+    "Отношения в семье",
+  ],
+  "Личностный рост": [
+    "Взросление и сепарация",
+    "Трудно принимать решения",
+    "Проблемы с самооценкой",
+    "Творческое развитие",
+    "Поиск себя и смысла жизни",
+    "Личные границы",
   ],
 };
 
@@ -84,6 +103,16 @@ const ageOptions = [
   { label: "25-35", value: "25-35" },
   { label: "35-45", value: "35-45" },
   { label: "45+", value: "45+" },
+];
+
+const PLACEHOLDER_PREFIX = "Например, «";
+const PLACEHOLDER_SUFFIX = "»";
+const PLACEHOLDER_PHRASES = [
+  "не сплю",
+  "тревожно",
+  "ссоры",
+  "плохой сон",
+  "выгорание",
 ];
 
 const therapyMethods = [
@@ -110,6 +139,14 @@ const therapyMethods = [
 
 type ChatSubStep = "gender" | "age" | "method" | "done";
 
+function getChipStepFromContent(content: string | React.ReactNode | undefined): ChatSubStep | null {
+  if (typeof content !== "string") return null;
+  if (content === "С кем комфортнее работать?") return "gender";
+  if (content === "Предпочтения по возрасту?") return "age";
+  if (content.includes("метод терапии")) return "method";
+  return null;
+}
+
 export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
   onClose,
   onShowResults,
@@ -131,6 +168,10 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
   const [showGenderNextButton, setShowGenderNextButton] = React.useState(false);
   const [showAgeNextButton, setShowAgeNextButton] = React.useState(false);
   const [showMethodNextButton, setShowMethodNextButton] = React.useState(false);
+  const [methodQuestionAnswered, setMethodQuestionAnswered] = React.useState(false);
+  const [placeholderIndex, setPlaceholderIndex] = React.useState(0);
+  const [typewriterText, setTypewriterText] = React.useState("");
+  const [isInputFocused, setIsInputFocused] = React.useState(false);
 
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
@@ -157,6 +198,32 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
     inputRef.current.style.height = "auto";
     inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
   }, [inputValue]);
+
+  // Плейсхолдер с эффектом печати: по очереди показываем фразы, печатаем быстро
+  React.useEffect(() => {
+    const phrase = PLACEHOLDER_PHRASES[placeholderIndex];
+    let charIndex = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const typeNext = () => {
+      if (charIndex <= phrase.length) {
+        setTypewriterText(phrase.slice(0, charIndex));
+        charIndex += 1;
+        timeoutId = setTimeout(typeNext, 50);
+      } else {
+        timeoutId = setTimeout(() => {
+          setPlaceholderIndex((i) => (i + 1) % PLACEHOLDER_PHRASES.length);
+          setTypewriterText("");
+        }, 2200);
+      }
+    };
+
+    const startId = setTimeout(typeNext, 400);
+    return () => {
+      clearTimeout(startId);
+      clearTimeout(timeoutId);
+    };
+  }, [placeholderIndex]);
 
   const addMessage = React.useCallback((message: Omit<Message, "id" | "timestamp">) => {
     const newMessage: Message = {
@@ -302,21 +369,23 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
           variant: "chips",
           chips: [
             { label: "Выбрать метод", value: "select_method" },
-            { label: "Не разбираюсь / Пропустить", value: "skip_method" },
+            { label: "Не разбираюсь", value: "skip_method" },
           ],
         });
         setChatSubStep("method");
         setShowMethodNextButton(true);
+        setMethodQuestionAnswered(false);
       }, 300);
     });
   };
 
   const handleMethodSelect = (value: string) => {
+    setMethodQuestionAnswered(true);
     if (value === "skip_method") {
       setSelectedMethods([]);
       addMessage({
         type: "user",
-        content: "Пропустить",
+        content: "Не разбираюсь",
       });
       startSearch();
     } else if (value === "select_method") {
@@ -350,6 +419,9 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
 
   const startSearch = () => {
     const selectedSymptoms = Object.values(selectedSymptomsByCategory).flat();
+    const searchSpecializations = Array.from(
+      new Set(selectedSymptoms.flatMap(symptomToSpecializations)),
+    );
     let filtered = [...psychologists];
 
     if (selectedGender && selectedGender !== "any") {
@@ -367,9 +439,9 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
       });
     }
 
-    if (selectedSymptoms.length > 0) {
+    if (searchSpecializations.length > 0) {
       filtered = filtered.filter((p) =>
-        selectedSymptoms.some((symptom) => p.specializations.includes(symptom)),
+        p.specializations.some((spec) => searchSpecializations.includes(spec)),
       );
     }
 
@@ -380,11 +452,90 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
     }
 
     if (onShowResults) {
-      onShowResults(filtered);
+      const withDisplayTags = filtered.map((p) => {
+        const matchedCategoryLabels =
+          selectedSymptoms.length > 0
+            ? selectedSymptoms.filter((symptom) =>
+                symptomToSpecializations(symptom).some((spec) =>
+                  p.specializations.includes(spec),
+                ),
+              )
+            : undefined;
+        return { ...p, displayTags: matchedCategoryLabels };
+      });
+      onShowResults(withDisplayTags);
     }
   };
 
-  const handleChipClick = (value: string) => {
+  const handleChipClick = (value: string, step?: ChatSubStep | null) => {
+    const targetStep = step ?? chatSubStep;
+    if (!targetStep) return;
+
+    // Клик по чипу из предыдущего вопроса — откатываемся на тот шаг и перезаписываем ответ
+    if (targetStep !== chatSubStep) {
+      const genderQuestionIndex = messages.findIndex(
+        (m) => m.type === "bot" && m.content === "С кем комфортнее работать?",
+      );
+      const ageQuestionIndex = messages.findIndex(
+        (m) => m.type === "bot" && m.content === "Предпочтения по возрасту?",
+      );
+      const methodQuestionIndex = messages.findIndex(
+        (m) =>
+          m.type === "bot" &&
+          typeof m.content === "string" &&
+          m.content.includes("метод терапии"),
+      );
+
+      if (targetStep === "gender" && genderQuestionIndex >= 0) {
+        const truncateTo = genderQuestionIndex + 2;
+        const genderLabel = genderOptions.find((opt) => opt.value === value)?.label ?? value;
+        setMessages((prev) => [
+          ...prev.slice(0, truncateTo),
+          {
+            id: Date.now().toString(),
+            type: "user" as const,
+            content: genderLabel,
+            timestamp: new Date(),
+          },
+        ]);
+        setSelectedGender(value);
+        setSelectedAges([]);
+        setSelectedMethods([]);
+        setChatSubStep("gender");
+        setShowGenderNextButton(false);
+        setShowAgeNextButton(false);
+        setShowMethodNextButton(false);
+        handleGenderNext(value);
+        return;
+      }
+
+      if (targetStep === "age" && ageQuestionIndex >= 0) {
+        const truncateTo = ageQuestionIndex + 2;
+        setMessages((prev) => prev.slice(0, truncateTo));
+        setSelectedMethods([]);
+        setChatSubStep("age");
+        setShowAgeNextButton(true);
+        setShowGenderNextButton(false);
+        setShowMethodNextButton(false);
+        setSelectedAges((prev) =>
+          prev.includes(value) ? prev.filter((a) => a !== value) : [...prev, value],
+        );
+        return;
+      }
+
+      if (targetStep === "method" && methodQuestionIndex >= 0) {
+        const truncateTo = methodQuestionIndex + 2;
+        setMessages((prev) => prev.slice(0, truncateTo));
+        setChatSubStep("method");
+        setShowMethodNextButton(true);
+        setShowAgeNextButton(false);
+        setShowGenderNextButton(false);
+        handleMethodSelect(value);
+        return;
+      }
+    }
+
+    // Текущий шаг — обычная обработка
     if (chatSubStep === "gender") {
       handleGenderSelect(value);
     } else if (chatSubStep === "age") {
@@ -395,28 +546,27 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full max-w-[440px] mx-auto bg-[#EAEFF8]">
-      <div className="flex items-center justify-between px-16 py-20 bg-white">
-        <div className="flex items-center gap-12">
-          <h1 className="text-14 font-semibold text-core-alpha-80">ProSebyAI bot</h1>
-          <span className="px-8 py-4 bg-brand-blue-alpha-10 text-12 font-medium text-brand-blue rounded-full">
+    <div className="flex flex-col h-full max-w-[440px] mx-auto bg-light-bg-secondary">
+      <header className="flex items-center justify-between px-16 py-20 bg-light-bg-secondary shrink-0 min-h-64">
+        <div className="flex items-center gap-12 flex-1 min-w-0">
+          <h1 className="text-14 font-semibold text-core-alpha-80 truncate leading-[20px]">
+            ProSebyAI bot
+          </h1>
+          <span className="px-8 py-4 bg-brand-blue-alpha-10 text-brand-blue text-12 font-medium rounded-full shrink-0 leading-[16px]">
             BETA
           </span>
         </div>
         {onClose && (
-          <button onClick={onClose} className="p-6 shrink-0" aria-label="Закрыть">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="rgba(34, 38, 59, 0.6)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          <button
+            type="button"
+            onClick={onClose}
+            className="p-6 shrink-0 -m-6 flex items-center justify-center text-core-alpha-60 hover:text-core-alpha-80 transition-colors"
+            aria-label="Закрыть"
+          >
+            <X className="w-24 h-24" strokeWidth={2} />
           </button>
         )}
-      </div>
+      </header>
 
       <div className="flex-1 overflow-y-auto px-16 py-16 space-y-16">
         {messages.map((message, index) => {
@@ -433,6 +583,10 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
               active: selectedAges.includes(opt.value),
             }));
           }
+          const chipStep = message.variant === "chips"
+            ? getChipStepFromContent(messages[index - 1]?.content)
+            : undefined;
+
           return (
             <MessageBubble
               key={message.id}
@@ -441,6 +595,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
               variant={message.variant}
               chips={chipsToShow}
               onChipClick={handleChipClick}
+              chipStep={chipStep ?? undefined}
               multiSelect={chatSubStep === "age"}
             />
           );
@@ -450,49 +605,74 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
       </div>
 
       {showInput ? (
-        <div className="bg-[#EAEFF8] border-t border-core-alpha-10 px-16 py-16">
-          <div className="flex gap-8 mb-12 overflow-x-auto whitespace-nowrap pb-4">
-            {categoryOptions.map((category) => {
-              const count = selectedSymptomsByCategory[category.value]?.length || 0;
-              return (
-                <Chip
-                  key={category.value}
-                  label={count > 0 ? `${category.label} (${count})` : category.label}
-                  onClick={() => handleCategoryChipClick(category.value)}
-                />
-              );
-            })}
+        <div className="bg-light-bg-secondary px-16 pt-8 pb-20 shrink-0">
+          <div className="relative -mx-16">
+            <div className="flex gap-4 mb-16 overflow-x-auto whitespace-nowrap scrollbar-hide px-16">
+              {categoryOptions.map((category) => {
+                const count = selectedSymptomsByCategory[category.value]?.length || 0;
+                const isActive = count > 0;
+                return (
+                  <Chip
+                    key={category.value}
+                    label={count > 0 ? `${category.label} (${count})` : category.label}
+                    active={isActive}
+                    onClick={() => handleCategoryChipClick(category.value)}
+                  />
+                );
+              })}
+            </div>
+            <div
+              className="pointer-events-none absolute right-0 top-0 bottom-4 w-32 flex-shrink-0 bg-gradient-to-l from-light-bg-secondary to-transparent"
+              aria-hidden
+            />
           </div>
-          <textarea
-            ref={inputRef}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Напишите в свободной форме"
-            className="
-              w-full min-h-[48px] p-16
-              border border-core-alpha-10 rounded-16
-              text-16 leading-[1.5em] text-core-alpha-80
-              placeholder:text-core-alpha-40
-              resize-none
-              focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue-alpha-10
-            "
-          />
-          <div className="mt-8 flex items-center justify-between">
-            <p className="text-12 text-core-alpha-60">
-              Можно коротко: «не сплю», «тревожно», «ссоры»
-            </p>
-            <Button
-              variant="primary"
-              size="m"
-              onClick={handleInputSubmit}
-              disabled={!inputValue.trim()}
-            >
-              Продолжить
-            </Button>
+          <div className="relative mb-16">
+            <textarea
+              ref={inputRef}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
+              placeholder=" "
+              className="
+                w-full min-h-[56px] p-16
+                border border-core-alpha-10 rounded-m
+                text-16 leading-[24px] text-core-alpha-80
+                placeholder:text-core-alpha-60
+                resize-none
+                focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue-alpha-10
+              "
+            />
+            {!inputValue.trim() && !isInputFocused && (
+              <div
+                className="pointer-events-none absolute inset-0 flex items-start p-16 text-16 leading-[24px] text-core-alpha-60"
+                aria-hidden
+              >
+                <span>
+                  {PLACEHOLDER_PREFIX}
+                  {typewriterText}
+                  {typewriterText === PLACEHOLDER_PHRASES[placeholderIndex]
+                    ? PLACEHOLDER_SUFFIX
+                    : ""}
+                </span>
+                <span className="animate-pulse" style={{ animationDuration: "1s" }}>
+                  |
+                </span>
+              </div>
+            )}
           </div>
+          <Button
+            variant="primary"
+            size="l"
+            fullWidth
+            onClick={handleInputSubmit}
+            disabled={!inputValue.trim()}
+          >
+            Продолжить
+          </Button>
         </div>
       ) : (
-        <div className="bg-[#EAEFF8] border-t border-core-alpha-10 px-16 py-16">
+        <div className="bg-light-bg-secondary px-16 py-16">
           {chatSubStep === "gender" && showGenderNextButton && (
             <Button
               variant="secondary"
@@ -512,6 +692,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
           {chatSubStep === "age" && showAgeNextButton && (
             <ButtonGroup
               type="2-buttons"
+              className="w-full px-0"
               buttons={[
                 {
                   label: "Назад",
@@ -545,6 +726,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
           {chatSubStep === "method" && showMethodNextButton && (
             <ButtonGroup
               type="2-buttons"
+              className="w-full px-0"
               buttons={[
                 {
                   label: "Назад",
@@ -564,12 +746,14 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
                     setSelectedMethods([]);
                     setShowMethodNextButton(false);
                     setShowAgeNextButton(true);
+                    setMethodQuestionAnswered(false);
                   },
                 },
                 {
                   label: "Продолжить",
                   variant: "primary",
                   onClick: handleMethodNext,
+                  disabled: !methodQuestionAnswered,
                 },
               ]}
             />
@@ -578,7 +762,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
       )}
 
       {showInput ? null : (
-        <div className="bg-[#EAEFF8] border-t border-core-alpha-10 px-16 py-16">
+        <div className="bg-light-bg-secondary px-16 py-16">
           <p className="text-12 leading-[1.3333333333333333em] text-center text-core-alpha-60">
             Бот может допускать ошибки. Информация не является медицинским заключением
           </p>
@@ -664,7 +848,7 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
             setSelectedMethods([]);
             addMessage({
               type: "user",
-              content: "Пропустить",
+              content: "Не разбираюсь",
             });
             startSearch();
           }}

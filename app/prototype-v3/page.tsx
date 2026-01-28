@@ -2,18 +2,17 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PrototypeV3Interface } from "@/components/chat/PrototypeV3Interface";
+import { PrototypeV3Interface, PsychologistWithDisplayTags } from "@/components/chat/PrototypeV3Interface";
 import { ResultsPage } from "@/components/chat/ResultsPage";
-import { Psychologist } from "@/data/psychologists";
 import { Spinner } from "@/components/ui/spinner";
 
 type View = "interface" | "loading" | "results";
 
 export default function PrototypeV3Page() {
   const [view, setView] = React.useState<View>("interface");
-  const [results, setResults] = React.useState<Psychologist[]>([]);
+  const [results, setResults] = React.useState<PsychologistWithDisplayTags[]>([]);
 
-  const handleShowResults = (psychologists: Psychologist[]) => {
+  const handleShowResults = (psychologists: PsychologistWithDisplayTags[]) => {
     setResults(psychologists);
     setView("loading");
     setTimeout(() => {

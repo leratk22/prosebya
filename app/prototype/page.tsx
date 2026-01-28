@@ -2,18 +2,17 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChatInterface } from "@/components/chat/ChatInterface";
+import { ChatInterface, PsychologistWithDisplayTags } from "@/components/chat/ChatInterface";
 import { ResultsPage } from "@/components/chat/ResultsPage";
-import { Psychologist } from "@/data/psychologists";
 import { Spinner } from "@/components/ui/spinner";
 
 type View = "chat" | "loading" | "results";
 
 export default function PrototypePage() {
   const [view, setView] = React.useState<View>("chat");
-  const [results, setResults] = React.useState<Psychologist[]>([]);
+  const [results, setResults] = React.useState<PsychologistWithDisplayTags[]>([]);
 
-  const handleShowResults = (psychologists: Psychologist[]) => {
+  const handleShowResults = (psychologists: PsychologistWithDisplayTags[]) => {
     setResults(psychologists);
     // Показываем лоадер на 2 секунды
     setView("loading");
@@ -28,7 +27,7 @@ export default function PrototypePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEFF8] flex items-center justify-center">
+    <div className="min-h-screen bg-light-bg-secondary flex items-center justify-center">
       <div className="w-full max-w-[440px] h-screen relative">
         <AnimatePresence mode="wait">
           {view === "chat" && (
@@ -50,7 +49,7 @@ export default function PrototypePage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="absolute inset-0 flex items-center justify-center bg-[#EAEFF8] z-50"
+              className="absolute inset-0 flex items-center justify-center bg-light-bg-secondary z-50"
             >
               <div className="flex flex-col items-center gap-16">
                 <Spinner size={24} />
