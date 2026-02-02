@@ -3,9 +3,14 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Chip } from "./Chip";
+import {
+  ContentRecommendationCard,
+  getContentTypeCaption,
+} from "@/components/cards/content-recommendation-card";
+import { withRussianQuotes } from "@/lib/russian-quotes";
 
 export type MessageType = "bot" | "user";
-export type MessageVariant = "default" | "chips";
+export type MessageVariant = "default" | "chips" | "content_recommendation";
 
 export interface MessageBubbleProps {
   type: MessageType;
@@ -87,6 +92,34 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     );
   }
 
+  if (variant === "content_recommendation" && chips) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex justify-start w-full"
+      >
+        <div className="relative -mr-16 w-[calc(100%+16px)]">
+          <div className="flex gap-[8px] overflow-x-auto scrollbar-hide pr-16">
+            {chips.map((chip) => (
+              <ContentRecommendationCard
+                key={chip.value}
+                caption={getContentTypeCaption(chip.value)}
+                title={chip.label}
+                onClick={() => onChipClick?.(chip.value, chipStep)}
+              />
+            ))}
+          </div>
+          <div
+            className="pointer-events-none absolute right-0 top-0 bottom-0 w-32 flex-shrink-0 bg-gradient-to-l from-light-bg-secondary dark:from-dark-bg-secondary to-transparent"
+            aria-hidden
+          />
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -104,7 +137,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         `}
       >
         {typeof content === "string" ? (
-          <p className="text-16 leading-[1.5em] font-regular">{content}</p>
+          <p className="text-16 leading-[1.5em] font-regular">{withRussianQuotes(content)}</p>
         ) : (
           content
         )}

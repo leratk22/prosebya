@@ -88,3 +88,5 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({
     </motion.div>
   );
 };
+
+export default ResultsPage;

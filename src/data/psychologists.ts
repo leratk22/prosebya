@@ -15,7 +15,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 1,
     name: 'Елена Смирнова',
-    photo: 'https://i.pravatar.cc/150?img=1',
+    photo: '/psychologists/1.png',
     gender: 'female',
     age: 38,
     experience: 8,
@@ -33,7 +33,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 2,
     name: 'Михаил Петров',
-    photo: 'https://i.pravatar.cc/150?img=12',
+    photo: '/psychologists/2.png',
     gender: 'male',
     age: 42,
     experience: 12,
@@ -51,7 +51,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 3,
     name: 'Анна Козлова',
-    photo: 'https://i.pravatar.cc/150?img=5',
+    photo: '/psychologists/3.png',
     gender: 'female',
     age: 35,
     experience: 7,
@@ -69,7 +69,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 4,
     name: 'Дмитрий Волков',
-    photo: 'https://i.pravatar.cc/150?img=15',
+    photo: '/psychologists/4.png',
     gender: 'male',
     age: 45,
     experience: 15,
@@ -86,7 +86,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 5,
     name: 'Мария Иванова',
-    photo: 'https://i.pravatar.cc/150?img=8',
+    photo: '/psychologists/5.png',
     gender: 'female',
     age: 32,
     experience: 6,
@@ -103,7 +103,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 6,
     name: 'Сергей Новиков',
-    photo: 'https://i.pravatar.cc/150?img=18',
+    photo: '/psychologists/6.png',
     gender: 'male',
     age: 40,
     experience: 10,
@@ -121,7 +121,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 7,
     name: 'Ольга Федорова',
-    photo: 'https://i.pravatar.cc/150?img=11',
+    photo: '/psychologists/7.png',
     gender: 'female',
     age: 36,
     experience: 9,
@@ -138,7 +138,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 8,
     name: 'Александр Морозов',
-    photo: 'https://i.pravatar.cc/150?img=20',
+    photo: '/psychologists/8.png',
     gender: 'male',
     age: 48,
     experience: 18,
@@ -155,7 +155,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 9,
     name: 'Татьяна Лебедева',
-    photo: 'https://i.pravatar.cc/150?img=3',
+    photo: '/psychologists/9.png',
     gender: 'female',
     age: 34,
     experience: 8,
@@ -172,7 +172,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 10,
     name: 'Игорь Соколов',
-    photo: 'https://i.pravatar.cc/150?img=16',
+    photo: '/psychologists/10.png',
     gender: 'male',
     age: 39,
     experience: 11,
@@ -189,7 +189,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 11,
     name: 'Екатерина Воробьева',
-    photo: 'https://i.pravatar.cc/150?img=7',
+    photo: '/psychologists/11.png',
     gender: 'female',
     age: 31,
     experience: 6,
@@ -206,7 +206,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 12,
     name: 'Андрей Орлов',
-    photo: 'https://i.pravatar.cc/150?img=19',
+    photo: '/psychologists/12.png',
     gender: 'male',
     age: 44,
     experience: 14,
@@ -223,7 +223,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 13,
     name: 'Наталья Романова',
-    photo: 'https://i.pravatar.cc/150?img=4',
+    photo: '/psychologists/13.png',
     gender: 'female',
     age: 37,
     experience: 9,
@@ -240,7 +240,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 14,
     name: 'Владимир Кузнецов',
-    photo: 'https://i.pravatar.cc/150?img=17',
+    photo: '/psychologists/14.png',
     gender: 'male',
     age: 41,
     experience: 13,
@@ -257,7 +257,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 15,
     name: 'Юлия Попова',
-    photo: 'https://i.pravatar.cc/150?img=9',
+    photo: '/psychologists/15.png',
     gender: 'female',
     age: 33,
     experience: 7,
@@ -274,7 +274,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 16,
     name: 'Ирина Семенова',
-    photo: 'https://i.pravatar.cc/150?img=6',
+    photo: '/psychologists/16.png',
     gender: 'female',
     age: 39,
     experience: 10,
@@ -292,7 +292,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 17,
     name: 'Роман Григорьев',
-    photo: 'https://i.pravatar.cc/150?img=14',
+    photo: '/psychologists/17.png',
     gender: 'male',
     age: 43,
     experience: 12,
@@ -309,7 +309,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 18,
     name: 'Светлана Михайлова',
-    photo: 'https://i.pravatar.cc/150?img=10',
+    photo: '/psychologists/18.png',
     gender: 'female',
     age: 36,
     experience: 8,
@@ -326,7 +326,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 19,
     name: 'Павел Филиппов',
-    photo: 'https://i.pravatar.cc/150?img=13',
+    photo: '/psychologists/19.png',
     gender: 'male',
     age: 38,
     experience: 9,
@@ -343,7 +343,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 20,
     name: 'Алена Дмитриева',
-    photo: 'https://i.pravatar.cc/150?img=2',
+    photo: '/psychologists/20.png',
     gender: 'female',
     age: 35,
     experience: 7,
@@ -360,7 +360,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 21,
     name: 'Виктор Степанов',
-    photo: 'https://i.pravatar.cc/150?img=21',
+    photo: '/psychologists/21.png',
     gender: 'male',
     age: 46,
     experience: 16,
@@ -378,7 +378,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 22,
     name: 'Лариса Николаева',
-    photo: 'https://i.pravatar.cc/150?img=22',
+    photo: '/psychologists/22.png',
     gender: 'female',
     age: 40,
     experience: 11,
@@ -395,7 +395,7 @@ export const psychologists: Psychologist[] = [
   {
     id: 23,
     name: 'Максим Белов',
-    photo: 'https://i.pravatar.cc/150?img=23',
+    photo: '/psychologists/23.png',
     gender: 'male',
     age: 37,
     experience: 8,

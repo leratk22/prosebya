@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PrototypeV3Interface, PsychologistWithDisplayTags } from "@/components/chat/PrototypeV3Interface";
-import { ResultsPage } from "@/components/chat/ResultsPage";
-import { Spinner } from "@/components/ui/spinner";
+import PrototypeV3Interface from "@/components/chat/PrototypeV3Interface";
+import type { PsychologistWithDisplayTags } from "@/components/chat/PrototypeV3Interface";
+import ResultsPage from "@/components/chat/ResultsPage";
+import Spinner from "@/components/ui/spinner";
 
 type View = "interface" | "loading" | "results";
 

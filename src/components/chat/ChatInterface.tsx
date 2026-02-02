@@ -9,6 +9,7 @@ import { PsychologistCard } from "./PsychologistCard";
 import { psychologists, Psychologist } from "@/data/psychologists";
 import { Button } from "@/components/ui/button";
 import { symptomToSpecializations } from "./symptomMapping";
+import { getContentForSymptoms } from "./contentBySymptom";
 
 export type ChatStep =
   | "start"
@@ -17,13 +18,14 @@ export type ChatStep =
   | "age"
   | "method"
   | "loading"
-  | "results";
+  | "results"
+  | "content_recommendation";
 
 export interface Message {
   id: string;
   type: "bot" | "user";
   content: string | React.ReactNode;
-  variant?: "default" | "chips";
+  variant?: "default" | "chips" | "content_recommendation";
   chips?: Array<{ label: string; value: string }>;
   timestamp: Date;
 }
@@ -51,6 +53,15 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose, onShowRes
   const [showCustomInput, setShowCustomInput] = React.useState<boolean>(false);
 
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+  // Для прототипа: тип подписки определяем случайно один раз за сессию (система знает заранее)
+  const hasSubscriptionRef = React.useRef<boolean | null>(null);
+  const resolveSubscription = (): boolean => {
+    if (hasSubscriptionRef.current === null) {
+      // 50/50: paid (true) → psychologist, free (false) → content
+      hasSubscriptionRef.current = Math.random() < 0.5 ? false : true;
+    }
+    return hasSubscriptionRef.current;
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -374,26 +385,50 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose, onShowRes
       }
     }
 
-    showBotTyping(() => {
-      // Сначала добавляем текст вопроса
-      addMessage({
-        type: "bot",
-        content: "С кем комфортнее работать?",
-      });
-      // Затем добавляем чипсы отдельным сообщением
-      setTimeout(() => {
+    // Развилка по подписке: система знает тип подписки заранее, не спрашиваем пользователя
+    const hasSubscription = resolveSubscription();
+
+    if (hasSubscription) {
+      // Платная подписка — продолжаем подбор психолога
+      showBotTyping(() => {
         addMessage({
           type: "bot",
-          content: "",
-          variant: "chips",
-          chips: genderOptions.map((opt) => ({
-            label: opt.label,
-            value: opt.value,
-          })),
+          content: "С кем комфортнее работать?",
         });
-        setStep("gender");
-      }, 300);
-    });
+        setTimeout(() => {
+          addMessage({
+            type: "bot",
+            content: "",
+            variant: "chips",
+            chips: genderOptions.map((opt) => ({
+              label: opt.label,
+              value: opt.value,
+            })),
+          });
+          setStep("gender");
+        }, 300);
+      });
+    } else {
+      // Бесплатная подписка — рекомендуем контент вместо подбора психолога
+      const selectedSymptoms = Object.values(selectedSymptomsByCategory).flat();
+      const contentChips = getContentForSymptoms(selectedSymptoms);
+
+      showBotTyping(() => {
+        addMessage({
+          type: "bot",
+          content: "По вашей подписке доступна подборка материалов по вашей теме. Вот что может помочь:",
+        });
+        setTimeout(() => {
+          addMessage({
+            type: "bot",
+            content: "",
+            variant: "content_recommendation",
+            chips: contentChips,
+          });
+          setStep("content_recommendation");
+        }, 300);
+      });
+    }
   };
 
   const handleGenderSelect = (gender: string) => {
@@ -700,7 +735,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose, onShowRes
 
   // Функция для очистки состояния последующих шагов
   const clearStateAfterStep = (targetStep: ChatStep) => {
-    const stepOrder: ChatStep[] = ["start", "category", "gender", "age", "method", "loading", "results"];
+    const stepOrder: ChatStep[] = ["start", "category", "gender", "age", "method", "loading", "results", "content_recommendation"];
     const targetIndex = stepOrder.indexOf(targetStep);
     
     if (targetIndex === -1) return;
@@ -1057,6 +1092,31 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onClose, onShowRes
               fullWidth={true}
             >
               Далее
+            </Button>
+          </div>
+        )}
+
+        {/* Кнопка "Выбрать другую тему" для шага рекомендации контента */}
+        {step === "content_recommendation" && (
+          <div className="w-full px-16 py-16">
+            <Button
+              onClick={() => {
+                hasSubscriptionRef.current = null;
+                setMessages((prev) => {
+                  const welcome = prev.find((m) => m.id === "welcome");
+                  return welcome ? [welcome] : prev;
+                });
+                setStep("category");
+                setSelectedSymptomsByCategory({});
+                setUserTextInput("");
+                setInputValue("");
+                setShowCustomInput(false);
+              }}
+              variant="secondary"
+              size="l"
+              fullWidth={true}
+            >
+              Выбрать другую тему
             </Button>
           </div>
         )}

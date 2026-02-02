@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Lab - Песочница компонентов</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Полная конфигурация Tailwind из tailwind.config.ts
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ffb800',
+                            'orange-hover': '#f6a300',
+                            'orange-muted': '#f9f5ec',
+                            'orange-overlay-70': 'rgba(255, 184, 0, 0.6)',
+                            'orange-overlay-30': 'rgba(255, 184, 0, 0.3)',
+                            blue: '#344079',
+                            'blue-alpha-70': 'rgba(52, 64, 121, 0.7)',
+                            'blue-alpha-20': 'rgba(52, 64, 121, 0.2)',
+                            'blue-alpha-10': 'rgba(52, 64, 121, 0.1)',
+                        },
+                        core: {
+                            DEFAULT: '#22263b',
+                            'alpha-80': 'rgba(34, 38, 59, 0.8)',
+                            'alpha-60': 'rgba(34, 38, 59, 0.6)',
+                            'alpha-40': 'rgba(34, 38, 59, 0.4)',
+                            'alpha-20': 'rgba(34, 38, 59, 0.2)',
+                            'alpha-10': 'rgba(34, 38, 59, 0.1)',
+                            'alpha-5': 'rgba(34, 38, 59, 0.05)',
+                        },
+                        'core-inverted': {
+                            DEFAULT: '#ffffff',
+                            'alpha-80': 'rgba(255, 255, 255, 0.8)',
+                            'alpha-60': 'rgba(255, 255, 255, 0.6)',
+                            'alpha-40': 'rgba(255, 255, 255, 0.4)',
+                            'alpha-20': 'rgba(255, 255, 255, 0.2)',
+                            'alpha-10': 'rgba(255, 255, 255, 0.1)',
+                            'alpha-5': 'rgba(255, 255, 255, 0.05)',
+                        },
+                        gray: {
+                            core: '#eaeff8',
+                            light: '#f4f6fa',
+                            muted: '#e7e9ed',
+                            dark: '#9199ba',
+                        },
+                        system: {
+                            black: '#000000',
+                            white: '#ffffff',
+                        },
+                        feedback: {
+                            negative: '#f15d56',
+                            'negative-neon': '#f1567b',
+                            'negative-overlay': 'rgba(241, 93, 86, 0.05)',
+                            positive: '#759f45',
+                            'positive-neon': '#3ccba9',
+                            'positive-overlay': 'rgba(117, 159, 69, 0.05)',
+                            warning: '#ffd452',
+                            'warning-neon': '#ffdc52',
+                            'warning-overlay': 'rgba(255, 212, 82, 0.05)',
+                        },
+                        light: {
+                            system: {
+                                black: '#000000',
+                                white: '#ffffff',
+                            },
+                            border: {
+                                positive: '#759f45',
+                                warning: '#ffd452',
+                                negative: '#f15d56',
+                                'button-secondary': 'rgba(52, 64, 121, 0.2)',
+                                'button-secondary-inverted': 'rgba(255, 255, 255, 0.2)',
+                                disabled: 'rgba(34, 38, 59, 0.1)',
+                                primary: 'rgba(34, 38, 59, 0.2)',
+                                secondary: 'rgba(34, 38, 59, 0.1)',
+                                'inverted-primary': 'rgba(255, 255, 255, 0.1)',
+                                accent: '#344079',
+                                'button-tertiary': 'rgba(52, 64, 121, 0.1)',
+                            },
+                            bg: {
+                                primary: '#ffffff',
+                                secondary: '#eaeff8',
+                                tertiary: '#f4f6fa',
+                                disabled: '#e7e9ed',
+                                dark: '#9199ba',
+                                'accent-overlay': 'rgba(52, 64, 121, 0.1)',
+                                accent: '#344079',
+                                pressed: 'rgba(34, 38, 59, 0.05)',
+                                'overlay-dark': 'rgba(34, 38, 59, 0.05)',
+                                'overlay-full': 'rgba(34, 38, 59, 0.8)',
+                                'overlay-video': 'rgba(34, 38, 59, 0.6)',
+                                'overlay-light': 'rgba(255, 255, 255, 0.1)',
+                                feedback: {
+                                    positive: '#759f45',
+                                    'positive-overlay': 'rgba(117, 159, 69, 0.05)',
+                                    negative: '#f15d56',
+                                    'negative-overlay': 'rgba(241, 93, 86, 0.05)',
+                                    warning: '#ffd452',
+                                    'warning-overlay': 'rgba(255, 212, 82, 0.05)',
+                                    'positive-neon': '#3ccba9',
+                                    'negative-neon': '#f1567b',
+                                    'warning-neon': '#ffdc52',
+                                },
+                                'accent-brand-overlay': 'rgba(255, 184, 0, 0.6)',
+                                'accent-brand-overlay-light': 'rgba(255, 184, 0, 0.3)',
+                                action: '#ffb800',
+                                'button-pressed': '#f6a300',
+                                'accent-brand': '#ffb800',
+                                'accent-content': '#f9f5ec',
+                            },
+                            fg: {
+                                primary: '#22263b',
+                                secondary: 'rgba(34, 38, 59, 0.8)',
+                                tertiary: 'rgba(34, 38, 59, 0.6)',
+                                muted: 'rgba(34, 38, 59, 0.4)',
+                                accent: '#344079',
+                                'accent-muted': 'rgba(52, 64, 121, 0.7)',
+                                inverted: {
+                                    primary: '#ffffff',
+                                    secondary: 'rgba(255, 255, 255, 0.8)',
+                                    tertiary: 'rgba(255, 255, 255, 0.6)',
+                                    muted: 'rgba(255, 255, 255, 0.4)',
+                                },
+                                feedback: {
+                                    positive: '#759f45',
+                                    warning: '#ffd452',
+                                    negative: '#f15d56',
+                                },
+                            },
+                        },
+                        dark: {
+                            system: {
+                                black: '#ffffff',
+                                white: '#000000',
+                            },
+                            border: {
+                                positive: '#759f45',
+                                warning: '#ffd452',
+                                negative: '#f15d56',
+                                'button-secondary': 'rgba(255, 255, 255, 0.2)',
+                                'button-secondary-inverted': 'rgba(34, 38, 59, 0.2)',
+                                disabled: 'rgba(255, 255, 255, 0.1)',
+                                primary: 'rgba(34, 38, 59, 0.2)',
+                                secondary: 'rgba(34, 38, 59, 0.1)',
+                                'inverted-primary': 'rgba(34, 38, 59, 0.1)',
+                                accent: '#344079',
+                                'button-tertiary': 'rgba(255, 255, 255, 0.1)',
+                            },
+                            bg: {
+                                primary: '#22263b',
+                                secondary: '#eaeff8',
+                                tertiary: '#f4f6fa',
+                                disabled: '#e7e9ed',
+                                dark: '#9199ba',
+                                'accent-overlay': 'rgba(52, 64, 121, 0.1)',
+                                accent: '#344079',
+                                pressed: 'rgba(255, 255, 255, 0.05)',
+                                'overlay-dark': 'rgba(34, 38, 59, 0.05)',
+                                'overlay-full': 'rgba(34, 38, 59, 0.8)',
+                                'overlay-video': 'rgba(34, 38, 59, 0.6)',
+                                'overlay-light': 'rgba(255, 255, 255, 0.1)',
+                                feedback: {
+                                    positive: '#759f45',
+                                    'positive-overlay': 'rgba(117, 159, 69, 0.05)',
+                                    negative: '#f15d56',
+                                    'negative-overlay': 'rgba(241, 93, 86, 0.05)',
+                                    warning: '#ffd452',
+                                    'warning-overlay': 'rgba(255, 212, 82, 0.05)',
+                                    'positive-neon': '#3ccba9',
+                                    'negative-neon': '#f1567b',
+                                    'warning-neon': '#ffdc52',
+                                },
+                                'accent-brand-overlay': 'rgba(255, 184, 0, 0.6)',
+                                'accent-brand-overlay-light': 'rgba(255, 184, 0, 0.3)',
+                                action: '#ffb800',
+                                'button-pressed': '#f6a300',
+                                'accent-brand': '#ffb800',
+                                'accent-content': '#f9f5ec',
+                            },
+                            fg: {
+                                primary: '#ffffff',
+                                secondary: 'rgba(255, 255, 255, 0.8)',
+                                tertiary: 'rgba(255, 255, 255, 0.6)',
+                                muted: 'rgba(255, 255, 255, 0.4)',
+                                accent: '#344079',
+                                'accent-muted': 'rgba(52, 64, 121, 0.7)',
+                                inverted: {
+                                    primary: '#22263b',
+                                    secondary: 'rgba(34, 38, 59, 0.8)',
+                                    tertiary: 'rgba(34, 38, 59, 0.6)',
+                                    muted: 'rgba(34, 38, 59, 0.4)',
+                                },
+                                feedback: {
+                                    positive: '#759f45',
+                                    warning: '#ffd452',
+                                    negative: '#f15d56',
+                                },
+                            },
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Euclid Circular A', 'sans-serif'],
+                        euclid: ['Euclid Circular A', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'title-xl': ['24px', { lineHeight: '28px', letterSpacing: '-0.02em' }],
+                        'title-l': ['20px', { lineHeight: '24px', letterSpacing: '-0.015em' }],
+                        'title-m': ['16px', { lineHeight: '20px', letterSpacing: '-0.01em' }],
+                        'title-s': ['14px', { lineHeight: '16px', letterSpacing: '0' }],
+                        'body-xl': ['16px', { lineHeight: '24px', letterSpacing: '0' }],
+                        'body-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
+                        'body-m': ['12px', { lineHeight: '16px', letterSpacing: '0' }],
+                        'body-s': ['12px', { lineHeight: '16px', letterSpacing: '0' }],
+                        'content-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
+                        'label-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
+                        'label-m': ['12px', { lineHeight: '16px', letterSpacing: '0' }],
+                        'label-s': ['10px', { lineHeight: '12px', letterSpacing: '0' }],
+                        'label-xs': ['10px', { lineHeight: '12px', letterSpacing: '0' }],
+                        'number-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
+                        'number-s': ['10px', { lineHeight: '12px', letterSpacing: '0' }],
+                        'caption-s': ['10px', { lineHeight: '12px', letterSpacing: '0.1em' }],
+                    },
+                    borderRadius: {
+                        'null': '0px',
+                        'checkbox': '6px',
+                        'xs': '8px',
+                        's': '12px',
+                        'm': '16px',
+                        'l': '24px',
+                        'xl': '32px',
+                        'full': '999px',
+                    },
+                    fontWeight: {
+                        light: '300',
+                        regular: '400',
+                        medium: '500',
+                        semibold: '600',
+                        bold: '700',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Загрузка шрифтов с несколькими путями для совместимости */
+        @font-face {
+            font-family: 'Euclid Circular A';
+            src: url('./public/fonts/Euclid Circular A Regular.ttf') format('truetype'),
+                 url('/public/fonts/Euclid Circular A Regular.ttf') format('truetype'),
+                 url('/fonts/Euclid Circular A Regular.ttf') format('truetype'),
+                 url('../public/fonts/Euclid Circular A Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Euclid Circular A';
+            src: url('./public/fonts/EuclidCircularA-Medium.otf') format('opentype'),
+                 url('/public/fonts/EuclidCircularA-Medium.otf') format('opentype'),
+                 url('/fonts/EuclidCircularA-Medium.otf') format('opentype'),
+                 url('../public/fonts/EuclidCircularA-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Euclid Circular A';
+            src: url('./public/fonts/Euclid Circular A SemiBold.ttf') format('truetype'),
+                 url('/public/fonts/Euclid Circular A SemiBold.ttf') format('truetype'),
+                 url('/fonts/Euclid Circular A SemiBold.ttf') format('truetype'),
+                 url('../public/fonts/Euclid Circular A SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Euclid Circular A';
+            src: url('./public/fonts/EuclidCircularA-Bold.otf') format('opentype'),
+                 url('/public/fonts/EuclidCircularA-Bold.otf') format('opentype'),
+                 url('/fonts/EuclidCircularA-Bold.otf') format('opentype'),
+                 url('../public/fonts/EuclidCircularA-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: 'Euclid Circular A', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 400;
+        }
+        
+        .font-euclid,
+        .font-sans,
+        * {
+            font-family: 'Euclid Circular A', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .font-light {
+            font-weight: 300 !important;
+        }
+        
+        .font-regular {
+            font-weight: 400 !important;
+        }
+        
+        .font-medium {
+            font-weight: 500 !important;
+        }
+        
+        .font-semibold {
+            font-weight: 600 !important;
+        }
+        
+        .font-bold {
+            font-weight: 700 !important;
+        }
+        
+        /* Принудительное применение шрифта ко всем элементам */
+        h1, h2, h3, h4, h5, h6, p, span, div, button, label, input, textarea, select {
+            font-family: 'Euclid Circular A', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(34, 38, 59, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 38, 59, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .dark .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-light-bg-primary dark:bg-dark-bg-primary text-light-fg-primary dark:text-dark-fg-primary">
+    <div class="h-screen flex flex-col overflow-hidden">
+        <!-- Header -->
+        <header class="border-b border-light-border-primary dark:border-dark-border-primary px-6 py-4 flex items-center justify-between font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+            <h1 class="text-title-l font-medium text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 20px; line-height: 24px; letter-spacing: -0.015em; font-weight: 500;">Design Lab</h1>
+            <div class="flex items-center gap-4">
+                <!-- Background Toggle -->
+                <div class="flex items-center gap-2 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-s p-1">
+                    <button 
+                        id="bgLight" 
+                        class="px-3 py-1.5 rounded-xs text-label-m font-medium bg-light-bg-primary dark:bg-dark-bg-primary text-light-fg-primary dark:text-dark-fg-primary transition-all font-euclid"
+                        style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;"
+                        title="Светлый фон"
+                    >
+                        ☀️
+                    </button>
+                    <button 
+                        id="bgDark" 
+                        class="px-3 py-1.5 rounded-xs text-label-m font-medium text-light-fg-tertiary dark:text-dark-fg-tertiary transition-all font-euclid"
+                        style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;"
+                        title="Тёмный фон"
+                    >
+                        🌙
+                    </button>
+                    <button 
+                        id="bgGrid" 
+                        class="px-3 py-1.5 rounded-xs text-label-m font-medium text-light-fg-tertiary dark:text-dark-fg-tertiary transition-all font-euclid"
+                        style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;"
+                        title="Сетка"
+                    >
+                        ⬜
+                    </button>
+                </div>
+                <!-- Dark Mode Toggle -->
+                <button 
+                    id="darkModeToggle" 
+                    class="px-4 py-2 rounded-s border border-light-border-primary dark:border-dark-border-primary text-label-m font-medium hover:bg-light-bg-pressed dark:hover:bg-dark-bg-pressed transition-colors font-euclid"
+                    style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;"
+                >
+                    <span class="light-text" style="font-family: 'Euclid Circular A', sans-serif;">🌙 Тёмная тема</span>
+                    <span class="dark-text hidden" style="font-family: 'Euclid Circular A', sans-serif;">☀️ Светлая тема</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Left Panel: AI Generator -->
+            <aside class="w-80 border-r border-light-border-primary dark:border-dark-border-primary p-6 overflow-y-auto scrollbar-hide flex flex-col font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                <h2 class="text-title-m font-medium mb-4 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">AI Generator</h2>
+                <div class="mb-6">
+                    <label class="block text-label-m font-medium mb-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;">Опишите компонент:</label>
+                    <textarea 
+                        id="aiPrompt" 
+                        placeholder="Например: Придумай карточку транзакции в моем стиле"
+                        class="w-full px-4 py-3 border border-light-border-primary dark:border-dark-border-primary rounded-s bg-light-bg-primary dark:bg-dark-bg-primary text-light-fg-primary dark:text-dark-fg-primary text-body-m resize-none focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-opacity-50 font-regular"
+                        style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;"
+                        rows="4"
+                    ></textarea>
+                    <button 
+                        id="generateBtn" 
+                        class="mt-3 w-full px-4 py-3 bg-brand-orange hover:bg-brand-orange-hover text-light-fg-inverted-primary rounded-full text-label-m font-medium transition-colors font-euclid"
+                        style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;"
+                    >
+                        Сгенерировать
+                    </button>
+                </div>
+
+                <!-- Component Controls -->
+                <div id="componentControls" class="hidden flex-1 flex flex-col">
+                    <h3 class="text-title-s font-medium mb-4 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 14px; line-height: 16px; font-weight: 500;">Настройки компонента</h3>
+                    
+                    <!-- Cardio Load Control (для Activity Dashboard) -->
+                    <div id="cardioLoadControl" class="mb-4 hidden">
+                        <label class="block text-label-m font-medium mb-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;">
+                            Cardio Load: <span id="cardioLoadValue" style="font-family: 'Euclid Circular A', sans-serif;">0</span> bpm
+                        </label>
+                        <input 
+                            type="range" 
+                            id="cardioLoadSlider" 
+                            min="0" 
+                            max="200" 
+                            value="0" 
+                            step="5"
+                            class="w-full"
+                        />
+                    </div>
+
+                    <!-- Gap Control -->
+                    <div class="mb-4">
+                        <label class="block text-label-m font-medium mb-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;">
+                            Gap: <span id="gapValue" style="font-family: 'Euclid Circular A', sans-serif;">16</span>px
+                        </label>
+                        <input 
+                            type="range" 
+                            id="gapControl" 
+                            min="0" 
+                            max="64" 
+                            value="16" 
+                            step="4"
+                            class="w-full"
+                        />
+                    </div>
+
+                    <!-- Padding Control -->
+                    <div class="mb-4">
+                        <label class="block text-label-m font-medium mb-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;">
+                            Padding: <span id="paddingValue" style="font-family: 'Euclid Circular A', sans-serif;">16</span>px
+                        </label>
+                        <input 
+                            type="range" 
+                            id="paddingControl" 
+                            min="0" 
+                            max="64" 
+                            value="16" 
+                            step="4"
+                            class="w-full"
+                        />
+                    </div>
+
+                    <!-- Opacity Control -->
+                    <div class="mb-4">
+                        <label class="block text-label-m font-medium mb-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;">
+                            Opacity: <span id="opacityValue" style="font-family: 'Euclid Circular A', sans-serif;">100</span>%
+                        </label>
+                        <input 
+                            type="range" 
+                            id="opacityControl" 
+                            min="0" 
+                            max="100" 
+                            value="100" 
+                            step="5"
+                            class="w-full"
+                        />
+                    </div>
+
+                    <!-- Copy Code Button -->
+                    <button 
+                        id="copyCodeBtn" 
+                        class="mt-auto px-4 py-3 border border-light-border-primary dark:border-dark-border-primary hover:bg-light-bg-pressed dark:hover:bg-dark-bg-pressed text-light-fg-primary dark:text-dark-fg-primary rounded-full text-label-m font-medium transition-colors font-euclid"
+                        style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;"
+                    >
+                        📋 Copy Code
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Center: Visual Canvas -->
+            <main class="flex-1 flex items-center justify-center p-8 overflow-auto scrollbar-hide font-euclid" id="canvas">
+                <div id="componentContainer" class="w-full max-w-4xl">
+                    <!-- Компоненты будут вставляться здесь -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentBackground = 'light';
+        let isDarkMode = false;
+        let currentComponent = null;
+        let componentHTML = '';
+
+        // DOM Elements
+        const bgLightBtn = document.getElementById('bgLight');
+        const bgDarkBtn = document.getElementById('bgDark');
+        const bgGridBtn = document.getElementById('bgGrid');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const canvas = document.getElementById('canvas');
+        const componentContainer = document.getElementById('componentContainer');
+        const aiPrompt = document.getElementById('aiPrompt');
+        const generateBtn = document.getElementById('generateBtn');
+        const componentControls = document.getElementById('componentControls');
+        const gapControl = document.getElementById('gapControl');
+        const paddingControl = document.getElementById('paddingControl');
+        const opacityControl = document.getElementById('opacityControl');
+        const gapValue = document.getElementById('gapValue');
+        const paddingValue = document.getElementById('paddingValue');
+        const opacityValue = document.getElementById('opacityValue');
+        const copyCodeBtn = document.getElementById('copyCodeBtn');
+        const cardioLoadControl = document.getElementById('cardioLoadControl');
+        const cardioLoadSlider = document.getElementById('cardioLoadSlider');
+        const cardioLoadValue = document.getElementById('cardioLoadValue');
+
+        // Background Toggle
+        function setBackground(type) {
+            currentBackground = type;
+            canvas.classList.remove('bg-light-bg-primary', 'bg-dark-bg-primary', 'grid-pattern');
+            
+            if (type === 'light') {
+                canvas.classList.add('bg-light-bg-primary');
+                bgLightBtn.classList.add('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgLightBtn.classList.remove('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+                bgDarkBtn.classList.remove('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgDarkBtn.classList.add('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+                bgGridBtn.classList.remove('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgGridBtn.classList.add('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+            } else if (type === 'dark') {
+                canvas.classList.add('bg-dark-bg-primary');
+                bgDarkBtn.classList.add('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgDarkBtn.classList.remove('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+                bgLightBtn.classList.remove('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgLightBtn.classList.add('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+                bgGridBtn.classList.remove('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgGridBtn.classList.add('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+            } else if (type === 'grid') {
+                canvas.classList.add('grid-pattern', 'bg-light-bg-secondary', 'dark:bg-dark-bg-secondary');
+                bgGridBtn.classList.add('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgGridBtn.classList.remove('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+                bgLightBtn.classList.remove('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgLightBtn.classList.add('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+                bgDarkBtn.classList.remove('bg-light-bg-primary', 'dark:bg-dark-bg-primary', 'text-light-fg-primary', 'dark:text-dark-fg-primary');
+                bgDarkBtn.classList.add('text-light-fg-tertiary', 'dark:text-dark-fg-tertiary');
+            }
+        }
+
+        bgLightBtn.addEventListener('click', () => setBackground('light'));
+        bgDarkBtn.addEventListener('click', () => setBackground('dark'));
+        bgGridBtn.addEventListener('click', () => setBackground('grid'));
+
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark', isDarkMode);
+            const lightText = document.querySelector('.light-text');
+            const darkText = document.querySelector('.dark-text');
+            if (isDarkMode) {
+                lightText.classList.add('hidden');
+                darkText.classList.remove('hidden');
+            } else {
+                lightText.classList.remove('hidden');
+                darkText.classList.add('hidden');
+            }
+            // Обновляем фон канваса
+            setBackground(currentBackground);
+        });
+
+        // Component Generation
+        function generateComponent(prompt) {
+            // Здесь будет интеграция с AI, пока используем примеры компонентов
+            // Для демонстрации создадим компонент "Что еще есть на эту тему"
+            
+            if (prompt.toLowerCase().includes('activity dashboard') || prompt.toLowerCase().includes('activity') || prompt.toLowerCase().includes('dashboard')) {
+                return generateActivityDashboard();
+            }
+            
+            if (prompt.toLowerCase().includes('что еще') || prompt.toLowerCase().includes('по теме')) {
+                return generateRelatedContentWidgets();
+            }
+            
+            // Простая генерация на основе промпта
+            return generateGenericComponent(prompt);
+        }
+
+        function generateRelatedContentWidgets() {
+            // Генерируем 3 варианта виджета "Что еще есть на эту тему"
+            const variants = [
+                {
+                    name: 'Вариант 1: Карточки с изображениями',
+                    html: `
+                        <div class="space-y-4 font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                            <h3 class="text-title-l font-medium mb-6 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 20px; line-height: 24px; letter-spacing: -0.015em; font-weight: 500;">Что еще есть на эту тему</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-4 border border-light-border-primary dark:border-dark-border-primary cursor-pointer hover:opacity-90 transition-opacity" style="font-family: 'Euclid Circular A', sans-serif;">
+                                    <div class="w-full h-32 bg-gray-core rounded-s mb-3 flex items-center justify-center">
+                                        <span class="text-light-fg-tertiary dark:text-dark-fg-tertiary text-body-m font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Изображение</span>
+                                    </div>
+                                    <h4 class="text-title-s font-medium mb-2 line-clamp-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 14px; line-height: 16px; font-weight: 500;">Название статьи или материала</h4>
+                                    <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary line-clamp-2 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Краткое описание содержимого материала</p>
+                                </div>
+                                <div class="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-4 border border-light-border-primary dark:border-dark-border-primary cursor-pointer hover:opacity-90 transition-opacity" style="font-family: 'Euclid Circular A', sans-serif;">
+                                    <div class="w-full h-32 bg-gray-core rounded-s mb-3 flex items-center justify-center">
+                                        <span class="text-light-fg-tertiary dark:text-dark-fg-tertiary text-body-m font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Изображение</span>
+                                    </div>
+                                    <h4 class="text-title-s font-medium mb-2 line-clamp-2 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 14px; line-height: 16px; font-weight: 500;">Название статьи или материала</h4>
+                                    <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary line-clamp-2 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Краткое описание содержимого материала</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Вариант 2: Горизонтальные карточки',
+                    html: `
+                        <div class="space-y-4 font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                            <h3 class="text-title-l font-medium mb-6 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 20px; line-height: 24px; letter-spacing: -0.015em; font-weight: 500;">Что еще есть на эту тему</h3>
+                            <div class="space-y-3">
+                                <div class="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-4 border border-light-border-primary dark:border-dark-border-primary flex gap-4 cursor-pointer hover:opacity-90 transition-opacity" style="font-family: 'Euclid Circular A', sans-serif;">
+                                    <div class="w-24 h-24 bg-gray-core rounded-s shrink-0 flex items-center justify-center">
+                                        <span class="text-light-fg-tertiary dark:text-dark-fg-tertiary text-label-s font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">IMG</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-title-s font-medium mb-1 line-clamp-1 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 14px; line-height: 16px; font-weight: 500;">Название материала</h4>
+                                        <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary line-clamp-2 mb-2 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Описание материала, которое может быть длинным</p>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">5 мин</span>
+                                            <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">•</span>
+                                            <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">Статья</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-4 border border-light-border-primary dark:border-dark-border-primary flex gap-4 cursor-pointer hover:opacity-90 transition-opacity" style="font-family: 'Euclid Circular A', sans-serif;">
+                                    <div class="w-24 h-24 bg-gray-core rounded-s shrink-0 flex items-center justify-center">
+                                        <span class="text-light-fg-tertiary dark:text-dark-fg-tertiary text-label-s font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">IMG</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-title-s font-medium mb-1 line-clamp-1 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 14px; line-height: 16px; font-weight: 500;">Название материала</h4>
+                                        <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary line-clamp-2 mb-2 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Описание материала, которое может быть длинным</p>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">12 мин</span>
+                                            <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">•</span>
+                                            <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">Видео</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Вариант 3: Компактный список с акцентом',
+                    html: `
+                        <div class="space-y-4 font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                            <h3 class="text-title-l font-medium mb-6 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 20px; line-height: 24px; letter-spacing: -0.015em; font-weight: 500;">Что еще есть на эту тему</h3>
+                            <div class="bg-light-bg-accent-content dark:bg-dark-bg-accent-content rounded-m p-6 border border-brand-blue-alpha-20" style="font-family: 'Euclid Circular A', sans-serif;">
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-4 cursor-pointer hover:opacity-90 transition-opacity" style="font-family: 'Euclid Circular A', sans-serif;">
+                                        <div class="w-2 h-2 rounded-full bg-brand-orange mt-2 shrink-0"></div>
+                                        <div class="flex-1">
+                                            <h4 class="text-title-m font-medium mb-1 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">Название материала</h4>
+                                            <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary mb-2 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Краткое описание материала</p>
+                                            <div class="flex items-center gap-3">
+                                                <span class="px-3 py-1 bg-light-bg-primary dark:bg-dark-bg-primary rounded-full text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">Статья</span>
+                                                <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">8 мин чтения</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-px bg-light-border-secondary dark:border-dark-border-secondary"></div>
+                                    <div class="flex items-start gap-4 cursor-pointer hover:opacity-90 transition-opacity" style="font-family: 'Euclid Circular A', sans-serif;">
+                                        <div class="w-2 h-2 rounded-full bg-brand-orange mt-2 shrink-0"></div>
+                                        <div class="flex-1">
+                                            <h4 class="text-title-m font-medium mb-1 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">Название материала</h4>
+                                            <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary mb-2 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Краткое описание материала</p>
+                                            <div class="flex items-center gap-3">
+                                                <span class="px-3 py-1 bg-light-bg-primary dark:bg-dark-bg-primary rounded-full text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">Подкаст</span>
+                                                <span class="text-label-s text-light-fg-tertiary dark:text-dark-fg-tertiary font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 400;">15 мин</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
+            ];
+
+            return variants;
+        }
+
+        function generateActivityDashboard() {
+            // Генерируем Activity Dashboard
+            return [{
+                name: 'Activity Dashboard',
+                html: generateActivityDashboardHTML(0)
+            }];
+        }
+
+        function generateActivityDashboardHTML(cardioLoad = 0) {
+            const today = new Date().getDay();
+            const dayNames = ["S", "S", "M", "T", "W", "T", "F"]; // Короткие названия
+            const exerciseDays = [true, false, true, true, false, false, true];
+            const exerciseCount = exerciseDays.filter(Boolean).length;
+            const totalDays = 6;
+            const activeZoneMinutes = 0;
+            const activeZoneTarget = 150;
+            const activeZonePercentage = Math.min((activeZoneMinutes / activeZoneTarget) * 100, 100);
+            const radius = 36;
+            const circumference = 2 * Math.PI * radius;
+            const strokeDashoffset = circumference - (activeZonePercentage / 100) * circumference;
+            const progressColor = '#3ccba9';
+
+            return `
+                <div class="w-full max-w-[932px] mx-auto px-16 md:px-24 py-16 md:py-24 font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                    <!-- Header -->
+                    <header class="flex items-center justify-between mb-24">
+                        <button class="w-40 h-40 rounded-full flex items-center justify-center hover:bg-light-bg-pressed dark:hover:bg-dark-bg-pressed transition-colors" aria-label="Назад">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-light-fg-primary dark:text-dark-fg-primary">
+                                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <h1 class="text-title-xl font-semibold text-light-fg-primary dark:text-dark-fg-primary flex-1 text-center" style="font-family: 'Euclid Circular A', sans-serif; font-size: 24px; line-height: 28px; letter-spacing: -0.02em; font-weight: 600;">Today</h1>
+                        <button class="w-40 h-40 rounded-full flex items-center justify-center hover:bg-light-bg-pressed dark:hover:bg-dark-bg-pressed transition-colors" aria-label="Редактировать">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-light-fg-primary dark:text-dark-fg-primary">
+                                <path d="M11.3333 2.00001C11.5084 1.82485 11.7163 1.686 11.9444 1.59123C12.1726 1.49646 12.4167 1.44727 12.6629 1.44727C12.9091 1.44727 13.1532 1.49646 13.3814 1.59123C13.6095 1.686 13.8174 1.82485 13.9925 2.00001C14.1677 2.17516 14.3065 2.38305 14.4013 2.61119C14.4961 2.83933 14.5453 3.08345 14.5453 3.32963C14.5453 3.57581 14.4961 3.81993 14.4013 4.04807C14.3065 4.27621 14.1677 4.4841 13.9925 4.65926L5.15926 13.4926L1.33337 14.6667L2.50748 10.8408L11.3333 2.00001Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </header>
+
+                    <!-- Activity Section -->
+                    <section class="space-y-16">
+                        <h2 class="text-title-l font-semibold text-light-fg-primary dark:text-dark-fg-primary mb-16" style="font-family: 'Euclid Circular A', sans-serif; font-size: 20px; line-height: 24px; letter-spacing: -0.015em; font-weight: 600;">Activity</h2>
+                        
+                        <div class="space-y-16">
+                            <!-- Cardio Load Card -->
+                            <div class="bg-light-bg-primary dark:bg-dark-bg-primary rounded-m border border-light-border-primary dark:border-dark-border-primary p-16 md:p-24">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-title-m font-medium text-light-fg-primary dark:text-dark-fg-primary mb-8" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">Cardio load</h3>
+                                        <div class="flex flex-col gap-4">
+                                            <span id="cardioLoadDisplay" class="text-[32px] md:text-[40px] font-bold text-light-fg-primary dark:text-dark-fg-primary leading-none" style="font-family: 'Euclid Circular A', sans-serif;">${cardioLoad}</span>
+                                            <span class="text-body-m text-light-fg-tertiary dark:text-dark-fg-tertiary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Today • No target</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-16 shrink-0">
+                                        <div class="w-56 h-56 md:w-64 md:h-64 rounded-full flex items-center justify-center" style="background-color: rgba(60, 203, 169, 0.1);">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #3ccba9;">
+                                                <path d="M13.8933 3.07333C13.5528 2.73267 13.1485 2.46233 12.7036 2.278C12.2587 2.09367 11.7817 2 11.3 2C10.8183 2 10.3413 2.09367 9.89644 2.278C9.45156 2.46233 9.04722 2.73267 8.70667 3.07333L8 3.78L7.29333 3.07333C6.60555 2.38555 5.67269 1.99989 4.7 1.99989C3.72731 1.99989 2.79445 2.38555 2.10667 3.07333C1.41889 3.76111 1.03323 4.69397 1.03323 5.66667C1.03323 6.63936 1.41889 7.57222 2.10667 8.26L2.81333 8.96667L8 14.1533L13.1867 8.96667L13.8933 8.26C14.234 7.91944 14.5043 7.51511 14.6887 7.07022C14.873 6.62533 14.9667 6.14833 14.9667 5.66667C14.9667 5.185 14.873 4.708 14.6887 4.26311C14.5043 3.81822 14.234 3.41389 13.8933 3.07333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Exercise Days Card -->
+                            <div class="bg-light-bg-primary dark:bg-dark-bg-primary rounded-m border border-light-border-primary dark:border-dark-border-primary p-16 md:p-24">
+                                <div class="mb-16">
+                                    <h3 class="text-title-m font-medium text-light-fg-primary dark:text-dark-fg-primary mb-8" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">Exercise days</h3>
+                                    <div class="flex flex-col gap-4">
+                                        <span class="text-[24px] font-bold text-light-fg-primary dark:text-dark-fg-primary leading-none" style="font-family: 'Euclid Circular A', sans-serif;">${exerciseCount} of ${totalDays}</span>
+                                        <span class="text-body-m text-light-fg-tertiary dark:text-dark-fg-tertiary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">This week</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-end justify-between gap-4 mb-16">
+                                    ${exerciseDays.map((hasExercise, index) => {
+                                        const isToday = index === today;
+                                        const isCompleted = hasExercise;
+                                        return `
+                                            <div class="flex-1 flex flex-col items-center gap-4">
+                                                <div class="w-full rounded-s transition-all flex items-center justify-center ${isCompleted ? (isToday ? 'h-40' : 'h-32') : (isToday ? 'h-32 border-2' : 'h-24')}" style="${isCompleted ? 'background-color: #3ccba9;' : isToday ? 'background-color: #eaeff8; border-color: #3ccba9;' : 'background-color: #eaeff8;'}">
+                                                    ${isCompleted ? '<span style="font-size: 10px; color: white;">✓</span>' : ''}
+                                                </div>
+                                                <span class="text-label-s font-medium ${isToday ? '' : 'text-light-fg-tertiary dark:text-dark-fg-tertiary'}" style="font-family: 'Euclid Circular A', sans-serif; font-size: 10px; line-height: 12px; font-weight: 500; ${isToday ? 'color: #3ccba9;' : ''}">${dayNames[index]}</span>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                                <div class="pt-16 border-t border-light-border-secondary dark:border-dark-border-secondary flex items-center gap-12">
+                                    <div class="w-32 h-32 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary flex items-center justify-center shrink-0">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-light-fg-primary dark:text-dark-fg-primary">
+                                            <path d="M22 12H18L15 21L9 3L6 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-8 mb-4">
+                                            <span class="text-title-s font-medium text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 14px; line-height: 16px; font-weight: 500;">Workout</span>
+                                        </div>
+                                        <div class="flex items-center gap-8 text-body-m text-light-fg-tertiary dark:text-dark-fg-tertiary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">
+                                            <span>10:38 PM</span>
+                                            <span>•</span>
+                                            <span>0 cal</span>
+                                            <span>•</span>
+                                            <span>0 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Active Zone Min Card -->
+                            <div class="bg-light-bg-primary dark:bg-dark-bg-primary rounded-m border border-light-border-primary dark:border-dark-border-primary p-16 md:p-24">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-title-m font-medium text-light-fg-primary dark:text-dark-fg-primary mb-8" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">Active Zone Min</h3>
+                                        <div class="flex flex-col gap-4">
+                                            <span class="text-[32px] md:text-[40px] font-bold text-light-fg-primary dark:text-dark-fg-primary leading-none" style="font-family: 'Euclid Circular A', sans-serif;">${activeZoneMinutes}</span>
+                                            <span class="text-body-m text-light-fg-tertiary dark:text-dark-fg-tertiary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">Today</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-16 shrink-0 relative">
+                                        <svg width="80" height="80" viewBox="0 0 80 80" class="transform -rotate-90">
+                                            <circle cx="40" cy="40" r="${radius}" stroke="currentColor" stroke-width="6" fill="none" class="text-light-bg-secondary dark:text-dark-bg-secondary"/>
+                                            <circle cx="40" cy="40" r="${radius}" stroke="${progressColor}" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="${circumference}" stroke-dashoffset="${strokeDashoffset}" class="transition-all duration-500"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: ${progressColor};">
+                                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `;
+        }
+
+        function generateGenericComponent(prompt) {
+            // Простая генерация компонента на основе промпта
+            return [{
+                name: 'Сгенерированный компонент',
+                html: `
+                    <div class="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-6 border border-light-border-primary dark:border-dark-border-primary font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                        <h3 class="text-title-l font-medium mb-4 text-light-fg-primary dark:text-dark-fg-primary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 20px; line-height: 24px; letter-spacing: -0.015em; font-weight: 500;">Компонент</h3>
+                        <p class="text-body-m text-light-fg-secondary dark:text-dark-fg-secondary mb-4 font-regular" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400;">
+                            ${prompt || 'Описание компонента'}
+                        </p>
+                        <button class="px-6 py-3 bg-brand-orange hover:bg-brand-orange-hover text-light-fg-inverted-primary rounded-full text-label-m font-medium transition-colors" style="font-family: 'Euclid Circular A', sans-serif; font-size: 12px; line-height: 16px; font-weight: 500;">
+                            Действие
+                        </button>
+                    </div>
+                `
+            }];
+        }
+
+        function renderComponent(variant) {
+            componentHTML = variant.html;
+            componentContainer.innerHTML = `
+                <div id="currentComponent" class="component-wrapper" style="gap: ${gapControl.value}px; padding: ${paddingControl.value}px; opacity: ${opacityControl.value / 100};">
+                    ${variant.html}
+                </div>
+            `;
+            currentComponent = document.getElementById('currentComponent');
+            componentControls.classList.remove('hidden');
+            
+            // Показываем контроллер Cardio Load только для Activity Dashboard
+            const isActivityDashboard = variant.name === 'Activity Dashboard' || variant.html.includes('Cardio load') || variant.html.includes('Activity');
+            if (cardioLoadControl) {
+                cardioLoadControl.classList.toggle('hidden', !isActivityDashboard);
+            }
+            
+            // Если это Activity Dashboard, устанавливаем начальное значение
+            if (isActivityDashboard && cardioLoadSlider && cardioLoadValue) {
+                const cardioLoadDisplay = document.getElementById('cardioLoadDisplay');
+                if (cardioLoadDisplay) {
+                    const currentValue = parseInt(cardioLoadDisplay.textContent) || 0;
+                    cardioLoadSlider.value = currentValue;
+                    cardioLoadValue.textContent = currentValue;
+                }
+            }
+        }
+
+        // Generate Button
+        generateBtn.addEventListener('click', () => {
+            const prompt = aiPrompt.value.trim();
+            if (!prompt) {
+                alert('Пожалуйста, введите описание компонента');
+                return;
+            }
+
+            const variants = generateComponent(prompt);
+            
+            // Если несколько вариантов, показываем все
+            if (variants.length > 1) {
+                componentContainer.innerHTML = variants.map((variant, index) => `
+                    <div class="mb-8 font-euclid" style="font-family: 'Euclid Circular A', sans-serif;">
+                        <h4 class="text-title-m font-medium mb-4 text-light-fg-secondary dark:text-dark-fg-secondary" style="font-family: 'Euclid Circular A', sans-serif; font-size: 16px; line-height: 20px; letter-spacing: -0.01em; font-weight: 500;">${variant.name}</h4>
+                        <div class="component-variant" data-index="${index}" style="font-family: 'Euclid Circular A', sans-serif;">
+                            ${variant.html}
+                        </div>
+                    </div>
+                `).join('');
+
+                // Добавляем обработчики клика для выбора варианта
+                document.querySelectorAll('.component-variant').forEach((el, index) => {
+                    el.addEventListener('click', () => {
+                        renderComponent(variants[index]);
+                    });
+                    el.classList.add('cursor-pointer', 'hover:opacity-90', 'transition-opacity');
+                });
+            } else {
+                renderComponent(variants[0]);
+            }
+        });
+
+        // Controls
+        gapControl.addEventListener('input', (e) => {
+            gapValue.textContent = e.target.value;
+            if (currentComponent) {
+                currentComponent.style.gap = `${e.target.value}px`;
+            }
+        });
+
+        paddingControl.addEventListener('input', (e) => {
+            paddingValue.textContent = e.target.value;
+            if (currentComponent) {
+                currentComponent.style.padding = `${e.target.value}px`;
+            }
+        });
+
+        opacityControl.addEventListener('input', (e) => {
+            opacityValue.textContent = e.target.value;
+            if (currentComponent) {
+                currentComponent.style.opacity = e.target.value / 100;
+            }
+        });
+
+        // Cardio Load Control
+        if (cardioLoadSlider && cardioLoadValue) {
+            cardioLoadSlider.addEventListener('input', (e) => {
+                const value = e.target.value;
+                cardioLoadValue.textContent = value;
+                
+                // Обновляем отображение Cardio Load в компоненте
+                const cardioLoadDisplay = document.getElementById('cardioLoadDisplay');
+                if (cardioLoadDisplay) {
+                    cardioLoadDisplay.textContent = value;
+                }
+            });
+        }
+
+        // Copy Code
+        copyCodeBtn.addEventListener('click', () => {
+            if (!componentHTML) {
+                alert('Нет компонента для копирования');
+                return;
+            }
+
+            // Извлекаем чистый HTML без обертки
+            const wrapper = currentComponent || componentContainer;
+            const cleanHTML = wrapper.innerHTML.replace(/style="[^"]*"/g, '').trim();
+            
+            // Форматируем код
+            const code = `<div class="component-wrapper">
+${cleanHTML.split('\n').map(line => '  ' + line).join('\n')}
+</div>`;
+
+            navigator.clipboard.writeText(code).then(() => {
+                copyCodeBtn.textContent = '✓ Скопировано!';
+                setTimeout(() => {
+                    copyCodeBtn.textContent = '📋 Copy Code';
+                }, 2000);
+            }).catch(() => {
+                alert('Не удалось скопировать код');
+            });
+        });
+
+        // Initialize
+        setBackground('light');
+        
+        // Автоматически генерируем Activity Dashboard при загрузке
+        window.addEventListener('load', () => {
+            aiPrompt.value = 'Activity Dashboard';
+            generateBtn.click();
+        });
+    </script>
+</body>
+</html>

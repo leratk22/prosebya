@@ -9,6 +9,7 @@ import { MessageBubble } from "./MessageBubble";
 import { Chip } from "./Chip";
 import { psychologists, Psychologist } from "@/data/psychologists";
 import { symptomToSpecializations } from "./symptomMapping";
+import { getContentForSymptoms } from "./contentBySymptom";
 
 export type PsychologistWithDisplayTags = Psychologist & { displayTags?: string[] };
 
@@ -21,7 +22,7 @@ export interface Message {
   id: string;
   type: "bot" | "user";
   content: string | React.ReactNode;
-  variant?: "default" | "chips";
+  variant?: "default" | "chips" | "content_recommendation";
   chips?: Array<{ label: string; value: string; active?: boolean }>;
   timestamp: Date;
 }
@@ -137,7 +138,7 @@ const therapyMethods = [
   "ДПТ",
 ];
 
-type ChatSubStep = "gender" | "age" | "method" | "done";
+type ChatSubStep = "gender" | "age" | "method" | "content_recommendation" | "done";
 
 function getChipStepFromContent(content: string | React.ReactNode | undefined): ChatSubStep | null {
   if (typeof content !== "string") return null;
@@ -175,6 +176,14 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
 
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
+  // Для прототипа: тип подписки случайно 50/50 один раз за сессию (система знает заранее)
+  const hasSubscriptionRef = React.useRef<boolean | null>(null);
+  const resolveSubscription = (): boolean => {
+    if (hasSubscriptionRef.current === null) {
+      hasSubscriptionRef.current = Math.random() < 0.5 ? false : true;
+    }
+    return hasSubscriptionRef.current;
+  };
 
   React.useEffect(() => {
     if (messages.length === 0) {
@@ -283,26 +292,49 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
     });
 
     setShowInput(false);
-    setChatSubStep("gender");
 
-    showBotTyping(() => {
-      addMessage({
-        type: "bot",
-        content: "С кем комфортнее работать?",
-      });
-      setTimeout(() => {
+    const hasSubscription = resolveSubscription();
+
+    if (hasSubscription) {
+      setChatSubStep("gender");
+      showBotTyping(() => {
         addMessage({
           type: "bot",
-          content: "",
-          variant: "chips",
-          chips: genderOptions.map((opt) => ({
-            label: opt.label,
-            value: opt.value,
-          })),
+          content: "С кем комфортнее работать?",
         });
-        setShowGenderNextButton(true);
-      }, 300);
-    });
+        setTimeout(() => {
+          addMessage({
+            type: "bot",
+            content: "",
+            variant: "chips",
+            chips: genderOptions.map((opt) => ({
+              label: opt.label,
+              value: opt.value,
+            })),
+          });
+          setShowGenderNextButton(true);
+        }, 300);
+      });
+    } else {
+      const selectedSymptoms = Object.values(selectedSymptomsByCategory).flat();
+      const contentChips = getContentForSymptoms(selectedSymptoms);
+
+      setChatSubStep("content_recommendation");
+      showBotTyping(() => {
+        addMessage({
+          type: "bot",
+          content: "По вашей подписке доступна подборка материалов по вашей теме. Вот что может помочь:",
+        });
+        setTimeout(() => {
+          addMessage({
+            type: "bot",
+            content: "",
+            variant: "content_recommendation",
+            chips: contentChips,
+          });
+        }, 300);
+      });
+    }
   };
 
   const handleGenderSelect = (gender: string) => {
@@ -673,6 +705,27 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
         </div>
       ) : (
         <div className="bg-light-bg-secondary px-16 pt-16 pb-[max(16px,env(safe-area-inset-bottom))] shrink-0">
+          {chatSubStep === "content_recommendation" && (
+            <Button
+              variant="secondary"
+              size="l"
+              fullWidth
+              onClick={() => {
+                hasSubscriptionRef.current = null;
+                setMessages((prev) => {
+                  const welcome = prev.find((m) => m.id === "welcome");
+                  return welcome ? [welcome] : prev;
+                });
+                setShowInput(true);
+                setChatSubStep(null);
+                setSelectedSymptomsByCategory({});
+                setInputValue("");
+                setLastSymptomsText("");
+              }}
+            >
+              Выбрать другую тему
+            </Button>
+          )}
           {chatSubStep === "gender" && showGenderNextButton && (
             <Button
               variant="secondary"
@@ -857,3 +910,5 @@ export const PrototypeV3Interface: React.FC<PrototypeV3InterfaceProps> = ({
     </div>
   );
 };
+
+export default PrototypeV3Interface;

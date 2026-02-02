@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground - Чат-бот подбора психолога</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ffb800',
+                            'orange-hover': '#f6a300',
+                            blue: '#344079',
+                        },
+                        light: {
+                            bg: {
+                                primary: '#ffffff',
+                                secondary: '#eaeff8',
+                                tertiary: '#f4f6fa',
+                            },
+                            fg: {
+                                primary: '#22263b',
+                                secondary: 'rgba(34, 38, 59, 0.8)',
+                                tertiary: 'rgba(34, 38, 59, 0.6)',
+                            },
+                            border: {
+                                primary: 'rgba(34, 38, 59, 0.2)',
+                            }
+                        }
+                    },
+                    borderRadius: {
+                        'm': '16px',
+                        'l': '24px',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-light-bg-secondary min-h-screen p-4">
+    <div class="max-w-[1920px] mx-auto h-[calc(100vh-2rem)] flex gap-4">
+        <!-- Левая панель управления -->
+        <div class="w-80 bg-light-bg-primary rounded-l border border-light-border-primary p-4 overflow-y-auto scrollbar-hide">
+            <h2 class="text-xl font-semibold text-light-fg-primary mb-4">Параметры</h2>
+            
+            <!-- Текущий шаг -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Текущий шаг</label>
+                <select id="currentStep" class="w-full px-3 py-2 border border-light-border-primary rounded-m bg-light-bg-primary text-light-fg-primary">
+                    <option value="start">Start</option>
+                    <option value="category" selected>Category</option>
+                    <option value="subscription_check">Subscription check</option>
+                    <option value="content_recommendation">Content recommendation</option>
+                    <option value="gender">Gender</option>
+                    <option value="age">Age</option>
+                    <option value="method">Method</option>
+                    <option value="loading">Loading</option>
+                    <option value="results">Results</option>
+                </select>
+            </div>
+
+            <!-- Подписка (для прототипа: случайно / платная / бесплатная) -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Подписка</label>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="subscription" value="random" checked class="subscription-radio">
+                        <span class="text-sm text-light-fg-primary">Случайно (прототип)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="subscription" value="paid" class="subscription-radio">
+                        <span class="text-sm text-light-fg-primary">Платная → подбор психолога</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="subscription" value="free" class="subscription-radio">
+                        <span class="text-sm text-light-fg-primary">Бесплатная → контент</span>
+                    </label>
+                </div>
+                <p id="resolvedSubscriptionHint" class="mt-2 text-xs text-light-fg-tertiary hidden"></p>
+            </div>
+
+            <!-- Категории проблем -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Категории проблем</label>
+                <div id="categories" class="space-y-2 max-h-40 overflow-y-auto scrollbar-hide">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Здоровье и тело" class="category-checkbox">
+                        <span class="text-sm text-light-fg-primary">Здоровье и тело</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Кризисные ситуации" class="category-checkbox">
+                        <span class="text-sm text-light-fg-primary">Кризисные ситуации</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Работа и эффективность" class="category-checkbox">
+                        <span class="text-sm text-light-fg-primary">Работа и эффективность</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Эмоциональные трудности" class="category-checkbox">
+                        <span class="text-sm text-light-fg-primary">Эмоциональные трудности</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Проблемы в отношениях" class="category-checkbox">
+                        <span class="text-sm text-light-fg-primary">Проблемы в отношениях</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Личностный рост" class="category-checkbox">
+                        <span class="text-sm text-light-fg-primary">Личностный рост</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Выбранные симптомы -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Симптомы</label>
+                <div id="symptoms" class="flex flex-wrap gap-2 max-h-32 overflow-y-auto scrollbar-hide">
+                    <!-- Динамически добавляются -->
+                </div>
+                <button id="addSymptomBtn" class="mt-2 text-xs text-brand-blue hover:underline">+ Добавить симптом</button>
+            </div>
+
+            <!-- Пол психолога -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Пол психолога</label>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="gender" value="male" class="gender-radio">
+                        <span class="text-sm text-light-fg-primary">Мужчина</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="gender" value="female" class="gender-radio">
+                        <span class="text-sm text-light-fg-primary">Женщина</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="gender" value="any" checked class="gender-radio">
+                        <span class="text-sm text-light-fg-primary">Неважно</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Возрастные диапазоны -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Возраст</label>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="25-35" class="age-checkbox">
+                        <span class="text-sm text-light-fg-primary">25-35</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="35-45" class="age-checkbox">
+                        <span class="text-sm text-light-fg-primary">35-45</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="45+" class="age-checkbox">
+                        <span class="text-sm text-light-fg-primary">45+</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Методы терапии -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Методы терапии</label>
+                <div id="methods" class="space-y-2 max-h-40 overflow-y-auto scrollbar-hide">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Гештальт-терапия" class="method-checkbox">
+                        <span class="text-sm text-light-fg-primary">Гештальт-терапия</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="КПТ" class="method-checkbox">
+                        <span class="text-sm text-light-fg-primary">КПТ</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Психоаналитическая терапия" class="method-checkbox">
+                        <span class="text-sm text-light-fg-primary">Психоаналитическая терапия</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" value="Экзистенциальная психотерапия" class="method-checkbox">
+                        <span class="text-sm text-light-fg-primary">Экзистенциальная психотерапия</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Текст пользователя -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-light-fg-secondary mb-2">Текст пользователя</label>
+                <textarea id="userText" rows="3" class="w-full px-3 py-2 border border-light-border-primary rounded-m bg-light-bg-primary text-light-fg-primary text-sm" placeholder="Введите текст..."></textarea>
+            </div>
+
+            <!-- Кнопка сброса -->
+            <button id="resetBtn" class="w-full px-4 py-2 bg-light-bg-secondary border border-light-border-primary rounded-m text-light-fg-primary hover:bg-light-bg-tertiary transition-colors">
+                Сбросить все
+            </button>
+        </div>
+
+        <!-- Центральная область визуализации -->
+        <div class="flex-1 bg-light-bg-primary rounded-m border border-light-border-primary p-6 overflow-y-auto scrollbar-hide">
+            <h2 class="text-xl font-semibold text-light-fg-primary mb-6">Визуализация логики чат-бота</h2>
+            
+            <!-- Визуализация потока шагов (с развилкой по подписке) -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium text-light-fg-secondary mb-4">Поток шагов</h3>
+                <div class="flow-diagram space-y-4">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <div class="step-node" data-step="start">Start</div>
+                        <i data-lucide="arrow-right" class="w-5 h-5 text-light-fg-tertiary"></i>
+                        <div class="step-node" data-step="category">Category</div>
+                        <i data-lucide="arrow-right" class="w-5 h-5 text-light-fg-tertiary"></i>
+                        <div class="step-node step-node-fork" data-step="subscription_check">Подписка?</div>
+                    </div>
+                    <div class="flex items-start gap-8 pl-4 border-l-2 border-light-border-primary ml-2">
+                        <div class="flex-1">
+                            <div class="text-xs text-light-fg-tertiary mb-2">Платная → подбор психолога</div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <div class="step-node" data-step="gender">Gender</div>
+                                <i data-lucide="arrow-right" class="w-5 h-5 text-light-fg-tertiary"></i>
+                                <div class="step-node" data-step="age">Age</div>
+                                <i data-lucide="arrow-right" class="w-5 h-5 text-light-fg-tertiary"></i>
+                                <div class="step-node" data-step="method">Method</div>
+                                <i data-lucide="arrow-right" class="w-5 h-5 text-light-fg-tertiary"></i>
+                                <div class="step-node" data-step="loading">Loading</div>
+                                <i data-lucide="arrow-right" class="w-5 h-5 text-light-fg-tertiary"></i>
+                                <div class="step-node" data-step="results">Results</div>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-xs text-light-fg-tertiary mb-2">Бесплатная → рекомендация контента</div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <div class="step-node" data-step="content_recommendation">Content</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Текущее состояние -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium text-light-fg-secondary mb-4">Текущее состояние</h3>
+                <div id="currentState" class="bg-light-bg-secondary rounded-m p-4 space-y-3">
+                    <!-- Динамически обновляется -->
+                </div>
+            </div>
+
+            <!-- Визуализация фильтрации -->
+            <div>
+                <h3 class="text-lg font-medium text-light-fg-secondary mb-4">Процесс фильтрации психологов</h3>
+                <div id="filterVisualization" class="bg-light-bg-secondary rounded-m p-4">
+                    <div class="space-y-4">
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="database" class="w-4 h-4 text-light-fg-tertiary"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">База психологов</span>
+                                <span id="totalPsychologists" class="text-xs text-light-fg-tertiary">(0)</span>
+                            </div>
+                        </div>
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="filter" class="w-4 h-4 text-light-fg-tertiary"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">Фильтр по полу</span>
+                                <span id="genderFilter" class="text-xs text-light-fg-tertiary">(не применен)</span>
+                            </div>
+                        </div>
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="filter" class="w-4 h-4 text-light-fg-tertiary"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">Фильтр по возрасту</span>
+                                <span id="ageFilter" class="text-xs text-light-fg-tertiary">(не применен)</span>
+                            </div>
+                        </div>
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="filter" class="w-4 h-4 text-light-fg-tertiary"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">Фильтр по симптомам</span>
+                                <span id="symptomFilter" class="text-xs text-light-fg-tertiary">(не применен)</span>
+                            </div>
+                        </div>
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="filter" class="w-4 h-4 text-light-fg-tertiary"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">Фильтр по методу</span>
+                                <span id="methodFilter" class="text-xs text-light-fg-tertiary">(не применен)</span>
+                            </div>
+                        </div>
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="star" class="w-4 h-4 text-light-fg-tertiary"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">Сортировка по рейтингу</span>
+                            </div>
+                        </div>
+                        <div class="filter-step">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="users" class="w-4 h-4 text-brand-orange"></i>
+                                <span class="text-sm font-medium text-light-fg-primary">Результаты</span>
+                                <span id="resultsCount" class="text-xs text-brand-orange font-medium">(0)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая панель Output Prompt -->
+        <div class="w-96 bg-light-bg-primary rounded-l border border-light-border-primary p-4 flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-light-fg-primary">Output Prompt</h2>
+                <button id="copyBtn" class="px-3 py-1 text-sm bg-light-bg-secondary border border-light-border-primary rounded-m text-light-fg-primary hover:bg-light-bg-tertiary transition-colors">
+                    Копировать
+                </button>
+            </div>
+            <textarea id="outputPrompt" readonly class="flex-1 w-full px-3 py-2 border border-light-border-primary rounded-m bg-light-bg-secondary text-light-fg-primary text-sm font-mono resize-none"></textarea>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Lucide Icons
+        lucide.createIcons();
+
+        // Состояние приложения
+        const state = {
+            currentStep: 'category',
+            subscriptionType: 'random',   // 'random' | 'paid' | 'free'
+            resolvedSubscription: null,   // true = paid, false = free (при random выбирается случайно)
+            categories: [],
+            symptoms: [],
+            gender: 'any',
+            ages: [],
+            methods: [],
+            userText: ''
+        };
+
+        // Для прототипа: случайное определение подписки (система знает заранее, не спрашиваем)
+        function resolveSubscription() {
+            if (state.subscriptionType === 'paid') return true;
+            if (state.subscriptionType === 'free') return false;
+            if (state.resolvedSubscription === null) {
+                state.resolvedSubscription = Math.random() >= 0.5;
+            }
+            return state.resolvedSubscription;
+        }
+
+        // Маппинг симптомов по категориям
+        const symptomsByCategory = {
+            'Здоровье и тело': [
+                'Проблема с питанием и весом',
+                'Сексуальное здоровье',
+                'Панические атаки',
+                'Проблемы со сном',
+                'Хроническая болезнь',
+                'Химическая зависимость',
+                'Принятие своего тела',
+                'Нехимическая зависимость'
+            ],
+            'Кризисные ситуации': [
+                'Развод',
+                'Потеря работы',
+                'Горе и утрата',
+                'Насилие',
+                'Страх смерти'
+            ],
+            'Работа и эффективность': [
+                'Продуктивность в работе',
+                'Прокрастинация',
+                'Финансовая эффективность',
+                'Стресс и выгорание',
+                'Баланс работы и жизни',
+                'Лидерство и управление',
+                'Профессиональный рост',
+                'Самоопределение',
+                'Конфликты на работе',
+                'Отношения в коллективе'
+            ],
+            'Эмоциональные трудности': [
+                'Плохое настроение',
+                'Мысли о суициде',
+                'Рассеянность',
+                'Эмоциональное напряжение',
+                'Страх и тревога',
+                'Перепады настроения',
+                'Раздражительность',
+                'Апатия'
+            ],
+            'Проблемы в отношениях': [
+                'Чувство одиночества',
+                'Трудности в общении',
+                'Отношения с детьми',
+                'Отношения в паре',
+                'Конфликты с близкими',
+                'Отношения в семье'
+            ],
+            'Личностный рост': [
+                'Взросление и сепарация',
+                'Трудно принимать решения',
+                'Проблемы с самооценкой',
+                'Творческое развитие',
+                'Поиск себя и смысла жизни',
+                'Личные границы'
+            ]
+        };
+
+        // Обновление визуализации
+        function updateVisualization() {
+            // Обновление активного шага
+            document.querySelectorAll('.step-node').forEach(node => {
+                const step = node.dataset.step;
+                if (step === state.currentStep) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
+            });
+
+            // Обновление текущего состояния
+            const hasSubscription = resolveSubscription();
+            const subLabel = state.subscriptionType === 'random'
+                ? (hasSubscription ? 'Платная (случайно)' : 'Бесплатная (случайно)')
+                : (state.subscriptionType === 'paid' ? 'Платная' : 'Бесплатная');
+            const currentStateDiv = document.getElementById('currentState');
+            currentStateDiv.innerHTML = `
+                <div class="space-y-2">
+                    <div><strong>Шаг:</strong> <span class="text-brand-blue">${state.currentStep}</span></div>
+                    <div><strong>Подписка:</strong> ${subLabel} → ${hasSubscription ? 'подбор психолога' : 'рекомендация контента'}</div>
+                    ${state.categories.length > 0 ? `<div><strong>Категории:</strong> ${state.categories.join(', ')}</div>` : ''}
+                    ${state.symptoms.length > 0 ? `<div><strong>Симптомы:</strong> ${state.symptoms.join(', ')}</div>` : ''}
+                    ${hasSubscription ? `<div><strong>Пол:</strong> ${state.gender === 'any' ? 'Неважно' : state.gender === 'male' ? 'Мужчина' : 'Женщина'}</div>` : ''}
+                    ${hasSubscription && state.ages.length > 0 ? `<div><strong>Возраст:</strong> ${state.ages.join(', ')}</div>` : ''}
+                    ${hasSubscription && state.methods.length > 0 ? `<div><strong>Методы:</strong> ${state.methods.join(', ')}</div>` : ''}
+                    ${state.userText ? `<div><strong>Текст:</strong> "${state.userText}"</div>` : ''}
+                </div>
+            `;
+
+            // Подсказка по разрешённой подписке при "Случайно"
+            const hintEl = document.getElementById('resolvedSubscriptionHint');
+            if (state.subscriptionType === 'random') {
+                hintEl.textContent = 'Сейчас: ' + (hasSubscription ? 'платная (подбор)' : 'бесплатная (контент)');
+                hintEl.classList.remove('hidden');
+            } else {
+                hintEl.classList.add('hidden');
+            }
+
+            // Обновление визуализации фильтрации
+            updateFilterVisualization();
+        }
+
+        // Обновление визуализации фильтрации
+        function updateFilterVisualization() {
+            const totalPsychologists = 23; // Примерное количество
+            document.getElementById('totalPsychologists').textContent = `(${totalPsychologists})`;
+
+            // Фильтр по полу
+            if (state.gender !== 'any') {
+                document.getElementById('genderFilter').textContent = `(${state.gender === 'male' ? 'Мужчина' : 'Женщина'})`;
+            } else {
+                document.getElementById('genderFilter').textContent = '(не применен)';
+            }
+
+            // Фильтр по возрасту
+            if (state.ages.length > 0) {
+                document.getElementById('ageFilter').textContent = `(${state.ages.join(', ')})`;
+            } else {
+                document.getElementById('ageFilter').textContent = '(не применен)';
+            }
+
+            // Фильтр по симптомам
+            if (state.symptoms.length > 0) {
+                document.getElementById('symptomFilter').textContent = `(${state.symptoms.length} симптомов)`;
+            } else {
+                document.getElementById('symptomFilter').textContent = '(не применен)';
+            }
+
+            // Фильтр по методу
+            if (state.methods.length > 0) {
+                document.getElementById('methodFilter').textContent = `(${state.methods.join(', ')})`;
+            } else {
+                document.getElementById('methodFilter').textContent = '(не применен)';
+            }
+
+            // Подсчет результатов (симуляция)
+            let resultsCount = totalPsychologists;
+            if (state.gender !== 'any') resultsCount = Math.floor(resultsCount * 0.5);
+            if (state.ages.length > 0) resultsCount = Math.floor(resultsCount * 0.7);
+            if (state.symptoms.length > 0) resultsCount = Math.floor(resultsCount * 0.6);
+            if (state.methods.length > 0) resultsCount = Math.floor(resultsCount * 0.8);
+            resultsCount = Math.max(3, Math.min(resultsCount, 5)); // От 3 до 5 результатов
+
+            document.getElementById('resultsCount').textContent = `(${resultsCount})`;
+        }
+
+        // Генерация Output Prompt
+        function generateOutputPrompt() {
+            const hasSubscription = resolveSubscription();
+            const changes = [];
+            const config = {
+                step: state.currentStep,
+                subscriptionType: state.subscriptionType,
+                hasSubscription: hasSubscription,
+                categories: state.categories,
+                symptoms: state.symptoms,
+                gender: state.gender,
+                ages: state.ages,
+                methods: state.methods,
+                userText: state.userText
+            };
+
+            // Генерация описания изменений
+            if (state.currentStep !== 'category') {
+                changes.push(`Текущий шаг чата изменен на: ${state.currentStep}`);
+            }
+            changes.push(`После вопроса о симптомах — развилка по подписке. Подписка: ${state.subscriptionType}${state.subscriptionType === 'random' ? ' (в прототипе случайно)' : ''}. Итог: ${hasSubscription ? 'подбор психолога' : 'рекомендация контента'}.`);
+            if (state.categories.length > 0) {
+                changes.push(`Выбраны категории проблем: ${state.categories.join(', ')}`);
+            }
+            if (state.symptoms.length > 0) {
+                changes.push(`Выбраны симптомы: ${state.symptoms.join(', ')}`);
+            }
+            if (state.gender !== 'any') {
+                changes.push(`Выбран пол психолога: ${state.gender === 'male' ? 'Мужчина' : 'Женщина'}`);
+            }
+            if (state.ages.length > 0) {
+                changes.push(`Выбраны возрастные диапазоны: ${state.ages.join(', ')}`);
+            }
+            if (state.methods.length > 0) {
+                changes.push(`Выбраны методы терапии: ${state.methods.join(', ')}`);
+            }
+            if (state.userText) {
+                changes.push(`Введен текст пользователя: "${state.userText}"`);
+            }
+
+            const prompt = {
+                description: changes.length > 0 ? changes.join('\n') : 'Нет изменений',
+                config: config,
+                instructions: `Примени эти изменения к компоненту ChatInterface:
+1. После первого вопроса о симптомах добавь развилку по подписке. Система знает тип подписки заранее (не спрашиваем пользователя).
+2. Если подписка платная — продолжаем подбор психолога (пол, возраст, метод → результаты).
+3. Если подписка бесплатная — показываем рекомендацию контента (статьи, курсы и т.п.) вместо подбора психолога.
+4. Для прототипа тип подписки определять случайно (random).
+5. Обнови состояние чата и UI согласно config.`
+            };
+
+            return JSON.stringify(prompt, null, 2);
+        }
+
+        // Обновление Output Prompt
+        function updateOutputPrompt() {
+            const outputTextarea = document.getElementById('outputPrompt');
+            outputTextarea.value = generateOutputPrompt();
+        }
+
+        // Обработчики событий
+        document.getElementById('currentStep').addEventListener('change', (e) => {
+            state.currentStep = e.target.value;
+            updateVisualization();
+            updateOutputPrompt();
+        });
+
+        document.querySelectorAll('.subscription-radio').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    state.subscriptionType = e.target.value;
+                    if (state.subscriptionType === 'random') {
+                        state.resolvedSubscription = null;
+                    }
+                    updateVisualization();
+                    updateOutputPrompt();
+                }
+            });
+        });
+
+        // Обработка категорий
+        document.querySelectorAll('.category-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const category = e.target.value;
+                if (e.target.checked) {
+                    if (!state.categories.includes(category)) {
+                        state.categories.push(category);
+                    }
+                    // Добавляем симптомы этой категории в список доступных
+                    updateSymptomsList();
+                } else {
+                    state.categories = state.categories.filter(c => c !== category);
+                    // Удаляем симптомы этой категории, если они были выбраны
+                    const categorySymptoms = symptomsByCategory[category] || [];
+                    state.symptoms = state.symptoms.filter(s => !categorySymptoms.includes(s));
+                    updateSymptomsList();
+                }
+                updateVisualization();
+                updateOutputPrompt();
+            });
+        });
+
+        // Обновление списка симптомов
+        function updateSymptomsList() {
+            const symptomsDiv = document.getElementById('symptoms');
+            const availableSymptoms = new Set();
+            state.categories.forEach(cat => {
+                (symptomsByCategory[cat] || []).forEach(symptom => {
+                    availableSymptoms.add(symptom);
+                });
+            });
+
+            symptomsDiv.innerHTML = '';
+            Array.from(availableSymptoms).forEach(symptom => {
+                const isSelected = state.symptoms.includes(symptom);
+                const chip = document.createElement('div');
+                chip.className = `inline-flex items-center gap-1 px-2 py-1 rounded-m text-xs ${
+                    isSelected 
+                        ? 'bg-brand-orange text-white' 
+                        : 'bg-light-bg-secondary text-light-fg-primary border border-light-border-primary'
+                } cursor-pointer`;
+                chip.innerHTML = `
+                    ${symptom}
+                    ${isSelected ? '<i data-lucide="x" class="w-3 h-3"></i>' : ''}
+                `;
+                chip.addEventListener('click', () => {
+                    if (isSelected) {
+                        state.symptoms = state.symptoms.filter(s => s !== symptom);
+                    } else {
+                        state.symptoms.push(symptom);
+                    }
+                    updateSymptomsList();
+                    updateVisualization();
+                    updateOutputPrompt();
+                });
+                symptomsDiv.appendChild(chip);
+            });
+            lucide.createIcons();
+        }
+
+        // Кнопка добавления симптома
+        document.getElementById('addSymptomBtn').addEventListener('click', () => {
+            const symptom = prompt('Введите название симптома:');
+            if (symptom && !state.symptoms.includes(symptom)) {
+                state.symptoms.push(symptom);
+                updateSymptomsList();
+                updateVisualization();
+                updateOutputPrompt();
+            }
+        });
+
+        // Обработка пола
+        document.querySelectorAll('.gender-radio').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    state.gender = e.target.value;
+                    updateVisualization();
+                    updateOutputPrompt();
+                }
+            });
+        });
+
+        // Обработка возраста
+        document.querySelectorAll('.age-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const age = e.target.value;
+                if (e.target.checked) {
+                    if (!state.ages.includes(age)) {
+                        state.ages.push(age);
+                    }
+                } else {
+                    state.ages = state.ages.filter(a => a !== age);
+                }
+                updateVisualization();
+                updateOutputPrompt();
+            });
+        });
+
+        // Обработка методов
+        document.querySelectorAll('.method-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const method = e.target.value;
+                if (e.target.checked) {
+                    if (!state.methods.includes(method)) {
+                        state.methods.push(method);
+                    }
+                } else {
+                    state.methods = state.methods.filter(m => m !== method);
+                }
+                updateVisualization();
+                updateOutputPrompt();
+            });
+        });
+
+        // Обработка текста пользователя
+        document.getElementById('userText').addEventListener('input', (e) => {
+            state.userText = e.target.value;
+            updateVisualization();
+            updateOutputPrompt();
+        });
+
+        // Кнопка сброса
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            state.currentStep = 'category';
+            state.subscriptionType = 'random';
+            state.resolvedSubscription = null;
+            state.categories = [];
+            state.symptoms = [];
+            state.gender = 'any';
+            state.ages = [];
+            state.methods = [];
+            state.userText = '';
+
+            // Сброс UI
+            document.getElementById('currentStep').value = 'category';
+            document.querySelectorAll('.subscription-radio').forEach(rb => {
+                rb.checked = rb.value === 'random';
+            });
+            document.querySelectorAll('.category-checkbox').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.gender-radio').forEach(rb => {
+                rb.checked = rb.value === 'any';
+            });
+            document.querySelectorAll('.age-checkbox').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.method-checkbox').forEach(cb => cb.checked = false);
+            document.getElementById('userText').value = '';
+
+            updateSymptomsList();
+            updateVisualization();
+            updateOutputPrompt();
+        });
+
+        // Кнопка копирования
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const outputTextarea = document.getElementById('outputPrompt');
+            outputTextarea.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Скопировано!';
+            btn.classList.add('bg-brand-orange', 'text-white');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('bg-brand-orange', 'text-white');
+            }, 2000);
+        });
+
+        // Инициализация
+        updateSymptomsList();
+        updateVisualization();
+        updateOutputPrompt();
+    </script>
+
+    <style>
+        .step-node {
+            padding: 8px 16px;
+            border-radius: 16px;
+            background: #eaeff8;
+            color: #22263b;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .step-node.active {
+            background: #ffb800;
+            color: white;
+            border-color: #f6a300;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
+        }
+
+        .filter-step {
+            padding: 8px;
+            border-left: 3px solid #eaeff8;
+            transition: all 0.3s ease;
+        }
+
+        .filter-step:hover {
+            background: rgba(52, 64, 121, 0.05);
+            border-left-color: #344079;
+        }
+
+        .step-node-fork.active {
+            background: #344079;
+            color: white;
+        }
+    </style>
+</body>
+</html>
