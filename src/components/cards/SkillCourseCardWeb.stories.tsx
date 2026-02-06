@@ -44,6 +44,13 @@ const meta: Meta<typeof SkillCourseCardWeb> = {
     state: "default",
     buttonText: "Название кнопки",
     videoTag: "Тэг",
+    // Для state="in-progress" при переключении в контролах:
+    nextExerciseSubtitle: "Следующее упражнение",
+    nextExerciseTitle:
+      "Название упражнения, максимум три строки на десктопе, если длиннее, то обрезаем в многоточие, но таких названий вроде и нет",
+    nextExerciseImageUrl: "/card-skill-cover.png",
+    nextExerciseImageAlt: "Обложка упражнения",
+    nextExerciseButtonText: "Название кнопки",
   },
   argTypes: {
     subtitle: {
@@ -114,42 +121,55 @@ export default meta;
 
 type Story = StoryObj<typeof SkillCourseCardWeb>;
 
-export const DefaultDesktop: Story = {
+export const Default: Story = {
   args: {
     subtitle: "тэг",
     title:
       "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается",
     state: "default",
-    videoImageUrl: "/ImageExample3x.png",
+    videoImageUrl: "/skill-course-video-image.png.png", // Изображение из Figma node 10561:34367
     videoImageAlt: "Video preview",
     buttonText: "Название кнопки",
+    videoTag: "Тэг",
     buttonOnClick: () => {
       console.log("Button clicked");
     },
   },
   parameters: {
-    viewport: {
-      defaultViewport: "desktop",
+    docs: {
+      description: {
+        story:
+          "Default состояние с изображением из Figma (node 10561:34367). Если изображение не загружается, автоматически показывается SVG плейсхолдер `/skill-course-not_started_placeholder.svg`.",
+      },
     },
   },
 };
 
-export const DefaultMobile: Story = {
+export const DefaultWithPlaceholder: Story = {
   args: {
-    title: "Заголовок на две строки, а затем обрезаем его многоточ...",
+    subtitle: "тэг",
+    title:
+      "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается",
     state: "default",
-    videoImageUrl: "/ImageExample3x.png",
+    videoImageUrl: undefined, // Без изображения - показывается SVG плейсхолдер
     videoImageAlt: "Video preview",
+    buttonText: "Название кнопки",
     videoTag: "Тэг",
+    buttonOnClick: () => {
+      console.log("Button clicked");
+    },
   },
   parameters: {
-    viewport: {
-      defaultViewport: "mobile1",
+    docs: {
+      description: {
+        story:
+          "Default состояние без изображения - показывается SVG плейсхолдер `/skill-course-not_started_placeholder.svg`.",
+      },
     },
   },
 };
 
-export const InProgressDesktop: Story = {
+export const InProgress: Story = {
   args: {
     subtitle: "Тэг",
     title: "Название всего курса максимум в две строки, потом многоточие",
@@ -157,38 +177,11 @@ export const InProgressDesktop: Story = {
     nextExerciseSubtitle: "Следующее упражнение",
     nextExerciseTitle:
       "Название упражнения, максимум три строки на десктопе, если длиннее, то обрезаем в многоточие, но таких названий вроде и нет",
-    nextExerciseImageUrl: "/ImageExample3x.png",
-    nextExerciseImageAlt: "Exercise cover",
+    nextExerciseImageUrl: "/card-skill-cover.png",
+    nextExerciseImageAlt: "Обложка упражнения",
     nextExerciseButtonText: "Название кнопки",
     nextExerciseButtonOnClick: () => {
       console.log("Exercise button clicked");
-    },
-  },
-  parameters: {
-    viewport: {
-      defaultViewport: "desktop",
-    },
-  },
-};
-
-export const InProgressMobile: Story = {
-  args: {
-    subtitle: "Тэг",
-    title: "Название всего курса максимум в две строки, потом многоточие",
-    state: "in-progress",
-    nextExerciseSubtitle: "Следующее упражнение",
-    nextExerciseTitle:
-      "Название упражнения, максимум три строки, если длиннее, то обрезаем в многоточие, но таких названий вроде и нет",
-    nextExerciseImageUrl: "/ImageExample3x.png",
-    nextExerciseImageAlt: "Exercise cover",
-    nextExerciseButtonText: "Название кнопки",
-    nextExerciseButtonOnClick: () => {
-      console.log("Exercise button clicked");
-    },
-  },
-  parameters: {
-    viewport: {
-      defaultViewport: "mobile1",
     },
   },
 };
@@ -199,7 +192,7 @@ export const Clickable: Story = {
     title:
       "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается",
     state: "default",
-    videoImageUrl: "/ImageExample3x.png",
+    videoImageUrl: "/skill-course-video-image.png.png",
     videoImageAlt: "Video preview",
     buttonText: "Название кнопки",
     onClick: () => {
@@ -211,24 +204,13 @@ export const Clickable: Story = {
   },
 };
 
-export const WithoutSubtitle: Story = {
-  args: {
-    title:
-      "Заголовок на три строки, а затем обрезаем его в многоточие, если не умещается",
-    state: "default",
-    videoImageUrl: "/ImageExample3x.png",
-    videoImageAlt: "Video preview",
-    buttonText: "Название кнопки",
-  },
-};
-
 export const LongTitle: Story = {
   args: {
     subtitle: "тэг",
     title:
       "Очень длинный заголовок который должен обрезаться после трех строк на десктопе и после двух строк на мобильном устройстве если текст не умещается в отведенное пространство карточки курса навыков и продолжается дальше",
     state: "default",
-    videoImageUrl: "/ImageExample3x.png",
+    videoImageUrl: "/skill-course-video-image.png.png",
     videoImageAlt: "Video preview",
     buttonText: "Название кнопки",
   },
