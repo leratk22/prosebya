@@ -289,9 +289,9 @@ const config: Config = {
         'body-m': ['12px', { lineHeight: '16px', letterSpacing: '0' }],
         'body-s': ['12px', { lineHeight: '16px', letterSpacing: '0' }],
         'content-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
-        'label-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
-        'label-m': ['12px', { lineHeight: '16px', letterSpacing: '0' }],
-        'label-s': ['10px', { lineHeight: '12px', letterSpacing: '0' }],
+        'label-l': ['16px', { lineHeight: '20px', letterSpacing: '0' }],   // Label/L
+        'label-m': ['14px', { lineHeight: '20px', letterSpacing: '0' }],   // Label/M
+        'label-s': ['12px', { lineHeight: '16px', letterSpacing: '0' }],   // Label/S
         'label-xs': ['10px', { lineHeight: '12px', letterSpacing: '0' }],
         'number-l': ['14px', { lineHeight: '20px', letterSpacing: '0' }],
         'number-s': ['10px', { lineHeight: '12px', letterSpacing: '0' }],
@@ -395,6 +395,19 @@ const config: Config = {
         'l': '24px',
         'xl': '32px',
         'full': '999px',
+      },
+      // Максимальная ширина
+      maxWidth: {
+        '320': '320px',
+        '360': '360px',
+        '375': '375px',
+        '400': '400px',
+        '430': '430px',
+        '480': '480px',
+        '600': '600px',
+        '768': '768px',
+        '1024': '1024px',
+        '1440': '1440px',
       },
       // Брейкпоинты (из Device Width)
       screens: {

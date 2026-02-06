@@ -70,10 +70,10 @@ export interface ButtonProps
  */
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {
-  // все размеры во Figma имеют одинаковые паддинги 12x16, различаются типографикой
-  l: "text-title-s md:text-label-l", // 16px label L — на мобиле можно оставить 14-16
-  m: "text-label-m",
+  // Label/S, Label/M, Label/L — 12px, 14px, 16px
   s: "text-label-s",
+  m: "text-label-m",
+  l: "text-label-l",
 };
 
 function variantClasses(

@@ -13,7 +13,7 @@ const meta: Meta<typeof ButtonPlayPause> = {
     },
     size: {
       control: { type: "select" },
-      options: [32, 56, 72],
+      options: [24, 32, 56, 72],
     },
   },
 };
@@ -39,6 +39,7 @@ export const Pause: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex items-center gap-16">
+      <ButtonPlayPause state="play" size={24} />
       <ButtonPlayPause state="play" size={32} />
       <ButtonPlayPause state="play" size={56} />
       <ButtonPlayPause state="play" size={72} />
@@ -77,16 +78,18 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-24">
       <div className="flex flex-col gap-12">
-        <h3 className="text-title-m font-semibold">Play (32px, 56px, 72px)</h3>
+        <h3 className="text-title-m font-semibold">Play (24px, 32px, 56px, 72px)</h3>
         <div className="flex items-center gap-16">
+          <ButtonPlayPause state="play" size={24} />
           <ButtonPlayPause state="play" size={32} />
           <ButtonPlayPause state="play" size={56} />
           <ButtonPlayPause state="play" size={72} />
         </div>
       </div>
       <div className="flex flex-col gap-12">
-        <h3 className="text-title-m font-semibold">Pause (32px, 56px, 72px)</h3>
+        <h3 className="text-title-m font-semibold">Pause (24px, 32px, 56px, 72px)</h3>
         <div className="flex items-center gap-16">
+          <ButtonPlayPause state="pause" size={24} />
           <ButtonPlayPause state="pause" size={32} />
           <ButtonPlayPause state="pause" size={56} />
           <ButtonPlayPause state="pause" size={72} />

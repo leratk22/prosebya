@@ -2,7 +2,8 @@ import * as React from "react";
 import { Icon } from "@/components/icons";
 
 export type ButtonPlayPauseState = "play" | "pause";
-export type ButtonPlayPauseSize = 32 | 56 | 72;
+export type ButtonPlayPauseSize = 24 | 32 | 56 | 72;
+export type ButtonPlayPauseVariant = "default" | "primary";
 
 export interface ButtonPlayPauseProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type" | "onToggle"> {
@@ -11,9 +12,13 @@ export interface ButtonPlayPauseProps
    */
   state?: ButtonPlayPauseState;
   /**
-   * Размер кнопки: 32px, 56px или 72px
+   * Размер кнопки: 24px, 32px, 56px или 72px
    */
   size?: ButtonPlayPauseSize;
+  /**
+   * Вариант кнопки play: default (белая) или primary (жёлтая, для мобильной карточки)
+   */
+  variant?: ButtonPlayPauseVariant;
   /**
    * Обработчик клика для переключения состояния
    */
@@ -28,6 +33,7 @@ export interface ButtonPlayPauseProps
  * - pause: полупрозрачная темная кнопка с размытием фона (backdrop blur)
  * 
  * Размеры:
+ * - 24px: padding 4px, иконка 16px
  * - 32px: padding 8px, иконка 16px
  * - 56px: padding 16px, иконка 24px
  * - 72px: padding 16px, иконка 40px
@@ -43,6 +49,7 @@ export const ButtonPlayPause = React.forwardRef<
     {
       state = "play",
       size = 56,
+      variant = "default",
       onToggle,
       className = "",
       onClick,
@@ -51,9 +58,15 @@ export const ButtonPlayPause = React.forwardRef<
     ref,
   ) => {
     // Определяем размеры иконки и padding на основе размера кнопки
-    // Только в самой большой кнопке (72px) будет самая большая иконка (24px)
+    // Иконка заполняет пространство внутри padding: buttonSize - padding*2
     const getSizeConfig = () => {
       switch (size) {
+        case 24:
+          return {
+            iconSize: 16,
+            padding: 4,
+            buttonSize: 24,
+          };
         case 32:
           return {
             iconSize: 16,
@@ -62,13 +75,13 @@ export const ButtonPlayPause = React.forwardRef<
           };
         case 56:
           return {
-            iconSize: 20,
+            iconSize: 24,
             padding: 16,
             buttonSize: 56,
           };
         case 72:
           return {
-            iconSize: 24, // Самая большая иконка только для самой большой кнопки
+            iconSize: 40, // Самая большая иконка только для самой большой кнопки
             padding: 16,
             buttonSize: 72,
           };
@@ -92,11 +105,17 @@ export const ButtonPlayPause = React.forwardRef<
       onClick?.(e);
     };
 
-    // Стили для состояния play
-    const playClasses = [
-      "bg-core-inverted", // белый фон
-      "shadow-[0px_12px_24px_-4px_rgba(34,38,59,0.05),0px_0px_0px_1px_rgba(34,38,59,0.05)]", // Elevation
-    ];
+    // Стили для состояния play: default — белая, primary — жёлтая (brand-orange)
+    const playClasses =
+      variant === "primary"
+        ? [
+            "bg-brand-orange", // primary — жёлтая
+            "shadow-[0px_12px_24px_-4px_rgba(34,38,59,0.05),0px_0px_0px_1px_rgba(34,38,59,0.05)]",
+          ]
+        : [
+            "bg-core-inverted", // белый фон
+            "shadow-[0px_12px_24px_-4px_rgba(34,38,59,0.05),0px_0px_0px_1px_rgba(34,38,59,0.05)]", // Elevation
+          ];
 
     // Стили для состояния pause
     const pauseClasses = [
@@ -127,7 +146,17 @@ export const ButtonPlayPause = React.forwardRef<
       padding: `${padding}px`,
     };
 
-    const iconColor = state === "play" ? "text-brand-blue" : "text-core-inverted";
+    const iconColor =
+      state === "play"
+        ? variant === "primary"
+          ? "text-core"
+          : "text-brand-blue"
+        : "text-core-inverted";
+
+    // Для больших размеров (40px) используем SVG 24px и масштабируем визуально
+    const iconName = state === "play" ? "play" : "pause";
+    const displaySize = iconSize; // Целевой визуальный размер иконки
+    const svgSize = Math.min(iconSize, 24) as 16 | 20 | 24; // Максимальный доступный размер SVG
 
     return (
       <button
@@ -139,19 +168,13 @@ export const ButtonPlayPause = React.forwardRef<
         aria-label={state === "play" ? "Play" : "Pause"}
         {...rest}
       >
-        {state === "play" ? (
-          <Icon
-            name="play"
-            size={iconSize as 16 | 20 | 24}
-            className={iconColor}
-          />
-        ) : (
-          <Icon
-            name="pause"
-            size={iconSize as 16 | 20 | 24}
-            className={iconColor}
-          />
-        )}
+        <Icon
+          name={iconName}
+          size={svgSize}
+          className={iconColor}
+          width={displaySize}
+          height={displaySize}
+        />
       </button>
     );
   },

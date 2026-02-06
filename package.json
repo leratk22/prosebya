@@ -15,6 +15,7 @@
     "chromatic": "npx chromatic --project-token=chpt_f1f820af99c54bd"
   },
   "dependencies": {
+    "agentation": "^2.1.1",
     "ast-types": "^0.16.1",
     "framer-motion": "10.18.0",
     "lucide-react": "^0.400.0",
