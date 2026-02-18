@@ -1,0 +1,545 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { BigPhotoCard, type BigPhotoCardProps } from "./big-photo-card";
+import { Spinner } from "@/components/ui/spinner";
+
+const meta: Meta<typeof BigPhotoCard> = {
+  title: "Cards/BigPhotoCard",
+  component: BigPhotoCard,
+  tags: ["autodocs"],
+  parameters: {
+    // По умолчанию показываем мобильную версию
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+    docs: {
+      description: {
+        component: `
+Горизонтальная карточка для отображения контента с большим фото согласно дизайну из Figma.
+
+**Адаптивность:**
+- **Mobile**: высота **235px**, изображение справа (136px), текст слева
+- **Desktop**: высота **251px**, максимальная ширина **756px**, изображение справа (120px), текст слева
+
+**Особенности:**
+- Заголовок обрезается после 3 строк многоточием (line-clamp-3)
+- Декоративный SVG элемент на фоне (только desktop, прикреплен к правому краю)
+- Subtitle на desktop как текст (Caption/S, uppercase), на mobile как badge
+- Label (текстовая метка под заголовком) опциональна
+- Badge с длительностью на изображении (duration) опционален
+- Поддержка светлой и темной темы
+- Весь блок кликабельный при наведении (если передан onClick)
+
+**Figma:** [BigPhotoCard](https://www.figma.com/design/NvzcX700bseJnlyBwa2zFv/%D0%9B%D0%9A-%D0%9C%D0%B0%D0%BA%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8--WEB-?node-id=9892-27155&t=iWJmLoiT7vqKsn1t-1)
+        `,
+      },
+    },
+  },
+  args: {
+    subtitle: "Практика",
+    title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+  },
+  argTypes: {
+    subtitle: {
+      control: { type: "text" },
+      description: "Подзаголовок карточки (опционально). На desktop как текст, на mobile как badge.",
+    },
+    title: {
+      control: { type: "text" },
+      description: "Заголовок карточки (максимум 3 строки)",
+    },
+    label: {
+      control: { type: "text" },
+      description: "Текстовая метка под заголовком (опционально)",
+    },
+    imageUrl: {
+      control: { type: "text" },
+      description: "URL изображения для правой части (3x)",
+    },
+    imageAlt: {
+      control: { type: "text" },
+      description: "Alt текст для изображения",
+    },
+    duration: {
+      control: { type: "text" },
+      description: "Длительность в формате MM:SS (отображается в Badge на изображении)",
+    },
+    onClick: {
+      action: "clicked",
+      description: "Обработчик клика на всю карточку",
+    },
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof BigPhotoCard>;
+
+export const Default: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Практика медитации",
+  },
+};
+
+export const WithImage: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Медитация для сна",
+    label: "Помочь себе за 2 минуты",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Медитация",
+    duration: "10:45",
+  },
+};
+
+export const Clickable: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Релаксация",
+    onClick: () => {
+      alert("Карточка кликнута!");
+    },
+  },
+};
+
+export const WithoutLabel: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Короткий заголовок",
+    label: undefined,
+    duration: "03:15",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Глубокий релакс",
+  },
+};
+
+export const WithoutDuration: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Короткий заголовок",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: undefined,
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Короткая практика",
+  },
+};
+
+export const WithoutLabelAndDuration: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Короткий заголовок",
+    label: undefined,
+    duration: undefined,
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Короткая практика без меток",
+  },
+};
+
+export const WithoutSubtitle: Story = {
+  args: {
+    subtitle: undefined,
+    title: "Короткий заголовок без подзаголовка",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Практика без подзаголовка",
+  },
+};
+
+export const LongTitle: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Очень длинный заголовок который должен обрезаться после трех строк и показывать многоточие если текст не умещается в отведенное пространство карточки",
+    label: "Описание",
+    duration: "12:34",
+    imageUrl: "/practice-images/practice-image-3x.png",
+    imageAlt: "Самостоятельная забота",
+  },
+};
+
+export const WithPlaceholder: Story = {
+  args: {
+    subtitle: "Практика",
+    title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+    // imageUrl не передан - должна отображаться заглушка
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Карточка с заглушкой вместо изображения. Заглушка отображается автоматически, когда imageUrl не передан или произошла ошибка загрузки изображения.",
+      },
+    },
+  },
+};
+
+export const ThemesComparison: Story = {
+  render: () => (
+    <div className="flex flex-col gap-24">
+      <div>
+        <h3 className="text-title-m font-semibold mb-16">Светлая тема</h3>
+        <div className="bg-light-bg-primary p-24 rounded-m">
+          <BigPhotoCard
+            subtitle="Практика"
+            title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
+            label="Описание в 1 строку в зависимости от типа контента (необязательно)"
+            duration="05:23"
+            imageUrl="/practice-images/practice-image-3x.png"
+            imageAlt="Медитация"
+          />
+        </div>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-16">Темная тема</h3>
+        <div className="dark bg-light-bg-primary p-24 rounded-m">
+          <BigPhotoCard
+            subtitle="Практика"
+            title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
+            label="Описание в 1 строку в зависимости от типа контента (необязательно)"
+            duration="05:23"
+            imageUrl="/practice-images/practice-image-3x.png"
+            imageAlt="Медитация"
+          />
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
+export const PlaceholderThemesComparison: Story = {
+  render: () => (
+    <div className="flex flex-col gap-24">
+      <div>
+        <h3 className="text-title-m font-semibold mb-16">Светлая тема (с заглушкой)</h3>
+        <div className="bg-light-bg-primary p-24 rounded-m">
+          <BigPhotoCard
+            subtitle="Практика"
+            title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
+            label="Описание в 1 строку в зависимости от типа контента (необязательно)"
+            duration="05:23"
+          />
+        </div>
+      </div>
+      <div>
+        <h3 className="text-title-m font-semibold mb-16">Темная тема (с заглушкой)</h3>
+        <div className="dark bg-light-bg-primary p-24 rounded-m">
+          <BigPhotoCard
+            subtitle="Практика"
+            title="Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился"
+            label="Описание в 1 строку в зависимости от типа контента (необязательно)"
+            duration="05:23"
+          />
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story: "Сравнение карточек с заглушкой в светлой и темной теме. Заглушка отображается автоматически, когда imageUrl не передан.",
+      },
+    },
+  },
+};
+
+export const ImageLoading: Story = {
+  render: (args: BigPhotoCardProps) => {
+    // Создаем кастомную карточку с спиннером вместо изображения
+    const CustomCard = () => {
+      const containerClasses = [
+        "relative",
+        "flex flex-row items-stretch",
+        "gap-16 md:gap-48",
+        "p-16 md:p-20",
+        "bg-light-bg-primary dark:bg-dark-bg-primary",
+        "rounded-m",
+        "border border-light-border-secondary dark:border-dark-border-secondary",
+        "shadow-[0px_12px_24px_-4px_rgba(34,38,59,0.05)]",
+        "overflow-hidden",
+        "box-border",
+        "h-[243px] md:h-[251px]",
+        "md:max-w-[756px]",
+      ].join(" ");
+
+      // Декоративный SVG элемент - под всем контентом (только на desktop)
+      const renderDecorativeVector = () => {
+        return (
+          <div
+            className="hidden md:block absolute pointer-events-none overflow-hidden"
+            style={{
+              opacity: 0.7,
+              zIndex: 0,
+              right: 0,
+              top: "-30px",
+              width: "460px",
+              height: "333px",
+            }}
+          >
+            <svg
+              viewBox="0 0 521 251"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+              preserveAspectRatio="xMidYMid slice"
+              aria-hidden="true"
+            >
+              <path
+                opacity="0.7"
+                d="M490.004 -0.962709C418.443 216.817 187.676 49.1193 224.29 -17.3762C260.904 -83.8717 448.887 131.647 294.385 180.048C165.493 220.425 145.695 72.7285 208.044 132.61C252.052 174.876 240.222 250.827 187.676 280.121C142.29 305.423 75.2997 313.962 30.0039 283.751"
+                className="big-photo-card-decorative-path"
+                strokeWidth="40"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        );
+      };
+
+      return (
+        <div className={containerClasses}>
+          {renderDecorativeVector()}
+          {/* Текстовая часть */}
+          <div className="flex flex-col justify-between flex-1 relative z-10 gap-24 md:gap-8 md:py-8">
+            <div className="flex flex-col gap-20 md:gap-8">
+              {args.subtitle && (
+                <div className="md:hidden">
+                  <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full font-medium font-euclid bg-core-alpha-5 dark:bg-core-inverted-alpha-10 text-light-fg-primary dark:text-core-inverted text-label-s">
+                    {args.subtitle.charAt(0).toUpperCase() + args.subtitle.slice(1).toLowerCase()}
+                  </div>
+                </div>
+              )}
+              {args.subtitle && (
+                <div className="hidden md:block">
+                  <p className="font-medium font-euclid text-light-fg-secondary dark:text-dark-fg-secondary text-caption-s uppercase">
+                    {args.subtitle}
+                  </p>
+                </div>
+              )}
+              <h3 className="font-medium font-euclid text-light-fg-primary dark:text-dark-fg-primary text-[20px] leading-[1.2em] tracking-[-0.01em] md:text-[24px] md:leading-[1.3333333333333333em] md:tracking-[-0.015em] line-clamp-3">
+                {args.title}
+              </h3>
+            </div>
+            {args.label && (
+              <p className="font-medium font-euclid text-[12px] leading-[1.3333333333333333em] text-light-fg-tertiary dark:text-dark-fg-tertiary md:text-[14px] md:leading-[1.4285714285714286em] line-clamp-1">
+                {args.label}
+              </p>
+            )}
+          </div>
+          {/* Область изображения со спиннером */}
+          <div 
+            className="big-photo-card-image relative shrink-0 z-10 w-[120px] md:w-[120px] flex items-center justify-center"
+            style={{
+              height: "211px",
+              borderRadius: "0px 16px 16px 0px",
+            }}
+          >
+            <Spinner size={32} aria-label="Загрузка изображения" role="status" />
+            {args.duration && (
+              <div className="absolute bottom-16 left-0 right-0 flex justify-center">
+                <div className="inline-flex items-center gap-4 rounded-full font-medium font-euclid bg-[rgba(34,38,59,0.6)] dark:bg-[rgba(255,255,255,0.6)] text-[#FFFFFF] dark:text-[#22263B] px-8 py-4 text-label-s">
+                  {args.duration}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    return <CustomCard />;
+  },
+  args: {
+    subtitle: "Практика",
+    title: "Заголовок максимум в 3 строки, далее обрезка в многоточие, если текст не уместился",
+    label: "Описание в 1 строку в зависимости от типа контента (необязательно)",
+    duration: "05:23",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Состояние загрузки изображения. На месте изображения отображается спиннер размером 32px.",
+      },
+    },
+  },
+};
+
+export const DesignTokens: Story = {
+  render: () => (
+    <div className="space-y-24 p-16 max-w-4xl">
+      <div>
+        <h2 className="text-title-l font-semibold mb-16">Используемые токены</h2>
+        
+        <div className="space-y-16">
+          <section>
+            <h3 className="text-title-m font-semibold mb-12">Карточка</h3>
+            <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-16 space-y-8">
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Фон</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  bg-light-bg-primary dark:bg-dark-bg-primary
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  #FFFFFF (светлая тема), #22263b (темная тема)
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Граница</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  border-light-border-secondary dark:border-dark-border-secondary
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  rgba(34, 38, 59, 0.1) - светлая тема, rgba(255, 255, 255, 0.1) - темная тема
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Высота</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  h-[235px] md:h-[251px]
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  Mobile: 235px, Desktop: 251px
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Максимальная ширина (Desktop)</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  md:max-w-[756px]
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  756px только для desktop
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3 className="text-title-m font-semibold mb-12">Изображение</h3>
+            <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-16 space-y-8">
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Ширина</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  w-[136px] md:w-[120px]
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  Mobile: 136px, Desktop: 120px
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3 className="text-title-m font-semibold mb-12">Типографика</h3>
+            <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-16 space-y-8">
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Subtitle (Desktop)</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  text-light-fg-secondary dark:text-dark-fg-secondary
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  MVP2.0/Caption/S, fontSize: 12px, lineHeight: 1.333em, letterSpacing: 0.1em (10%), uppercase
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Subtitle Badge (Mobile)</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  bg-core-alpha-5 dark:bg-core-inverted-alpha-10
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  rgba(34, 38, 59, 0.05) - светлая тема, rgba(255, 255, 255, 0.1) - темная тема
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Заголовок (Mobile)</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  text-[20px] leading-[1.2em] tracking-[-0.01em] font-medium
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  MVP2.0/Title/M, fontSize: 20px, lineHeight: 1.2em, letterSpacing: -1%, font-weight: 500 (Medium)
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Точные значения:</strong> font-size: 20px, line-height: 1.2em, font-weight: 500 (Medium), letter-spacing: -0.01em (-1%)
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Заголовок (Desktop)</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  md:text-[24px] md:leading-[1.333em] md:tracking-[-0.015em] font-medium
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  MVP2.0/Title/L, fontSize: 24px, lineHeight: 1.333em, letterSpacing: -1.5%, font-weight: 500 (Medium)
+                </p>
+                <p className="text-body-s text-light-fg-tertiary dark:text-dark-fg-tertiary mt-2">
+                  <strong>Точные значения:</strong> font-size: 24px, line-height: 1.333em, font-weight: 500 (Medium), letter-spacing: -0.015em (-1.5%)
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Label</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  text-[12px] md:text-[14px] text-light-fg-tertiary dark:text-dark-fg-tertiary
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  Mobile: Body/S-Medium (12px), Desktop: Body/M-Medium (14px)
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3 className="text-title-m font-semibold mb-12">Badge с длительностью</h3>
+            <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-m p-16 space-y-8">
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Светлая тема</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  bg-[rgba(34,38,59,0.6)] text-[#FFFFFF]
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  backgroundColor: rgba(34, 38, 59, 0.6), color: #FFFFFF
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-label-m font-medium mb-4">Темная тема</h4>
+                <code className="text-body-s bg-light-bg-primary dark:bg-dark-bg-primary px-8 py-4 rounded-s block">
+                  dark:bg-[rgba(255,255,255,0.6)] dark:text-[#22263B]
+                </code>
+                <p className="text-body-s text-light-fg-secondary dark:text-dark-fg-secondary mt-4">
+                  backgroundColor: rgba(255, 255, 255, 0.6), color: #22263B
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story: "Подробное описание всех используемых дизайн-токенов в компоненте BigPhotoCard",
+      },
+    },
+  },
+};

@@ -1,0 +1,35 @@
+[08:37:35.577] [INFO] storybook v10.1.11
+[08:38:18.663] [DEBUG] Getting package.json info for /Users/valeriatkaceva/Documents/ProSebya/CURSOR/package.json...
+[08:50:10.778] [ERROR] [38;2;241;97;97mSB_CORE-SERVER_0002 (CriticalPresetLoadError): Storybook failed to load the following preset: @storybook/nextjs-vite/preset.
+
+Please check whether your setup is correct, the Storybook dependencies (and their peer dependencies) are installed correctly and there are no package version clashes.
+
+If you believe this is a bug, please open an issue on Github.
+
+Error: Cannot find module 'next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js'
+Require stack:
+- ./node_modules/vite-plugin-storybook-nextjs/dist/index.cjs
+- ./node_modules/@storybook/nextjs-vite/dist/preset.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.require (node:internal/modules/cjs/loader:1504:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (./node_modules/vite-plugin-storybook-nextjs/dist/index.cjs:11:34)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14)
+
+More info: 
+[39m
+    at loadPreset (file://./node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:10101:13)
+    at async Promise.all (index 0)
+    at async loadPresets (file://./node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:10110:73)
+    at async getPresets (file://./node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:10141:23)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7163:17)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-2372JZ52.js:209:12)
+    at async dev (file://./node_modules/storybook/dist/bin/core.js:2734:3)
+    at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2801:92)
+[08:50:10.782] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.

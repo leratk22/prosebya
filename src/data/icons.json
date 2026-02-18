@@ -1,0 +1,782 @@
+[
+  {
+    "name": "alert-circle",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "alert-circle-16.svg"
+    }
+  },
+  {
+    "name": "alert-triangle",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "alert-triangle-16.svg"
+    }
+  },
+  {
+    "name": "arrow-down",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "arrow-down-16.svg"
+    }
+  },
+  {
+    "name": "arrow-left",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "arrow-left-16.svg"
+    }
+  },
+  {
+    "name": "arrow-right",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "arrow-right-16.svg"
+    }
+  },
+  {
+    "name": "arrow-up",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "arrow-up-16.svg"
+    }
+  },
+  {
+    "name": "bell",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "bell-16.svg"
+    }
+  },
+  {
+    "name": "book",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "book-16.svg"
+    }
+  },
+  {
+    "name": "calendar",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "calendar-16.svg"
+    }
+  },
+  {
+    "name": "camera",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "camera-16.svg"
+    }
+  },
+  {
+    "name": "check",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "check-16.svg"
+    }
+  },
+  {
+    "name": "chevron-down",
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "files": {
+      "16": "chevron-down-16.svg",
+      "20": "chevron-down-20.svg",
+      "24": "chevron-down-24.svg"
+    }
+  },
+  {
+    "name": "chevron-left",
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "files": {
+      "16": "chevron-left-16.svg",
+      "20": "chevron-left-20.svg",
+      "24": "chevron-left-24.svg"
+    }
+  },
+  {
+    "name": "chevron-right",
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "files": {
+      "16": "chevron-right-16.svg",
+      "20": "chevron-right-20.svg",
+      "24": "chevron-right-24.svg"
+    }
+  },
+  {
+    "name": "chevron-up",
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "files": {
+      "16": "chevron-up-16.svg",
+      "20": "chevron-up-20.svg",
+      "24": "chevron-up-24.svg"
+    }
+  },
+  {
+    "name": "clock",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "clock-16.svg"
+    }
+  },
+  {
+    "name": "compass",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "compass-16.svg"
+    }
+  },
+  {
+    "name": "copy",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "copy-16.svg"
+    }
+  },
+  {
+    "name": "cut",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "cut-16.svg"
+    }
+  },
+  {
+    "name": "download",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "download-16.svg"
+    }
+  },
+  {
+    "name": "edit",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "edit-16.svg"
+    }
+  },
+  {
+    "name": "eye",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "eye-16.svg"
+    }
+  },
+  {
+    "name": "eye-off",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "eye-off-16.svg"
+    }
+  },
+  {
+    "name": "file",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "file-16.svg"
+    }
+  },
+  {
+    "name": "filter",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "filter-16.svg"
+    }
+  },
+  {
+    "name": "folder",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "folder-16.svg"
+    }
+  },
+  {
+    "name": "globe",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "globe-16.svg"
+    }
+  },
+  {
+    "name": "hash",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "hash-16.svg"
+    }
+  },
+  {
+    "name": "heart",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "heart-16.svg"
+    }
+  },
+  {
+    "name": "help-circle",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "help-circle-16.svg"
+    }
+  },
+  {
+    "name": "hide",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "hide-16.svg"
+    }
+  },
+  {
+    "name": "home",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "home-16.svg"
+    }
+  },
+  {
+    "name": "image",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "image-16.svg"
+    }
+  },
+  {
+    "name": "info",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "info-16.svg"
+    }
+  },
+  {
+    "name": "key",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "key-16.svg"
+    }
+  },
+  {
+    "name": "lock",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "lock-16.svg"
+    }
+  },
+  {
+    "name": "log-out",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "log-out-16.svg"
+    }
+  },
+  {
+    "name": "mail",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "mail-16.svg"
+    }
+  },
+  {
+    "name": "map-pin",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "map-pin-16.svg"
+    }
+  },
+  {
+    "name": "menu",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "menu-16.svg"
+    }
+  },
+  {
+    "name": "message",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "message-16.svg"
+    }
+  },
+  {
+    "name": "message-square",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "message-square-16.svg"
+    }
+  },
+  {
+    "name": "minus",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "minus-16.svg"
+    }
+  },
+  {
+    "name": "more-horizontal",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "more-horizontal-16.svg"
+    }
+  },
+  {
+    "name": "more-vertical",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "more-vertical-16.svg"
+    }
+  },
+  {
+    "name": "music",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "music-16.svg"
+    }
+  },
+  {
+    "name": "navigation",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "navigation-16.svg"
+    }
+  },
+  {
+    "name": "paste",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "paste-16.svg"
+    }
+  },
+  {
+    "name": "pause",
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "files": {
+      "16": "pause-16.svg",
+      "20": "pause-20.svg",
+      "24": "pause-24.svg"
+    }
+  },
+  {
+    "name": "phone",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "phone-16.svg"
+    }
+  },
+  {
+    "name": "play",
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "files": {
+      "16": "play-16.svg",
+      "20": "play-20.svg",
+      "24": "play-24.svg"
+    }
+  },
+  {
+    "name": "plus",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "plus-16.svg"
+    }
+  },
+  {
+    "name": "scan-face-id",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "scan-face-id-16.svg"
+    }
+  },
+  {
+    "name": "search",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "search-16.svg"
+    }
+  },
+  {
+    "name": "select-multiple",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "select-multiple-16.svg"
+    }
+  },
+  {
+    "name": "send",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "send-16.svg"
+    }
+  },
+  {
+    "name": "settings",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "settings-16.svg"
+    }
+  },
+  {
+    "name": "share",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "share-16.svg"
+    }
+  },
+  {
+    "name": "shield",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "shield-16.svg"
+    }
+  },
+  {
+    "name": "skip-back",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "skip-back-16.svg"
+    }
+  },
+  {
+    "name": "skip-forward",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "skip-forward-16.svg"
+    }
+  },
+  {
+    "name": "sliders",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "sliders-16.svg"
+    }
+  },
+  {
+    "name": "star",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "star-16.svg"
+    }
+  },
+  {
+    "name": "stop",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "stop-16.svg"
+    }
+  },
+  {
+    "name": "thumbs-down",
+    "sizes": [
+      20
+    ],
+    "files": {
+      "20": "thumbs-down-20.svg"
+    }
+  },
+  {
+    "name": "thumbs-up",
+    "sizes": [
+      20
+    ],
+    "files": {
+      "20": "thumbs-up-20.svg"
+    }
+  },
+  {
+    "name": "time",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "time-16.svg"
+    }
+  },
+  {
+    "name": "timer",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "timer-16.svg"
+    }
+  },
+  {
+    "name": "toggle-left",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "toggle-left-16.svg"
+    }
+  },
+  {
+    "name": "toggle-right",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "toggle-right-16.svg"
+    }
+  },
+  {
+    "name": "trash",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "trash-16.svg"
+    }
+  },
+  {
+    "name": "unlock",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "unlock-16.svg"
+    }
+  },
+  {
+    "name": "upload",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "upload-16.svg"
+    }
+  },
+  {
+    "name": "user",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "user-16.svg"
+    }
+  },
+  {
+    "name": "user-minus",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "user-minus-16.svg"
+    }
+  },
+  {
+    "name": "user-plus",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "user-plus-16.svg"
+    }
+  },
+  {
+    "name": "users",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "users-16.svg"
+    }
+  },
+  {
+    "name": "visibility",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "visibility-16.svg"
+    }
+  },
+  {
+    "name": "volume-1",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "volume-1-16.svg"
+    }
+  },
+  {
+    "name": "volume",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "volume-16.svg"
+    }
+  },
+  {
+    "name": "volume-2",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "volume-2-16.svg"
+    }
+  },
+  {
+    "name": "volume-x",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "volume-x-16.svg"
+    }
+  },
+  {
+    "name": "wifi",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "wifi-16.svg"
+    }
+  },
+  {
+    "name": "x",
+    "sizes": [
+      16
+    ],
+    "files": {
+      "16": "x-16.svg"
+    }
+  }
+]

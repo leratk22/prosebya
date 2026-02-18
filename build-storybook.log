@@ -1,0 +1,196 @@
+
+> design-system-demo@0.1.0 build-storybook
+> storybook build --output-dir=/var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz
+
+
+┌  Building storybook v10.1.11
+│
+◇  Cleaning outputDir:
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz
+│
+◇  Loading presets
+│
+◇  Building manager..
+│
+▲  unable to find package.json for ast-types
+│
+●  Building preview..
+│
+▲  No story files found for the specified pattern: src/**/*.mdx
+│  Vite vite v7.3.1 building client environment for production...
+│  Vite transforming...
+│
+●  Copying static files: public at
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz
+│
+▲  Vite src/components/cards/audio-card-web.tsx (1:0): Error when using
+│  sourcemap for reporting an error: Can't resolve original location of
+│  error.
+│
+▲  Vite src/components/cards/audio-card-web.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/cards/audio-card-web.tsx" was ignored.
+│
+▲  Vite src/components/cards/practice-card.tsx (1:0): Error when using
+│  sourcemap for reporting an error: Can't resolve original location of
+│  error.
+│
+▲  Vite src/components/cards/practice-card.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/cards/practice-card.tsx" was ignored.
+│
+▲  Vite src/components/ui/button.tsx (1:0): Error when using sourcemap
+│  for reporting an error: Can't resolve original location of error.
+│
+▲  Vite src/components/ui/button.tsx (1:0): Module level directives cause
+│  errors when bundled, "use client" in "src/components/ui/button.tsx"
+│  was ignored.
+│
+▲  Vite src/components/illustrations/illustration.tsx (1:0): Error when
+│  using sourcemap for reporting an error: Can't resolve original
+│  location of error.
+│
+▲  Vite src/components/illustrations/illustration.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/illustrations/illustration.tsx" was ignored.
+│
+▲  Vite src/components/ui/palette-showcase.tsx (1:0): Error when using
+│  sourcemap for reporting an error: Can't resolve original location of
+│  error.
+│
+▲  Vite src/components/ui/palette-showcase.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/ui/palette-showcase.tsx" was ignored.
+│
+▲  Vite src/components/cards/horizontal-card-web.tsx (1:0): Error when
+│  using sourcemap for reporting an error: Can't resolve original
+│  location of error.
+│
+▲  Vite src/components/cards/horizontal-card-web.tsx (1:0): Module level
+│  directives cause errors when bundled, "use client" in
+│  "src/components/cards/horizontal-card-web.tsx" was ignored.
+│
+▲  Vite src/components/ui/badge.tsx (1:0): Error when using sourcemap for
+│  reporting an error: Can't resolve original location of error.
+│
+▲  Vite src/components/ui/badge.tsx (1:0): Module level directives cause
+│  errors when bundled, "use client" in "src/components/ui/badge.tsx" was
+│  ignored.
+│
+▲  Vite src/components/icons/icon.tsx (1:0): Error when using sourcemap
+│  for reporting an error: Can't resolve original location of error.
+│
+▲  Vite src/components/icons/icon.tsx (1:0): Module level directives
+│  cause errors when bundled, "use client" in
+│  "src/components/icons/icon.tsx" was ignored.
+│  Vite ✓ 2506 modules transformed.
+│  Vite rendering chunks...
+│  Vite computing gzip size...
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/iframe.html
+│  18.16 kB │ gzip:   5.10 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/iframe-_xEC4eWo.css
+│  24.97 kB │ gzip:   5.24 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/jsx-runtime-DyMYXTzQ.js
+│  0.07 kB │ gzip:   0.08 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/formatter-QJ4M4OGQ-LqinmW35.js
+│  0.32 kB │ gzip:   0.25 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/index-BoWugyWX.js
+│  0.46 kB │ gzip:   0.30 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/createLucideIcon-Cs4huLs9.js
+│  0.87 kB │ gzip:   0.53 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/react-18-BZST2v1A.js
+│  0.90 kB │ gzip:   0.51 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/index-DIluthaw.js
+│  0.95 kB │ gzip:   0.50 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/preload-helper-PPVm8Dsz.js
+│  1.23 kB │ gzip:   0.71 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/badge-C9zOQXOv.js
+│  1.83 kB │ gzip:   1.00 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/button-play-pause-BKqiAF81.js
+│  2.98 kB │ gzip:   1.36 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/button-DKkJMQrM.js
+│  5.30 kB │ gzip:   1.81 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/Badge.stories-Bd-JoniT.js
+│  5.69 kB │ gzip:   1.38 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/ButtonExpand.stories-B09CP_pH.js
+│  6.11 kB │ gzip:   2.27 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/Button.stories-C2SDJJii.js
+│  6.61 kB │ gzip:   1.68 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/ButtonPlayPause.stories-CTpL8Qu4.js
+│  7.62 kB │ gzip:   1.68 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/icon-p258YVRc.js
+│  8.33 kB │ gzip:   2.21 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/ButtonGroup.stories-RipGEQ0n.js
+│  11.55 kB │ gzip:   3.10 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/Illustration.stories-ysJMHdep.js
+│  12.97 kB │ gzip:   3.57 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/vite-inject-mocker-entry.js
+│  28.30 kB │ gzip:   9.84 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/matchers-DMFSMG2O-HJu_DfWo.js
+│  29.23 kB │ gzip:  10.06 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/Color-ASIRERSW-XOzEsoG9.js
+│  29.99 kB │ gzip:  11.40 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/AudioCardWeb.stories-DCYfRQlu.js
+│  32.76 kB │ gzip:   4.75 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/WithTooltip-IO6J4KBT-Bw7Uocyk.js
+│  33.14 kB │ gzip:  11.68 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/PracticeCard.stories-Db5rK4pE.js
+│  37.42 kB │ gzip:   5.87 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/HorizontalCardWeb.stories-B8JKrC2f.js
+│  51.23 kB │ gzip:   6.25 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/syntaxhighlighter-IQDEPFLK-Cw4Z30EC.js
+│  77.98 kB │ gzip:  27.36 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/PaletteShowcase.stories-D8sFe5g_.js
+│  327.42 kB │ gzip:  99.96 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/axe-C3wDqPhV.js
+│  579.41 kB │ gzip: 159.47 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/DocsRenderer-GHJI37HO-CQ_8OoQs.js
+│  801.89 kB │ gzip: 256.60 kB
+│  Vite
+│  ../../../../../var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz/assets/iframe-CURW-Rtj.js
+│  1,393.90 kB │ gzip: 403.42 kB
+│
+▲  Vite
+│  (!) Some chunks are larger than 500 kB after minification. Consider:
+│  - Using dynamic import() to code-split the application
+│  - Use build.rollupOptions.output.manualChunks to improve chunking:
+│  ]8;;https://rollupjs.org/configuration-options/#output-manualchunkshttps://rollupjs.org/configuration-options/#output-manualchunks]8;;
+│  - Adjust chunk size limit for this warning via
+│  build.chunkSizeWarningLimit.
+│  Vite ✓ built in 6.10s
+│
+◇  Output directory:
+│  /var/folders/jw/zwfgqc193td73lhqy025pvxw0000gn/T/chromatic--782-26KNYxkYzONz
+│
+└  Storybook build completed successfully
+
