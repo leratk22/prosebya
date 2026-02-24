@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Просебя — Главная</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: '#F5C542',
+              blue: '#5B72E5',
+              'blue-dark': '#4B62D5',
+              navy: '#1A2240',
+              gray: '#E8E8F0',
+              'gray-mid': '#C0C0D0',
+              'text-main': '#1A2240',
+              'text-muted': '#8888AA',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #EAEAF2;
+      color: #1A2240;
+    }
+
+    /* Scrollbar hide for horizontal scroll */
+    .scroll-hide::-webkit-scrollbar { display: none; }
+    .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Hero grid pattern */
+    .hero-grid {
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Logo font style */
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* Category pill active */
+    .pill-active {
+      background-color: #1A2240;
+      color: white;
+    }
+    .pill-inactive {
+      background-color: white;
+      color: #1A2240;
+      border: 1.5px solid #D0D0E0;
+    }
+
+    /* Card hover */
+    .card-hover {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 34, 64, 0.12);
+    }
+
+    /* Play button overlay */
+    .play-btn {
+      width: 32px;
+      height: 32px;
+      background: #1A2240;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="sticky top-0 z-50 bg-transparent">
+    <div class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center no-underline">
+        <span class="logo-text" style="color: #F5C542;">про</span><span class="logo-text" style="color: #F5C542;">себя</span>
+      </a>
+      <!-- Hamburger -->
+      <button class="w-10 h-10 rounded-full bg-white flex flex-col items-center justify-center gap-1 shadow-sm" aria-label="Открыть меню">
+        <span class="block w-5 h-0.5 bg-gray-700 rounded-full"></span>
+        <span class="block w-5 h-0.5 bg-gray-700 rounded-full"></span>
+        <span class="block w-5 h-0.5 bg-gray-700 rounded-full"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO BANNER
+  ============================================================ -->
+  <section class="max-w-5xl mx-auto px-5 pb-6">
+    <div class="relative rounded-3xl overflow-hidden hero-grid" style="background-color: #5B72E5; min-height: 200px; padding: 2rem 2rem 2.5rem;">
+      <!-- Badge top-right -->
+      <div class="absolute top-4 right-4">
+        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white" style="background-color: #1A2240;">
+          40+ треков
+        </span>
+      </div>
+
+      <!-- Content -->
+      <div class="max-w-xs">
+        <h2 class="text-2xl font-bold text-white leading-tight mb-3">
+          Станьте опорой для себя
+        </h2>
+        <p class="text-sm text-white/80 leading-relaxed mb-6">
+          Практики, тесты и медитации для вашего ментального здоровья
+        </p>
+        <button class="px-8 py-3 rounded-full text-sm font-semibold" style="background-color: #F5C542; color: #1A2240;">
+          Подобрать трек
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main class="max-w-5xl mx-auto px-5 pb-16">
+
+    <!-- Section Title -->
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold" style="color: #1A2240;">
+        Все материалы<br>
+        для <em class="not-italic" style="color: #A0A8D0;">самопомощи</em>
+      </h1>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="pill-active px-4 py-2 rounded-full text-sm font-medium">Все</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Саморефлексия</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Адаптивность</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Забота о теле</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Взаимоотношения с другими</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Управление эмоциями</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Критическое мышление</button>
+      <button class="pill-inactive px-4 py-2 rounded-full text-sm font-medium">Вера в себя</button>
+    </div>
+
+    <!-- ── Section: Психологические тесты ── -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold mb-4" style="color: #1A2240;">Психологические тесты</h2>
+      <div class="flex gap-4 overflow-x-auto scroll-hide pb-2">
+
+        <!-- Test Card 1 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-28 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #E8EDF8 0%, #D0D8F0 100%);">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="18" r="10" fill="#B0BAE0"/>
+                <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#B0BAE0"/>
+              </svg>
+            </div>
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Как я справляюсь с конфликтами</p>
+        </div>
+
+        <!-- Test Card 2 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-28 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #FFF0E0 0%, #FFD8B0 100%);">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="18" r="10" fill="#F0A880"/>
+                <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#F0A880"/>
+              </svg>
+            </div>
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Мой уровень эмоционального выгорания</p>
+        </div>
+
+        <!-- Test Card 3 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-28 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #E8F5E0 0%, #C8E8B0 100%);">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="18" r="10" fill="#90C870"/>
+                <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#90C870"/>
+              </svg>
+            </div>
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Насколько рациональны мои убеждения?</p>
+        </div>
+
+        <!-- Test Card 4 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-28 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #F0E8F8 0%, #D8C0F0 100%);">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="18" r="10" fill="#B090D8"/>
+                <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#B090D8"/>
+              </svg>
+            </div>
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Разбираюсь ли я в своих эмоциях?</p>
+        </div>
+
+        <!-- Test Card 5 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-28 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #E8F8F8 0%, #B0E0E8 100%);">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="18" r="10" fill="#70C0C8"/>
+                <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#70C0C8"/>
+              </svg>
+            </div>
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Насколько стрессовая моя жизнь</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Section: Медитации ── -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold mb-4" style="color: #1A2240;">Медитации</h2>
+      <div class="flex gap-4 overflow-x-auto scroll-hide pb-2">
+
+        <!-- Meditation Card 1 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 200px; background: linear-gradient(160deg, #F5D4C8 0%, #E8B8A8 100%);">
+          <div class="h-32 relative overflow-hidden flex items-end justify-end p-3">
+            <div class="w-16 h-16 rounded-full" style="background: rgba(255,255,255,0.3);"></div>
+          </div>
+          <div class="px-4 pb-4 pt-2">
+            <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Как начать медитировать</p>
+          </div>
+        </div>
+
+        <!-- Meditation Card 2 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 200px; background: linear-gradient(160deg, #D0D8F0 0%, #B8C4E8 100%);">
+          <div class="h-32 relative overflow-hidden flex items-end justify-end p-3">
+            <div class="w-14 h-14 rounded-full" style="background: rgba(255,255,255,0.3);"></div>
+          </div>
+          <div class="px-4 pb-4 pt-2">
+            <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Настроиться на новый день</p>
+          </div>
+        </div>
+
+        <!-- Meditation Card 3 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 200px; background: linear-gradient(160deg, #E0F0D8 0%, #C8E0B8 100%);">
+          <div class="h-32 relative overflow-hidden flex items-end justify-end p-3">
+            <div class="w-12 h-12 rounded-full" style="background: rgba(255,255,255,0.3);"></div>
+          </div>
+          <div class="px-4 pb-4 pt-2">
+            <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Позволить себе расслабиться</p>
+          </div>
+        </div>
+
+        <!-- Meditation Card 4 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 200px; background: linear-gradient(160deg, #F8F0D8 0%, #F0E0B0 100%);">
+          <div class="h-32 relative overflow-hidden flex items-end justify-end p-3">
+            <div class="w-16 h-16 rounded-full" style="background: rgba(255,255,255,0.3);"></div>
+          </div>
+          <div class="px-4 pb-4 pt-2">
+            <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Отвлечься на рабочем месте</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Section: Практики самопомощи ── -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold mb-4" style="color: #1A2240;">Практики самопомощи</h2>
+      <div class="flex gap-4 overflow-x-auto scroll-hide pb-2">
+
+        <!-- Practice Card 1 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #FFE8D0 0%, #FFCCA8 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Почувствовать бодрость</p>
+        </div>
+
+        <!-- Practice Card 2 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #D8E8FF 0%, #B8CCF8 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Подготовиться к переменам</p>
+        </div>
+
+        <!-- Practice Card 3 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #E8FFE8 0%, #C0F0C0 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Справиться с эмоциями</p>
+        </div>
+
+        <!-- Practice Card 4 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #FFF8D0 0%, #FFE898 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Сконцентрироваться</p>
+        </div>
+
+        <!-- Practice Card 5 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #F8E8FF 0%, #E8C8FF 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Обрести спокойствие</p>
+        </div>
+
+        <!-- Practice Card 6 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #FFE8E8 0%, #FFC8C8 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Настроиться на легкий разговор</p>
+        </div>
+
+        <!-- Practice Card 7 -->
+        <div class="card-hover bg-white rounded-2xl p-4 flex-shrink-0 cursor-pointer" style="width: 200px;">
+          <div class="w-full h-24 rounded-xl mb-3 overflow-hidden" style="background: linear-gradient(135deg, #E0F8E8 0%, #B8ECC8 100%);">
+          </div>
+          <p class="text-xs font-medium leading-snug" style="color: #1A2240;">Снять усталость</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Section: Меня всё раздражает и бесит (Video) ── -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold mb-4" style="color: #1A2240;">Меня всё раздражает и бесит</h2>
+      <div class="flex gap-4 overflow-x-auto scroll-hide pb-2">
+
+        <!-- Video Card 1 -->
+        <div class="card-hover bg-white rounded-2xl p-3 flex-shrink-0 cursor-pointer flex items-center gap-3" style="width: 280px;">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden relative" style="background: #D0D0D8;">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="5" fill="#888"/>
+                <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" fill="#888"/>
+              </svg>
+            </div>
+            <div class="absolute bottom-1 left-1 play-btn" style="width:20px;height:20px;">
+              <svg width="8" height="9" viewBox="0 0 8 9" fill="none">
+                <path d="M1 1.5L7 4.5L1 7.5V1.5Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Пъhkr 1 ĝh 4</p>
+            <p class="text-xs font-semibold leading-snug" style="color: #1A2240;">Агрессия: причины и последствия</p>
+          </div>
+        </div>
+
+        <!-- Video Card 2 -->
+        <div class="card-hover bg-white rounded-2xl p-3 flex-shrink-0 cursor-pointer flex items-center gap-3" style="width: 280px;">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden relative" style="background: #D0D0D8;">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="5" fill="#888"/>
+                <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" fill="#888"/>
+              </svg>
+            </div>
+            <div class="absolute bottom-1 left-1 play-btn" style="width:20px;height:20px;">
+              <svg width="8" height="9" viewBox="0 0 8 9" fill="none">
+                <path d="M1 1.5L7 4.5L1 7.5V1.5Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Пъhkr 2 ĝh 4</p>
+            <p class="text-xs font-semibold leading-snug" style="color: #1A2240;">Как связаны агрессия, отпуск и страх перемен</p>
+          </div>
+        </div>
+
+        <!-- Video Card 3 -->
+        <div class="card-hover bg-white rounded-2xl p-3 flex-shrink-0 cursor-pointer flex items-center gap-3" style="width: 280px;">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden relative" style="background: #D0D0D8;">
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="5" fill="#888"/>
+                <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" fill="#888"/>
+              </svg>
+            </div>
+            <div class="absolute bottom-1 left-1 play-btn" style="width:20px;height:20px;">
+              <svg width="8" height="9" viewBox="0 0 8 9" fill="none">
+                <path d="M1 1.5L7 4.5L1 7.5V1.5Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Пъhkr 3 ĝh 4</p>
+            <p class="text-xs font-semibold leading-snug" style="color: #1A2240;">Что помогает справиться с агрессией</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- "Выбрать другую тему" link -->
+      <button class="mt-3 flex items-center gap-1 text-sm font-medium" style="color: #8888AA;">
+        Выбрать другую тему
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </section>
+
+    <!-- ── Section: Статьи для саморазвития ── -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold mb-4" style="color: #1A2240;">Статьи для саморазвития</h2>
+      <div class="flex gap-4 overflow-x-auto scroll-hide pb-2">
+
+        <!-- Article Card 1 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 240px; background: linear-gradient(160deg, #F5C8A8 0%, #EEB888 100%);">
+          <div class="h-40 relative flex items-center justify-center overflow-hidden">
+            <div class="w-24 h-24 rounded-full" style="background: rgba(255,255,255,0.25);"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(255,255,255,0.35); color: #1A2240;">Статья</span>
+            </div>
+          </div>
+          <div class="px-4 py-3">
+            <p class="text-sm font-semibold leading-snug" style="color: #1A2240;">Как справляться со стрессом</p>
+          </div>
+        </div>
+
+        <!-- Article Card 2 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 240px; background: linear-gradient(160deg, #F8E890 0%, #F0D860 100%);">
+          <div class="h-40 relative flex items-center justify-center overflow-hidden">
+            <div class="w-24 h-24 rounded-full" style="background: rgba(255,255,255,0.25);"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(255,255,255,0.35); color: #1A2240;">Статья</span>
+            </div>
+          </div>
+          <div class="px-4 py-3">
+            <p class="text-sm font-semibold leading-snug" style="color: #1A2240;">О балансе психики</p>
+          </div>
+        </div>
+
+        <!-- Article Card 3 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 240px; background: linear-gradient(160deg, #F0C8B8 0%, #E8B098 100%);">
+          <div class="h-40 relative flex items-center justify-center overflow-hidden">
+            <div class="w-24 h-24 rounded-full" style="background: rgba(255,255,255,0.25);"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(255,255,255,0.35); color: #1A2240;">Статья</span>
+            </div>
+          </div>
+          <div class="px-4 py-3">
+            <p class="text-sm font-semibold leading-snug" style="color: #1A2240;">Что такое выгорание</p>
+          </div>
+        </div>
+
+        <!-- Article Card 4 -->
+        <div class="card-hover rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer" style="width: 240px; background: linear-gradient(160deg, #D8E8F8 0%, #B8CCE8 100%);">
+          <div class="h-40 relative flex items-center justify-center overflow-hidden">
+            <div class="w-24 h-24 rounded-full" style="background: rgba(255,255,255,0.25);"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(255,255,255,0.35); color: #1A2240;">Статья</span>
+            </div>
+          </div>
+          <div class="px-4 py-3">
+            <p class="text-sm font-semibold leading-snug" style="color: #1A2240;">Как найти силы на важные дела</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="border-t" style="background: #EAEAF2; border-color: #D0D0E0;">
+    <div class="max-w-5xl mx-auto px-5 py-8">
+      <p class="text-sm font-semibold mb-2" style="color: #1A2240;">ООО «ПРОСЕБЯ»</p>
+      <p class="text-xs leading-relaxed mb-4" style="color: #8888AA; max-width: 600px;">
+        Основным направлением деятельности ООО «ПРОСЕБЯ» (ОГРН: 1237700218832) является разработка и внедрение инновационных цифровых b2c и b2bc сервисов (программного обеспечения, в том числе мобильного приложения) для вашего ментального здоровья.
+      </p>
+      <div class="flex gap-6">
+        <a href="mailto:service@prosebya.ru" class="text-xs" style="color: #8888AA;">service@prosebya.ru</a>
+        <a href="#" class="text-xs" style="color: #8888AA;">Юридические документы</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
