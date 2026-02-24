@@ -16,5 +16,5 @@ None
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
-| 1 | Создать HTML-копию страницы lk.prosebya.ru как базу для прототипа CSI-опросника | 2026-02-24 | TBD | [1-html-lk-prosebya-ru-csi](./quick/1-html-lk-prosebya-ru-csi/) |
+| 1 | Создать HTML-копию страницы lk.prosebya.ru как базу для прототипа CSI-опросника | 2026-02-24 | 084dad1 | [1-html-lk-prosebya-ru-csi](./quick/1-html-lk-prosebya-ru-csi/) |
 
