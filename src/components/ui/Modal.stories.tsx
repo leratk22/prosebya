@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Modal, type ModalButtonConfig } from "./modal";
+import { Modal, type ModalButtonConfig, type ModalProps } from "./modal";
 import { Button } from "./button";
 
 const meta: Meta<typeof Modal> = {
@@ -60,7 +60,7 @@ type Story = StoryObj<typeof Modal>;
 function ModalWrapper({
   defaultOpen = false,
   ...modalProps
-}: React.ComponentProps<typeof Modal> & { defaultOpen?: boolean }) {
+}: Omit<ModalProps, "open" | "onClose"> & { defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="min-h-[400px] p-16">
