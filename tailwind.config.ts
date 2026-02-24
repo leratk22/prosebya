@@ -326,9 +326,8 @@ const config: Config = {
         'number-s': '0',
         'caption-s': '0.1em',
       },
-      // Отступы между параграфами
+      // Отступы (spacing) — используем значения из Numbers
       spacing: {
-        // Используем значения из Numbers
         '0': '0px',
         '1': '1px',
         '2': '2px',
@@ -364,6 +363,7 @@ const config: Config = {
         '144': '144px',
         '160': '160px',
         '192': '192px',
+        '216': '216px',
         '224': '224px',
         '256': '256px',
         '288': '288px',
@@ -417,6 +417,10 @@ const config: Config = {
         'lg': '768px',
         'xl': '1024px',
         '2xl': '1440px',
+      },
+      // Тени
+      boxShadow: {
+        'elevation': '0 12px 24px -4px rgba(34, 38, 59, 0.05)',
       },
       // Насыщенность шрифта
       fontWeight: {
