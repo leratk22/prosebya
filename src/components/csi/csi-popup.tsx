@@ -228,16 +228,7 @@ export const CsiPopup = React.forwardRef<HTMLDivElement, CsiPopupProps>(
               placeholder="Комментарий"
               maxLength={MAX_COMMENT_LENGTH}
               rows={1}
-              counter={(() => {
-                const rem = MAX_COMMENT_LENGTH - comment.length;
-                const word =
-                  rem % 10 === 1 && rem % 100 !== 11
-                    ? "символ"
-                    : rem % 10 >= 2 && rem % 10 <= 4 && (rem % 100 < 10 || rem % 100 >= 20)
-                    ? "символа"
-                    : "символов";
-                return `Осталось ${rem} ${word}`;
-              })()}
+              counter={`${comment.length}/${MAX_COMMENT_LENGTH}`}
               clearable
               onClear={() => onCommentChange?.("")}
               variant="underline"

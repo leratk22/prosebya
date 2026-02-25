@@ -94,13 +94,17 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const LINE_HEIGHT_PX = 20; // body-l line-height
     const MAX_LINES = 4;
-    const MAX_HEIGHT_PX = 56 + (MAX_LINES - 1) * LINE_HEIGHT_PX; // ~104px for 4 lines
+    const MIN_HEIGHT_PX = 24;
+    const TEXTAREA_MAX_HEIGHT_PX = 8 + MAX_LINES * LINE_HEIGHT_PX + 8; // py-8 + 4 lines
+    const WRAPPER_MAX_HEIGHT_PX = 40 + TEXTAREA_MAX_HEIGHT_PX; // label + textarea
     const resizeTextarea = React.useCallback(() => {
       if (!isUnderline || !textareaRef.current) return;
       const el = textareaRef.current;
       el.style.height = "auto";
-      el.style.height = `${Math.max(24, el.scrollHeight)}px`;
-      el.style.overflowY = "hidden";
+      const targetHeight = Math.max(MIN_HEIGHT_PX, el.scrollHeight);
+      const cappedHeight = Math.min(targetHeight, TEXTAREA_MAX_HEIGHT_PX);
+      el.style.height = `${cappedHeight}px`;
+      el.style.overflowY = targetHeight > TEXTAREA_MAX_HEIGHT_PX ? "auto" : "hidden";
     }, [isUnderline]);
 
     React.useEffect(() => {
@@ -168,7 +172,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             <>
               <div
                 className={`w-full min-h-56 overflow-y-auto overflow-x-hidden border-b pr-36 ${error ? "border-light-border-negative" : underlineActive ? "border-light-border-accent" : "border-light-border-primary"}`}
-                style={{ maxHeight: MAX_HEIGHT_PX }}
+                style={{ maxHeight: WRAPPER_MAX_HEIGHT_PX }}
               >
                 <label
                   htmlFor={textareaId}

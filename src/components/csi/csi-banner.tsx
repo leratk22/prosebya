@@ -32,7 +32,7 @@ export interface CsiBannerProps {
   variant?: "inline" | "fixed";
 }
 
-// Только дизайн-токены: spacing (4,8,12), radius (l,full), colors (light-*), fontSize (title-m, body-m, label-s)
+// Только дизайн-токены: spacing (4,8,12,16), radius (m,l,full), colors (light-*), fontSize (title-m, body-m, label-s)
 const CONTAINER_CLASS =
   "w-216 bg-light-bg-primary rounded-tl-m rounded-tr-m rounded-br-m rounded-bl-m shadow-elevation overflow-hidden flex flex-col pb-8 font-euclid";
 
@@ -52,7 +52,7 @@ export const CsiBanner = React.forwardRef<HTMLDivElement, CsiBannerProps>(
   ) => {
     const positionClasses =
       variant === "fixed"
-        ? "fixed bottom-24 right-24 z-40 pointer-events-auto"
+        ? "fixed left-16 right-16 bottom-16 w-[calc(100vw-32px)] md:left-auto md:right-24 md:bottom-24 md:w-216 z-40 pointer-events-auto"
         : "";
 
     return (
