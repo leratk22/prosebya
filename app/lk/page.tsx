@@ -43,22 +43,33 @@ export default function LkPage() {
       <iframe
         src="https://lk.prosebya.ru/"
         title="Личный кабинет Просебя"
-        className="absolute inset-0 w-full h-full border-0"
+        className="absolute inset-0 w-full h-full border-0 z-0"
       />
 
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-10"
         aria-hidden={!isBannerVisible && !isPopupOpen}
       >
         {isBannerVisible && (
-          <div className="pointer-events-auto">
-            <CsiBanner
-              variant="fixed"
-              selectedRating={selectedRating}
-              onRatingSelect={handleRatingClick}
-              onClose={() => setIsBannerVisible(false)}
+          <>
+            {/* По Figma NvzcX700bseJnlyBwa2zFv: core #22263B, 25% opacity снизу, прозрачный сверху */}
+            <div
+              className="absolute bottom-0 left-0 right-0 h-160 md:hidden pointer-events-none z-20"
+              style={{
+                background:
+                  "linear-gradient(0deg, rgba(34, 38, 59, 0.25) 0%, rgba(34, 38, 59, 0) 100%)",
+              }}
+              aria-hidden
             />
-          </div>
+            <div className="pointer-events-auto relative z-40">
+              <CsiBanner
+                variant="fixed"
+                selectedRating={selectedRating}
+                onRatingSelect={handleRatingClick}
+                onClose={() => setIsBannerVisible(false)}
+              />
+            </div>
+          </>
         )}
         {isPopupOpen && selectedRating != null && (
           <CsiPopup

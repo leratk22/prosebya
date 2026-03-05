@@ -4,7 +4,7 @@ import * as React from "react";
 
 const CloseIcon = () => (
   <svg
-    className="w-18 h-18 block text-core-alpha-40"
+    className="w-16 h-16 block text-core-alpha-40"
     viewBox="0 0 18 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -32,12 +32,12 @@ export interface CsiBannerProps {
   variant?: "inline" | "fixed";
 }
 
-// Только дизайн-токены: spacing (4,8,12,16), radius (m,l,full), colors (light-*), fontSize (title-m, body-m, label-s)
+// Мобильная: w-216. Десктоп (md+): w-300, p-16, gap-12 — по Figma Gr1ERrSAzB6n2xWAV5ECiu.
 const CONTAINER_CLASS =
-  "w-216 bg-light-bg-primary rounded-tl-m rounded-tr-m rounded-br-m rounded-bl-m shadow-elevation overflow-hidden flex flex-col pb-8 font-euclid";
+  "w-216 md:w-300 bg-light-bg-primary rounded-tl-m rounded-tr-m rounded-br-m rounded-bl-m shadow-elevation overflow-hidden flex flex-col gap-8 md:gap-12 p-12 md:p-16 font-euclid";
 
 const RATING_BUTTON_CLASS =
-  "flex-1 min-w-0 flex items-center justify-center py-8 border-0 rounded-full bg-light-bg-pressed text-label-s font-semibold text-light-fg-muted cursor-pointer hover:bg-light-bg-accent-overlay hover:text-light-fg-tertiary font-euclid";
+  "flex-1 min-w-0 flex items-center justify-center py-8 px-12 border-0 rounded-full bg-light-bg-pressed text-label-s font-semibold text-light-fg-muted cursor-pointer hover:bg-light-bg-accent-overlay hover:text-light-fg-tertiary font-euclid";
 
 export const CsiBanner = React.forwardRef<HTMLDivElement, CsiBannerProps>(
   (
@@ -52,7 +52,7 @@ export const CsiBanner = React.forwardRef<HTMLDivElement, CsiBannerProps>(
   ) => {
     const positionClasses =
       variant === "fixed"
-        ? "fixed left-16 right-16 bottom-16 w-[calc(100vw-32px)] md:left-auto md:right-24 md:bottom-24 md:w-216 z-40 pointer-events-auto"
+        ? "fixed left-16 right-16 bottom-16 w-[calc(100vw-32px)] md:left-auto md:right-24 md:bottom-24 md:w-300 md:max-w-[300px] z-40 pointer-events-auto"
         : "";
 
     return (
@@ -60,24 +60,27 @@ export const CsiBanner = React.forwardRef<HTMLDivElement, CsiBannerProps>(
         ref={ref}
         className={`${CONTAINER_CLASS} ${positionClasses} ${className}`.trim()}
       >
-        <header className="relative flex items-center gap-4 pt-12 pb-8 pl-12 pr-0 flex-shrink-0 rounded-tl-m rounded-tr-m">
-          <h2 className="flex-1 min-w-0 text-title-m font-semibold text-light-fg-primary">
-            Оцените нас
-          </h2>
+        {/* По Figma: text_group (title+body) gap-4, close 16x16 */}
+        <header className="relative flex items-start gap-8 md:gap-12 flex-shrink-0 rounded-tl-m rounded-tr-m pr-16">
+          <div className="flex flex-col gap-4 flex-1 min-w-0">
+            <h2 className="text-title-m font-semibold text-light-fg-primary">
+              Оцените нас
+            </h2>
+            <p className="text-body-m md:text-body-l font-regular text-light-fg-secondary">
+              Насколько вам нравится сервис «Просебя»?
+            </p>
+          </div>
           <button
             type="button"
             aria-label="Закрыть"
             onClick={onClose}
-            className="absolute top-4 right-4 w-36 h-36 p-6 border-0 bg-transparent cursor-pointer grid place-items-center rounded-full"
+            className="absolute top-0 right-0 w-16 h-16 p-0 border-0 bg-transparent cursor-pointer grid place-items-center rounded-full hover:bg-light-bg-accent-overlay shrink-0"
           >
             <CloseIcon />
           </button>
         </header>
 
-        <div className="flex flex-col gap-8 pb-4 px-12">
-          <p className="py-4 text-body-m font-regular text-light-fg-secondary">
-            Насколько вам нравится сервис «Просебя»?
-          </p>
+        <div className="flex flex-col">
           <div className="flex gap-4">
             {[1, 2, 3, 4, 5].map((rating) => {
               const isSelected = selectedRating === rating;
@@ -88,7 +91,7 @@ export const CsiBanner = React.forwardRef<HTMLDivElement, CsiBannerProps>(
                   onClick={() => onRatingSelect?.(rating)}
                   className={
                     isSelected
-                      ? "flex-1 min-w-0 flex items-center justify-center py-8 border-0 rounded-full bg-light-bg-accent text-label-s font-semibold text-light-fg-inverted-primary cursor-pointer font-euclid"
+                      ? "flex-1 min-w-0 flex items-center justify-center py-8 px-12 border-0 rounded-full bg-light-bg-accent text-label-s font-semibold text-light-fg-inverted-primary cursor-pointer font-euclid"
                       : RATING_BUTTON_CLASS
                   }
                   aria-pressed={isSelected}

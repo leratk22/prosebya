@@ -10,6 +10,12 @@ export default function Home() {
           </a>
         </p>
         <p className="text-lg text-gray-600 mb-4">
+          ЛК с CSI баннером:{" "}
+          <a href="/lk" className="text-blue-600 hover:underline">
+            /lk
+          </a>
+        </p>
+        <p className="text-lg text-gray-600 mb-4">
           Прототип чата (V3):{" "}
           <a href="/prototype-v3" className="text-blue-600 hover:underline">
             /prototype-v3
