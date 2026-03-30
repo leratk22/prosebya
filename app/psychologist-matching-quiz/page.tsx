@@ -17,8 +17,8 @@ const PsychologistMatchingQuiz = dynamic(
 
 export default function PsychologistMatchingQuizPage() {
   return (
-    <div className="min-h-screen bg-light-bg-secondary py-24 font-euclid">
-      <div className="mx-auto min-h-812 max-w-375">
+    <div className="min-h-screen font-euclid bg-light-bg-primary md:bg-light-bg-secondary md:py-24">
+      <div className="mx-auto min-h-screen md:min-h-812 md:max-w-375">
         <PsychologistMatchingQuiz />
       </div>
     </div>

@@ -193,7 +193,7 @@ export function PsychologistMatchingQuiz() {
   };
 
   return (
-    <div className="flex min-h-812 w-full max-w-375 flex-col bg-light-bg-primary font-euclid shadow-sm">
+    <div className="flex min-h-screen w-full flex-col bg-light-bg-primary font-euclid md:min-h-812 md:max-w-375 md:shadow-sm">
       {step >= 1 && step <= 3 ? (
         <>
           {step === 1 ? (
