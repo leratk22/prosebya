@@ -413,7 +413,7 @@ export function PsychologistMatchingQuiz() {
                   С кем комфортнее работать
                 </p>
               </div>
-              <div className="flex w-[327px] max-w-full rounded-full bg-light-bg-pressed p-2">
+              <div className="flex w-full rounded-full bg-light-bg-pressed p-2">
                 {(
                   [
                     { id: "female", label: "Женщина" },
@@ -448,7 +448,7 @@ export function PsychologistMatchingQuiz() {
                   Возраст специалиста
                 </p>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="grid grid-cols-4 gap-4">
                 {AGE_OPTIONS.filter((o) => o.id !== "any").map((opt) => {
                   const active = answers.ages.includes(opt.id);
                   return (
@@ -457,7 +457,7 @@ export function PsychologistMatchingQuiz() {
                       type="button"
                       onClick={() => toggleAge(opt.id)}
                       className={[
-                        "whitespace-nowrap rounded-full px-16 py-8 text-label-m font-semibold transition-colors",
+                        "whitespace-nowrap rounded-full px-8 py-8 text-center text-label-m font-semibold transition-colors",
                         active
                           ? "bg-brand-blue text-white"
                           : "bg-light-bg-pressed text-light-fg-muted",
