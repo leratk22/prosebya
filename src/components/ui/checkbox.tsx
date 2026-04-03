@@ -58,11 +58,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const borderRadius = type === "round" ? "1000px" : "6px";
     const innerSize = size - 4; // 20px для size=24 (отступ 2px с каждой стороны)
 
-<<<<<<< HEAD
-    const inputRef = React.useRef<HTMLInputElement>(null);
-=======
     const inputRef = React.useRef<HTMLInputElement | null>(null);
->>>>>>> 4e5b4e4 (fix: исправлена ошибка компиляции в компоненте Checkbox)
 
     const handleClick = (e: React.MouseEvent) => {
       // Предотвращаем всплытие, чтобы не срабатывал onClick родительского элемента
@@ -123,18 +119,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         onClick={handleClick}
       >
         <input
-<<<<<<< HEAD
-          ref={(node) => {
-            inputRef.current = node;
-            if (typeof ref === "function") {
-              ref(node);
-            } else if (ref) {
-              ref.current = node;
-            }
-          }}
-=======
           ref={setInputRef}
->>>>>>> 4e5b4e4 (fix: исправлена ошибка компиляции в компоненте Checkbox)
           type="checkbox"
           checked={checked}
           onChange={onChange}
