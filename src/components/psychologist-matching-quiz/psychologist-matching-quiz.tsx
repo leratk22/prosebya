@@ -386,16 +386,130 @@ export function PsychologistMatchingQuiz() {
       ) : null}
 
       {step === 4 ? (
-        <div className="flex flex-1 flex-col items-center justify-center gap-24 px-32 py-40 text-center">
-          <p className="text-title-l font-semibold text-light-fg-primary">
-            Запрос отправлен
-          </p>
-          <p className="text-body-l font-regular text-light-fg-secondary">
-            Здесь будет экран с подобранными специалистами или переход в выдачу.
-          </p>
-          <Button variant="secondary" size="l" type="button" onClick={restart}>
-            Пройти заново
-          </Button>
+        <div className="flex min-h-screen w-full flex-col bg-light-bg-secondary font-euclid md:min-h-812">
+          {/* AppBar */}
+          <header className="shrink-0 bg-light-bg-secondary">
+            <div className="flex h-56 items-center px-16">
+              <button
+                type="button"
+                onClick={() => setStep(3)}
+                className="inline-flex h-56 w-40 shrink-0 items-center justify-center rounded-full text-light-fg-primary hover:bg-light-bg-pressed"
+                aria-label="Назад"
+              >
+                <Icon name="chevron-left" size={24} />
+              </button>
+              <h1 className="min-w-0 flex-1 truncate text-center pr-40 text-body-xl font-semibold text-light-fg-primary [line-height:24px]">
+                Параметры подбора
+              </h1>
+            </div>
+          </header>
+
+          {/* Content */}
+          <div className="flex flex-1 flex-col overflow-y-auto px-24 pb-144 pt-24">
+            {/* С кем комфортнее работать */}
+            <div className="flex flex-col gap-4 pb-8 pt-4">
+              <div className="flex h-48 items-center">
+                <p className="flex-1 text-body-xl font-semibold text-light-fg-primary [line-height:20px]">
+                  С кем комфортнее работать
+                </p>
+              </div>
+              <div className="flex w-full rounded-full bg-light-bg-pressed p-2">
+                {GENDER_OPTIONS.map((opt) => {
+                  const active = answers.gender === opt.id;
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setAnswers((a) => ({ ...a, gender: opt.id }))}
+                      className={[
+                        "flex flex-1 items-center justify-center rounded-full px-4 py-8 text-label-m font-semibold transition-colors",
+                        active
+                          ? "bg-light-bg-primary text-light-fg-primary shadow-elevation"
+                          : "text-light-fg-tertiary",
+                      ].join(" ")}
+                    >
+                      {opt.label.replace("С ", "").replace("Не важно", "Не важно")}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Возраст специалиста */}
+            <div className="flex flex-col gap-4 pb-16 pt-4">
+              <div className="flex h-48 items-center">
+                <p className="flex-1 text-body-xl font-semibold text-light-fg-primary [line-height:20px]">
+                  Возраст специалиста
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                {AGE_OPTIONS.filter((o) => o.id !== "any").map((opt) => {
+                  const active = answers.ages.includes(opt.id);
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => toggleAge(opt.id)}
+                      className={[
+                        "rounded-full px-16 py-8 text-label-m font-semibold transition-colors",
+                        active
+                          ? "bg-light-bg-accent text-white"
+                          : "bg-light-bg-pressed text-light-fg-muted",
+                      ].join(" ")}
+                    >
+                      {opt.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Метод терапии */}
+            <div className="flex flex-col gap-4 pb-8 pt-4">
+              <div className="flex h-48 items-center">
+                <p className="flex-1 text-body-xl font-semibold text-light-fg-primary [line-height:20px]">
+                  Метод терапии
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStep(3)}
+                  className="inline-flex size-40 shrink-0 items-center justify-center rounded-full border border-light-border-button-secondary"
+                  aria-label="Изменить метод терапии"
+                >
+                  <Icon name="chevron-right" size={16} />
+                </button>
+              </div>
+              <p className="text-body-xl font-regular text-light-fg-secondary [line-height:24px]">
+                {answers.therapyMode === "any"
+                  ? "Любой"
+                  : answers.therapyMethods.join(", ")}
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom buttons */}
+          <footer className="sticky bottom-0 z-10 flex w-full shrink-0 flex-col gap-8 border-t border-light-border-secondary bg-light-bg-secondary px-32 pb-20 pt-12">
+            <Button
+              variant="primary"
+              size="l"
+              fullWidth
+              type="button"
+              onClick={() => {
+                /* TODO: submit filters */
+              }}
+            >
+              Применить
+            </Button>
+            <Button
+              variant="secondary"
+              size="l"
+              fullWidth
+              type="button"
+              onClick={restart}
+            >
+              Подобрать заново
+            </Button>
+          </footer>
         </div>
       ) : null}
     </div>
