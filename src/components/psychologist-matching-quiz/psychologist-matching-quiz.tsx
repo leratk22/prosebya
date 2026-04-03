@@ -409,12 +409,18 @@ export function PsychologistMatchingQuiz() {
             {/* С кем комфортнее работать */}
             <div className="flex flex-col gap-4 pb-8 pt-4">
               <div className="flex h-48 items-center">
-                <p className="flex-1 text-body-xl font-semibold text-light-fg-primary [line-height:20px]">
+                <p className="flex-1 text-title-s font-semibold text-light-fg-primary">
                   С кем комфортнее работать
                 </p>
               </div>
-              <div className="flex w-full rounded-full bg-light-bg-pressed p-2">
-                {GENDER_OPTIONS.map((opt) => {
+              <div className="flex w-[327px] max-w-full rounded-full bg-light-bg-pressed p-2">
+                {(
+                  [
+                    { id: "female", label: "Женщина" },
+                    { id: "male", label: "Мужчина" },
+                    { id: "any", label: "Не важно" },
+                  ] as const
+                ).map((opt) => {
                   const active = answers.gender === opt.id;
                   return (
                     <button
@@ -422,13 +428,13 @@ export function PsychologistMatchingQuiz() {
                       type="button"
                       onClick={() => setAnswers((a) => ({ ...a, gender: opt.id }))}
                       className={[
-                        "flex flex-1 items-center justify-center rounded-full px-4 py-8 text-label-m font-semibold transition-colors",
+                        "flex flex-1 items-center justify-center whitespace-nowrap rounded-full px-4 py-8 text-label-m font-semibold transition-colors",
                         active
                           ? "bg-light-bg-primary text-light-fg-primary shadow-elevation"
                           : "text-light-fg-tertiary",
                       ].join(" ")}
                     >
-                      {opt.label.replace("С ", "").replace("Не важно", "Не важно")}
+                      {opt.label}
                     </button>
                   );
                 })}
@@ -438,7 +444,7 @@ export function PsychologistMatchingQuiz() {
             {/* Возраст специалиста */}
             <div className="flex flex-col gap-4 pb-16 pt-4">
               <div className="flex h-48 items-center">
-                <p className="flex-1 text-body-xl font-semibold text-light-fg-primary [line-height:20px]">
+                <p className="flex-1 text-title-s font-semibold text-light-fg-primary">
                   Возраст специалиста
                 </p>
               </div>
@@ -451,9 +457,9 @@ export function PsychologistMatchingQuiz() {
                       type="button"
                       onClick={() => toggleAge(opt.id)}
                       className={[
-                        "rounded-full px-16 py-8 text-label-m font-semibold transition-colors",
+                        "whitespace-nowrap rounded-full px-16 py-8 text-label-m font-semibold transition-colors",
                         active
-                          ? "bg-light-bg-accent text-white"
+                          ? "bg-brand-blue text-white"
                           : "bg-light-bg-pressed text-light-fg-muted",
                       ].join(" ")}
                     >
@@ -467,7 +473,7 @@ export function PsychologistMatchingQuiz() {
             {/* Метод терапии */}
             <div className="flex flex-col gap-4 pb-8 pt-4">
               <div className="flex h-48 items-center">
-                <p className="flex-1 text-body-xl font-semibold text-light-fg-primary [line-height:20px]">
+                <p className="flex-1 text-title-s font-semibold text-light-fg-primary">
                   Метод терапии
                 </p>
                 <button
