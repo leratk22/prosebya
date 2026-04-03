@@ -142,6 +142,7 @@ function normalizeAges(ages: AgeId[], id: AgeId): AgeId[] {
 export function PsychologistMatchingQuiz() {
   const [step, setStep] = React.useState(1);
   const [answers, setAnswers] = React.useState<Answers>(initialAnswers);
+  const [hasReachedSummary, setHasReachedSummary] = React.useState(false);
 
   const goBack = () => {
     if (step <= 1) return;
@@ -184,11 +185,13 @@ export function PsychologistMatchingQuiz() {
     (answers.therapyMode === "choose" && answers.therapyMethods.length > 0);
 
   const finish = () => {
+    setHasReachedSummary(true);
     setStep(4);
   };
 
   const restart = () => {
     setAnswers(initialAnswers);
+    setHasReachedSummary(false);
     setStep(1);
   };
 
@@ -378,7 +381,7 @@ export function PsychologistMatchingQuiz() {
                 type="button"
                 onClick={finish}
               >
-                Подобрать
+                {hasReachedSummary ? "Сохранить" : "Подобрать"}
               </Button>
             </footer>
           ) : null}
