@@ -33,6 +33,8 @@ export interface TextareaProps
   onClear?: () => void;
   /** Вариант: underline (Figma) — подчёркивание, filled — рамка */
   variant?: "underline" | "filled";
+  /** Подстройка высоты по содержимому (underline). Для CSI — false и задайте rows */
+  autoResize?: boolean;
 }
 
 const underlineBase =
@@ -65,6 +67,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       onBlur,
       onInput,
       placeholder,
+      rows = 1,
+      autoResize = true,
       ...rest
     },
     ref
@@ -95,13 +99,27 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const LINE_HEIGHT_PX = 20; // body-l line-height
     const MAX_LINES = 4;
     const MAX_HEIGHT_PX = 56 + (MAX_LINES - 1) * LINE_HEIGHT_PX; // ~104px for 4 lines
+    const fixedTextareaPx = rows * LINE_HEIGHT_PX;
+    const underlineFloatingMaxPx = Math.max(
+      MAX_HEIGHT_PX,
+      fixedTextareaPx + 72
+    );
     const resizeTextarea = React.useCallback(() => {
       if (!isUnderline || !textareaRef.current) return;
       const el = textareaRef.current;
+      if (!autoResize) {
+        el.style.minHeight = `${fixedTextareaPx}px`;
+        el.style.maxHeight = `${fixedTextareaPx}px`;
+        el.style.height = `${fixedTextareaPx}px`;
+        el.style.overflowY = "auto";
+        return;
+      }
+      el.style.minHeight = "";
+      el.style.maxHeight = "";
       el.style.height = "auto";
       el.style.height = `${Math.max(24, el.scrollHeight)}px`;
       el.style.overflowY = "hidden";
-    }, [isUnderline]);
+    }, [autoResize, fixedTextareaPx, isUnderline]);
 
     React.useEffect(() => {
       resizeTextarea();
@@ -145,6 +163,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           resizeTextarea();
           onInput?.(e);
         }}
+        rows={rows}
         className={[inputClass, "flex-1 min-w-0", className]
           .filter(Boolean)
           .join(" ")}
@@ -161,14 +180,20 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         <div
           className={
-            isUnderline ? "relative" : "relative flex items-center"
+            isUnderline
+              ? "relative"
+              : `relative flex ${rows > 1 || !autoResize ? "items-stretch" : "items-center"}`
           }
         >
           {isUnderline && showFloatingLabel ? (
             <>
               <div
                 className={`w-full min-h-56 overflow-y-auto overflow-x-hidden border-b pr-36 ${error ? "border-light-border-negative" : underlineActive ? "border-light-border-accent" : "border-light-border-primary"}`}
-                style={{ maxHeight: MAX_HEIGHT_PX }}
+                style={{
+                  maxHeight: autoResize
+                    ? MAX_HEIGHT_PX
+                    : underlineFloatingMaxPx,
+                }}
               >
                 <label
                   htmlFor={textareaId}
