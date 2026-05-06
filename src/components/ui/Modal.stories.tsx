@@ -56,11 +56,19 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
+type ModalWrapperProps = Omit<
+  React.ComponentProps<typeof Modal>,
+  "open" | "onClose"
+> & {
+  defaultOpen?: boolean;
+};
+
 // Обёртка с состоянием для интерактивных историй
 function ModalWrapper({
   defaultOpen = false,
+  children,
   ...modalProps
-}: React.ComponentProps<typeof Modal> & { defaultOpen?: boolean }) {
+}: ModalWrapperProps) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="min-h-[400px] p-16">
@@ -80,7 +88,9 @@ function ModalWrapper({
               }
             : () => setOpen(false),
         }))}
-      />
+      >
+        {children}
+      </Modal>
     </div>
   );
 }
