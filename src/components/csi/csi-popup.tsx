@@ -227,7 +227,7 @@ export const CsiPopup = React.forwardRef<HTMLDivElement, CsiPopupProps>(
               label="Комментарий"
               placeholder="Комментарий"
               maxLength={MAX_COMMENT_LENGTH}
-              rows={4}
+              rows={3}
               autoResize={false}
               counter={(() => {
                 const rem = MAX_COMMENT_LENGTH - comment.length;
