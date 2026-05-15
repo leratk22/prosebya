@@ -50,42 +50,44 @@ export default function TodayMyContentPrototypePage() {
   }, [cards.length]);
 
   return (
-    <div
-      className={`flex h-[100dvh] min-h-[100dvh] w-full min-w-0 flex-col overflow-hidden ${
-        view === "list" ? "bg-light-bg-secondary" : "bg-light-bg-primary"
-      }`}
-    >
-      <div className="relative flex min-h-0 flex-1 flex-col">
-        <ContentRemovedToast open={toastOpen} />
-        <AnimatePresence mode="wait" initial={false}>
-          {view === "home" ? (
-            <motion.div
-              key="home"
-              className="flex min-h-0 flex-1 flex-col"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.22 }}
-            >
-              <TodayTabScreen cards={cards} onRemove={removeCard} onOpenMyContentList={openList} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="list"
-              className="flex min-h-0 flex-1 flex-col"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.22 }}
-            >
-              <MyContentListScreen
-                cards={cards}
-                onBack={() => setView("home")}
-                onRemove={removeCard}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="flex min-h-[100dvh] w-full justify-center bg-gray-core">
+      <div
+        className={`flex h-[100dvh] min-h-[100dvh] w-full max-w-[460px] min-w-0 flex-col overflow-hidden ${
+          view === "list" ? "bg-light-bg-secondary" : "bg-light-bg-primary"
+        }`}
+      >
+        <div className="relative flex min-h-0 flex-1 flex-col">
+          <ContentRemovedToast open={toastOpen} />
+          <AnimatePresence mode="wait" initial={false}>
+            {view === "home" ? (
+              <motion.div
+                key="home"
+                className="flex min-h-0 flex-1 flex-col"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.22 }}
+              >
+                <TodayTabScreen cards={cards} onRemove={removeCard} onOpenMyContentList={openList} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="list"
+                className="flex min-h-0 flex-1 flex-col"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.22 }}
+              >
+                <MyContentListScreen
+                  cards={cards}
+                  onBack={() => setView("home")}
+                  onRemove={removeCard}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
