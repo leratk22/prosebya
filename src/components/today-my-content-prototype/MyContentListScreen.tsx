@@ -40,12 +40,13 @@ export function MyContentListScreen({ cards, onBack, onRemove }: MyContentListSc
       </p>
 
       <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-16 pb-24 pt-0">
-        <div className="mx-auto flex w-full max-w-[343px] flex-col gap-8">
+        <div className="flex w-full min-w-0 flex-col gap-8">
           <AnimatePresence mode="popLayout" initial={false}>
             {cards.map((card) => (
               <motion.div
                 key={card.id}
                 layout
+                className="w-full min-w-0"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}

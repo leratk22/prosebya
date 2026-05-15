@@ -37,7 +37,7 @@ export function SwipeDeleteListRow({ children, onDelete }: SwipeDeleteListRowPro
   );
 
   return (
-    <div className="relative overflow-hidden rounded-[12px] shadow-elevation">
+    <div className="relative w-full min-w-0 overflow-hidden rounded-[12px] shadow-elevation">
       <button
         type="button"
         aria-label="Удалить"
@@ -57,7 +57,7 @@ export function SwipeDeleteListRow({ children, onDelete }: SwipeDeleteListRowPro
         dragElastic={{ left: 0.1, right: 0 }}
         dragMomentum={false}
         onDragEnd={handleDragEnd}
-        className="relative z-10 touch-pan-y overflow-hidden rounded-[12px] bg-light-bg-primary"
+        className="relative z-10 w-full min-w-0 touch-pan-y overflow-hidden rounded-[12px] bg-light-bg-primary"
       >
         {children}
       </motion.div>
